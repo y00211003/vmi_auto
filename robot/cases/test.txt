@@ -1,0 +1,837 @@
+*** Settings ***
+Library           vmi.robot.caseutil.Cases
+Library           vmi.robot.vmilib.VMIInstanceFactory
+Library           vmi.server.servermanager.ServerManager
+Library           vmi.unia.uniamanager.UniaManager
+
+*** Variables ***
+${full_active_code}    MW-DSCG-NWQ4Q-9JK24-RC6H6-JK4UJ-LNPQD    # Full Active Code
+${trail_active_code}    MW-A7PV-VV4VS-4SU3B-TZ392-TLDGD-VVUCJ
+${trail_expired_active_code}    MW-6TZR-6HAWX-SFWX9-NP99P-86WEK-RJL7P    # Expired trail license
+
+*** Test Cases ***
+create_local_group_richard
+    [Setup]    Setup    management    create_local_group
+    ${server}    Build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${group_id}    create_group    ${server}    group2
+
+active_license_expired_trail
+    [Setup]    Setup    management    active_license_expired_trail
+    ${server}    build_instance    Server
+    ${sm}    build_instance    ServerManager
+    ${e_m}    Run Keyword And Expect Error    *    call_method    ${sm}    active_license    ${server}
+    ...    ${trail_expired_active_code}
+    should_contain    ${e_m}    ValueError
+
+active_license_not_expired_trail
+    [Setup]    Setup    management    active_license_not_expired_trail
+    ${server}    build_instance    Server
+    ${sm}    build_instance    ServerManager
+    call_method    ${sm}    active_license    ${server}    MW-76JR-LAAQH-HC7VU-RC5BN-2N2YY-32V5G
+
+create_local_user_in_default_group
+    [Setup]    Setup    management    create_local_user_in_default_group
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+
+create_local_user_with_special_char
+    [Setup]    Setup    management    create_local_user_with_special_char
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${e_m}    Run Keyword And Expect Error    *    create_user_in_group    ${server}    ${g_id}    user_^%$$@!
+    ...    pass    1
+    should_contain    ${e_m}    Failed to create user
+
+create_local_user_with_chinese_charactors
+    [Setup]    Setup    management    create_local_user_with_chinese_charactors
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${e_m}    Run Keyword And Expect Error    *    create_user_in_group    ${server}    ${g_id}    user_对象
+    ...    pass    1
+    should_contain    ${e_m}    Failed to create user
+
+create_2_local_users_with_same_name
+    [Setup]    Setup    management    create_2_local_users_with_same_name
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${e_m}    Run Keyword And Expect Error    *    create_user_in_group    ${server}    ${g_id}    user
+    ...    pass    1
+    should_contain    ${e_m}    ValueError
+
+create_local_group
+    [Setup]    Setup    management    create_local_group
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${group_id}    create_group    ${server}    group1
+
+create_local_group_with_special_char
+    [Setup]    Setup    management    create_local_group
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${group_id}    create_group    ${server}    group!@#
+
+create_local_group_with_chinese_charactors
+    [Setup]    Setup    management    create_local_group
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${group_id}    create_group    ${server}    group对象
+
+create_local_user_in_group01
+    [Setup]    Setup    management    create_local_user_in_group
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    create_group    ${server}    group1
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+
+active_license_full01
+    [Setup]    Setup    management    active_license_full01
+    ${server}    build_instance    Server
+    active_license    ${server}    MW-ECNQ-3GZ3Q-ZHXLH-FMDZT-G47F3-JH4AK
+
+active_license_full02
+    [Setup]    Setup    management    active_license_full01
+    ${server}    build_instance    Server
+    ${sm}    build_instance    ServerManager
+    call_method    ${sm}    active_license    ${server}    ${full_active_code}
+
+active_license_twice01
+    [Setup]    Setup    management    active_license_twice01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${e_m}    Run Keyword And Expect Error    *    active_license    ${server}    ${full_active_code}
+    should_contain    ${e_m}    Fail to Active License
+
+delete_local_user01
+    [Setup]    Setup    management    delete_local_user01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    delete_user_by_id    ${server}    ${u_id}
+
+create_profile01
+    [Setup]    Setup    management    create_profile01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+
+#edit by gannicus
+copy_from_default_profile_while_changing_its_applications
+    [Setup]    Setup    management    copy_from_default_profile_while_changing_its_applications
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_native_application    ${server}    ${a}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    call_method    ${p}    add_app    ${a_id}
+    ${p_id}    create_profile    ${server}    ${p}
+
+delete_profile01
+    [Setup]    Setup    management    delete_profile01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    delete_profiles    ${server}    ${p_id}
+
+assign_profile_on_group01
+    [Setup]    Setup    management    assign_profile_on_group01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    assign_profile_on_group    ${server}    ${g_id}    ${p_id}
+
+assign_profile_on_group02
+    [Setup]    Setup    management    assign_profile_on_group02
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    create_group    ${server}    group1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    -1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    assign_profile_on_group    ${server}    ${g_id}    ${p_id}
+
+assign_profile_on_user01
+    [Setup]    Setup    management    assign_profile_on_user01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    assign_profile_on_user    ${server}    ${u_id}    ${p_id}
+
+delete_profile_assigned_user01
+    [Setup]    Setup    management    delete_profile_on_user01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    assign_profile_on_user    ${server}    ${u_id}    ${p_id}
+    delete_user_by_id    ${server}    ${u_id}
+
+enable_active_directory01
+    [Setup]    Setup    management    enable_active_directory01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+
+enable_active_directory02
+    [Setup]    Setup    management    enable_active_directory02
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\qa1    1234
+
+change_active_directory01
+    [Setup]    Setup    management    change_active_directory01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\qa1    1234
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+
+disable_active_directory01
+    [Setup]    Setup    management    disable_active_directory01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    disable_active_directory    ${server}
+
+disable_active_directory_and_create_local_user01
+    [Setup]    Setup    management    disable_active_directory_and_create_local_user01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    disable_active_directory    ${server}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+
+disable_active_directory_and_create_local_user02
+    [Setup]    Setup    management    disable_active_directory_and_create_local_user02
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    disable_active_directory    ${server}
+    ${g_id}    create_group    ${server}    group1
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+
+disable_active_directory_and_create_local_user03
+    [Setup]    Setup    management    disable_active_directory_and_create_local_user03
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    disable_active_directory    ${server}
+    ${g_id}    create_group    ${server}    group1
+    create_user_in_group    ${server}    ${g_id}    user02    pass    1
+
+disable_active_directory_and_create_local_user04
+    [Setup]    Setup    management    disable_active_directory_and_create_local_user04
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    disable_active_directory    ${server}
+    ${g_id}    create_group    ${server}    group1
+    ${e_m}    Run Keyword And Expect Error    *    create_user_in_group    ${server}    ${g_id}    user
+    ...    pass    1
+    should_contain    ${e_m}    ValueError
+
+enable_local_user
+    [Setup]    Setup    managment    enable_local_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    enable_user_by_id    ${server}    ${user_id}
+
+disable_local_user
+    [Setup]    Setup    management    disable_local_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    disable_user_by_id    ${server}    ${user_id}
+
+enable_ldap_user
+    [Setup]    Setup    management    enable_ldap_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user_id}    get_user_id_by_name    ${server}    gannicus_wang
+    enable_user_by_id    ${server}    ${user_id}
+
+disable_ldap_user
+    [Setup]    Setup    management    disable_ldap_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user_id}    get_user_id_by_name    ${server}    gannicus_wang
+    disable_user_by_id    ${server}    ${user_id}
+
+import_ldap_user01
+    [Setup]    Setup    management    import_ldap_user01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+
+import_ldap_user02
+    [Setup]    Setup    management    import_ldap_user02
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    import_group_or_users    ${server}    vmi    All of CN VMI QA Team    group
+
+import_ldap_user03
+    [Setup]    Setup    management    import_ldap_user03
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${e_m}    Run Keyword And Expect Error    *    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)
+    ...    person
+    should_contain    ${e_m}    is already imported
+
+import_ldap_user04
+    [Setup]    Setup    management    import_ldap_user04
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    vmi    All of CN VMI QA Team    group
+
+import_ldap_user05
+    [Setup]    Setup    management    import_ldap_user05
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    vmi    All of CN VMI QA Team    group
+    ${e_m}    Run Keyword And Expect Error    *    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)
+    ...    person
+    should_contain    ${e_m}    is already imported
+
+delete_ldap_user01
+    [Setup]    Setup    management    import_ldap_user01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${u_id}    get_user_id_by_name    ${server}    gannicus_wang
+    delete_user_by_id    ${server}    ${u_id}
+
+unia_local_user_login
+    [Setup]    Setup    unia    unia_local_user_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_local_user_login_set_auth_none
+    [Setup]    Setup    unia    unia_local_user_login_set_auth_none
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_local_user_login_set_auth_pin
+    [Setup]    Setup    unia    unia_local_user_login_set_auth_pin
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    3
+    ...    1234
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_pin    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_local_user_login_set_auth_password
+    [Setup]    Setup    unia    unia_local_user_login_set_auth_password
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    4
+    ...    qwer
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_password    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_ldap_user_login
+    [Setup]    Setup    unia    unia_ldap_user_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user}    build_instance    User    trend\\gannicus_wang    !qaw3edr5    gannicus_wang@trendmicro.com.cn    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_ldap_user_login_set_auth_none
+    [Setup]    Setup    unia    unia_ldap_user_login_set_auth_none
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user}    build_instance    User    trend\\gannicus_wang    !qaw3edr5    gannicus_wang@trendmicro.com.cn    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_ldap_user_login_set_auth_pin
+    [Setup]    Setup    unia    unia_ldap_user_login_set_auth_pin
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user}    build_instance    User    trend\\gannicus_wang    !qaw3edr5    gannicus_wang@trendmicro.com.cn    3
+    ...    1234
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_pin    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_ldap_user_login_set_auth_password
+    [Setup]    Setup    unia    unia_ldap_user_login_set_auth_password
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user}    build_instance    User    trend\\gannicus_wang    !qaw3edr5    gannicus_wang@trendmicro.com.cn    4
+    ...    qwer
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_password    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_local_user_login_and_logout
+    [Setup]    Setup    unia    unia_local_user_login_and_logout
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_ldap_user_login_and_logout
+    [Setup]    Setup    unia    unia_ldap_user_login_and_logout
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user}    build_instance    User    trend\\gannicus_wang    !qaw3edr5    gannicus_wang@trendmicro.com.cn    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_disable_local_user_and_login
+    [Setup]    Setup    unia    unia_disable_local_user_and_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    ${user_id}    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    disable_user_by_id    ${server}    ${user_id}
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    Comment    call_method    ${droid_helper}    navigate_to_launcher
+    ${e_m}    Run Keyword And Expect Error    *    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    should_contain    ${e_m}    ValueError
+
+unia_disable_local_user_and_enable_then_login
+    [Setup]    Setup    unia    unia_disable_local_user_and_enable_then_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    ${user_id}    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    disable_user_by_id    ${server}    ${user_id}
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    Comment    call_method    ${droid_helper}    navigate_to_launcher
+    ${e_m}    Run Keyword And Expect Error    *    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    should_contain    ${e_m}    ValueError
+    enable_user_by_id    ${server}    ${user_id}
+    call_method    ${droid_helper}    reinvoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_disable_ldap_user_and_login
+    [Setup]    Setup    unia    unia_disable_ldap_user_and_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user_id}    get_user_id_by_name    ${server}    gannicus_wang
+    ${user}    build_instance    User    trend\\gannicus_wang    !qaw3edr5    gannicus_wang@trendmicro.com.cn    1
+    disable_user_by_id    ${server}    ${user_id}
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    Comment    call_method    ${droid_helper}    navigate_to_launcher
+    ${e_m}    Run Keyword And Expect Error    *    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    should_contain    ${e_m}    ValueError
+
+unia_disable_ldap_user_and_enable_then_login
+    [Setup]    Setup    unia    unia_disable_ldap_user_and_enable_then_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user_id}    get_user_id_by_name    ${server}    gannicus_wang
+    ${user}    build_instance    User    trend\\gannicus_wang    !qaw3edr5    gannicus_wang@trendmicro.com.cn    1
+    disable_user_by_id    ${server}    ${user_id}
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    Comment    call_method    ${droid_helper}    navigate_to_launcher
+    ${e_m}    Run Keyword And Expect Error    *    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    should_contain    ${e_m}    ValueError
+    enable_user_by_id    ${server}    ${user_id}
+    call_method    ${droid_helper}    reinvoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_local_user_relogin_with_auth_none
+    [Setup]    Setup    unia    unia_local_user_relogin_with_auth_none
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_local_user_relogin_with_auth_pin
+    [Setup]    Setup    unia    unia_local_user_relogin_with_auth_pin
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    3
+    ...    1234
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_pin    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    unlock_unia_with_pin    1234
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_local_user_relogin_with_auth_password
+    [Setup]    Setup    unia    unia_local_user_relogin_with_auth_password
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    4
+    ...    qwer
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_password    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    unlock_unia_with_password    qwer
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_ldap_user_login_with_auth_none
+    [Setup]    Setup    unia    unia_ldap_user_login_with_auth_none
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user}    build_instance    User    trend\\gannicus_wang    !qaw3edr5    gannicus_wang@trendmicro.com.cn    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_ldap_user_login_with_auth_pin
+    [Setup]    Setup    unia    unia_ldap_user_login_with_auth_pin
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user}    build_instance    User    trend\\gannicus_wang    !qaw3edr5    gannicus_wang@trendmicro.com.cn    3
+    ...    1234
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_pin    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    unlock_unia_with_pin    1234
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_ldap_user_login_with_auth_password
+    [Setup]    Setup    unia    unia_ldap_user_login_with_auth_password
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.64.1.54    389    trend\\gannicus_wang    !qaw3edr5
+    import_group_or_users    ${server}    gannicus wang    Gannicus Wang (RD-CN)    person
+    ${user}    build_instance    User    trend\\gannicus_wang    !qaw3edr5    gannicus_wang@trendmicro.com.cn    4
+    ...    qwer
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_password    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    unlock_unia_with_password    qwer
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_local_user_open_remote_view
+    [Setup]    Setup    unia    unia_local_user_open_remote_view
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    launch_app_from_unia    Settings
+
+edit_apps_of_existed_profile
+    [Setup]    Setup    management    edit_apps_of_existed_profile
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_native_application    ${server}    ${a}
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    set_user_profile    ${server}    ${u_id}    ${p_id}
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${p}    add_app    ${a_id}
+    update_profile    ${server}    ${p}
+    sleep    15
+    call_method    ${droid_helper}    check_app_exist    Open Camera
+
+#add by gannicus
+add_legal_web_clip
+    [Setup]    Setup    management    add_legal_web_clip
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a_id}    add_webclip    ${server}    http:\/\/stackoverflow.com
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    call_method    ${p}    add_app    ${a_id}
+    update_profile    ${server}    ${p}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    set_user_profile    ${server}    ${u_id}    ${p_id}
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    check_app_exist    Stack Overflow
+
+#add by gannicus
+add_webclip_and_upload_new_icon
+    [Setup]    Setup    management    add_webclip_and_upload_new_icon
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a_id}    add_webclip    ${server}    http:\/\/www.stackoverflow.com
+    update_web_clip_icon    ${server}    ${a_id}    cdcbbs.png
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    call_method    ${p}    add_app    ${a_id}
+    update_profile    ${server}    ${p}
+
+#add by gannicus
+edit_my_ccount_without_input_full_name_or_Last_name
+    [Setup]    Setup    management    edit_my_ccount_without_input_full_name_or_Last_name
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    edit_admin_info    ${server}    123@321.com    Xuan
+
+#add by gannicus
+auth_fail_2_time_block_60_sec
+    [Setup]    Setup    management    auth_fail_2_time_block_60_sec
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_ldap_lock    ${server}    2    60
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\qa1    1234
+    import_group_or_users    ${server}    gannicus    gannicus wang    person
+    ${user_id}    get_user_id_by_name    ${server}    gannicus
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_name_psw_without_remember_password    ${server}    vmi\\gannicus    12345
+    sleep    5
+    call_method    ${droid_helper}    input_password_and_login    12345
+    sleep    5
+    call_method    ${droid_helper}    input_password_and_login    12345
+    call_method    ${droid_helper}    check_retry_in_seconds
+
+#add by gannicus
+limitation_value_is_kept_the_same_if_all_configuration_not_changed
+    [Setup]    Setup    management    limitation_value_is_kept_the_same_if_all_configuration_not_changed
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${capacity1}    get_instance_limitation    ${server}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    call_method    ${droid_helper}    invoke_device    ${android}
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    ${capacity2}    get_instance_limitation    ${server}
+    restart_vmi
+    ${capacity3}    get_instance_limitation    ${server}
+    should be equal    ${capacity1}    ${capacity2}
+    should be equal    ${capacity2}    ${capacity3}
+
+#add by gannicus
+change_ac_trail_full
+    [Setup]    Setup    management    change_ac_trail_full
+    ${server}    build_instance    Server
+    active_license    ${server}    ${trail_active_code}
+    active_license    ${server}    ${full_active_code}
+
+#add by gannicus
+set_a_vaild_proxy_with_auth_on_server
+    [Setup]    Setup    management    set_a_vaild_proxy_with_auth_on_server
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${proxy}    build_instance    ProxySetting    10.64.1.62    8080    trend\\gannicus_wang    26288DFF26A13128
+    set_proxy_setting    ${server}    ${proxy}
+    ${serverproxy}    get_proxy_setting    ${server}
+    ${result}    call_method    ${proxy}    __eq__    ${serverproxy}
+    should be true    ${result}  
+    
+#add by gannicus
+check_mars_result_in_application_page
+    [Setup]    Setup    management    check_mars_result_in_application_page
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_native_application    ${server}    ${a}
+    ${risklevel}    get_app_risklevel    ${server}    ${a_id}
+    should be equal    ${risklevel}    250
+
+#add by gannicus
+set_a_user_as_VIP
+    [Setup]    Setup    management    set_a_user_as_VIP
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    set_vip    ${server}    test 

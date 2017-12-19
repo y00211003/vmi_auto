@@ -1,0 +1,99 @@
+{
+	"activity_data" : [{
+			"class_name" : "com/trendmicro/vmi/testsso/LoginActivity",
+			"text_views" : [{
+					"control_id" : "editTextUserName",
+					"sso_key" : "KEY_USERNAME"
+				}, {
+					"control_id" : "editTextPassword",
+					"sso_key" : "KEY_PASSWORD"
+				}
+			]
+		}, {
+			"class_name" : "com/trendmicro/virdroid/ui/LoginActivity",
+			"text_views" : [{
+					"control_id" : "username_edit_text",
+					"sso_key" : "KEY_USERNAME"
+				}, {
+					"control_id" : "password_edit_text",
+					"sso_key" : "KEY_PASSWORD"
+				}
+			]
+		}, {
+			"class_name" : "com/sap/mobile/meps/core/dialogs/LogonActivity",
+			"text_views" : [{
+					"control_id" : "core_login_user_name",
+					"sso_key" : "KEY_USERNAME"
+				}, {
+					"control_id" : "core_login_password",
+					"sso_key" : "KEY_PASSWORD"
+				}
+			]
+		}, {
+			"class_name" : "com/nitrodesk/nitroid/settings/ConfigWizard",
+			"text_views" : [{
+					"control_id" : "txtUserID",
+					"sso_key" : "KEY_USERNAME_WITHOUT_DOMAIN"
+				}, {
+					"control_id" : "txtEmailAddress",
+					"sso_key" : "KEY_USERNAME_EMAIL"
+				}, {
+					"control_id" : "txtPassword",
+					"sso_key" : "KEY_PASSWORD"
+				}, {
+					"control_id" : "txtServer",
+					"sso_key" : "KEY_EXCHANGE_SERVER"
+				}
+			]
+		}, {
+			"class_name" : "com/seeyon/mobile/android/model/login/fragment/LoginFragment",
+			"text_views" : [{
+					"control_id" : "et_login_loginName",
+					"sso_key" : "KEY_USERNAME_WITHOUT_DOMAIN"
+				}, {
+					"control_id" : "et_login_password",
+					"sso_key" : "KEY_PASSWORD"
+				}
+			]
+		}, {
+			"class_name" : "com/seeyon/mobile/android/model/login/setting/LoginSettingFragment",
+			"text_views" : [{
+					"control_id" : "et_setting_safa_add",
+					"sso_key" : "KEY_OTHER_SERVER"
+				}, {
+					"control_id" : "et_setting_safa_port",
+					"sso_key" : "KEY_OTHER_SERVER_PORT"
+				}
+			]
+		}
+	],
+	"app_data" : [{
+			"package_name" : "*",
+			"special_values" : [{
+					"key" : "$NOTHING$",
+					"value" : "true"
+				}
+			]
+		}, {
+			"package_name" : "com.trendmicro.ba.mobile.appstore",
+			"special_values" : [{
+					"key" : "$ALWAYS_WITHOUT_DOMAIN$",
+					"value" : "true"
+				}
+			]
+		}, {
+			"package_name" : "com.seeyon.mobile.android",
+			"special_values" : [{
+					"key" : "$WAIT_TIME$",
+					"value" : "10000"
+				}, {
+					"key" : "$OTHER_SERVER$",
+					"value" : "172.31.1.53"
+				}, {
+					"key" : "$OTHER_SERVER_PORT$",
+					"value" : "9999"
+				}
+			]
+		}
+	]
+}

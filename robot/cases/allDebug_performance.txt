@@ -1,0 +1,118 @@
+*** Settings ***
+Library           vmi.robot.caseutil.Cases
+Library           vmi.robot.vmilib.VMIInstanceFactory
+Library           vmi.server.servermanager.ServerManager
+Library           vmi.unia.uniamanager.UniaManager
+
+*** Variables ***
+${full_active_code}    MW-B3VH-GU422-3HAZD-FN9FX-HJN7E-VK6TQ    # Full Active Code
+${trail_active_code}    MW-6JE7-9D8RN-AF4FN-YS62Q-WHW6S-5VJ9F
+${trail_expired_active_code}    MW-6TZR-6HAWX-SFWX9-NP99P-86WEK-RJL7P    # Expired trail license
+
+*** Test Cases ***
+Performance_superlab
+    [Tags]    server    superlab
+    [Setup]    Setup    management    Performance_superlab
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${a1}    build_instance    Application    ScrollAutoAnimation.apk
+    ${a_id1}    upload_native_application    ${server}    ${a1}
+    ${a2}    build_instance    Application    ZoomAutoAnimation.apk
+    ${a_id2}    upload_native_application    ${server}    ${a2}
+    ${a_id3}    add_webclip    ${server}    http:\/\/10.206.139.99:8080\/sina.html
+    ${p}    build_instance    Profile    test    test
+    call_method    ${p}    add_app    ${a_id1}
+    call_method    ${p}    add_app    ${a_id2}
+    call_method    ${p}    add_app    ${a_id3}
+    ${p_id}    create_profile    ${server}    ${p}
+    assign_profile_on_group    ${server}    ${g_id}    ${p_id}
+    ${u_id1}    create_user_in_group    ${server}    ${g_id}    10001001001    mac8.6    1
+    ${u_id2}    create_user_in_group    ${server}    ${g_id}    10001001002    mac8.6    1
+    ${u_id3}    create_user_in_group    ${server}    ${g_id}    10001001003    mac8.6    1
+    #${u_id4}    create_user_in_group    ${server}    ${g_id}    10001001004    mac8.6    1
+    #${u_id5}    create_user_in_group    ${server}    ${g_id}    10001001005    mac8.6    1
+    assign_profile_on_user    ${server}    ${u_id1}    ${p_id}
+    assign_profile_on_user    ${server}    ${u_id2}    ${p_id}
+    assign_profile_on_user    ${server}    ${u_id3}    ${p_id}
+    #assign_profile_on_user    ${server}    ${u_id4}    ${p_id}
+    #assign_profile_on_user    ${server}    ${u_id5}    ${p_id}
+    ${Res_Detail_hide}    hide_app    ${server}    1
+    should be equal    ${Res_Detail_hide}    Success
+    ${Res_Detail_hide}    hide_app    ${server}    2
+    should be equal    ${Res_Detail_hide}    Success
+    ${Res_Detail_hide}    hide_app    ${server}    3
+    should be equal    ${Res_Detail_hide}    Success
+    ${Res_Detail_hide}    hide_app    ${server}    4
+    should be equal    ${Res_Detail_hide}    Success
+    ${Res_Detail_hide}    hide_app    ${server}    5
+    should be equal    ${Res_Detail_hide}    Success
+    ${Res_Detail_hide}    hide_app    ${server}    6
+    should be equal    ${Res_Detail_hide}    Success
+    ${Res_Detail_hide}    hide_app    ${server}    7
+    should be equal    ${Res_Detail_hide}    Success
+    ${Res_Detail_hide}    hide_app    ${server}    8
+    should be equal    ${Res_Detail_hide}    Success
+    ${Res_Detail_hide}    hide_app    ${server}    9
+    should be equal    ${Res_Detail_hide}    Success
+    ${Res_Detail_hide}    hide_app    ${server}    1000
+    should be equal    ${Res_Detail_hide}    Success
+    ${Res_Detail_hide}    hide_app    ${server}    1001
+    should be equal    ${Res_Detail_hide}    Success
+    ${Res_Detail_hide}    hide_app    ${server}    1102
+    should be equal    ${Res_Detail_hide}    Success
+    ${ret1}    collectSysInfo    ${server}
+    should be equal    ${ret1}    0
+    ${ret2}    doPerformanceSuperlab    ${server}
+    should be equal    ${ret2}    0
+    Sleep    600
+    ${ret5}    handleInfoData    ${server}
+    should be equal    ${ret5}    0
+    ${ret6}    handleUniaLoginTime    ${server}
+    should be equal    ${ret6}    0
+    countUniaLoginTime    ${server}    10001001001
+    countUniaLoginTime    ${server}    10001001002
+    countUniaLoginTime    ${server}    10001001003
+    #countUniaLoginTime    ${server}    10001001004
+    #countUniaLoginTime    ${server}    10001001005
+    delete_user_by_id    ${server}    ${u_id1}
+    delete_user_by_id    ${server}    ${u_id2}
+    delete_user_by_id    ${server}    ${u_id3}
+    #delete_user_by_id    ${server}    ${u_id4}
+    #delete_user_by_id    ${server}    ${u_id5}
+
+unia_RealDevice_NormalLoginTime
+    [Tags]    client    superlab
+    [Setup]    Setup    unia    unia_RealDevice_NormalLoginTime
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    Sleep    3
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    10
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    10
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    check_app_exist    Settings
+    call_method    ${droid_helper}    signout_from_launcher
+    Sleep    30
+    ${loginStartTime}    call_method    ${droid_helper}    superlab_login_server_without_input_server_address    ${server}    ${user}
+    ${loginEndTime}    call_method    ${droid_helper}    superlab_navigate_to_launcher
+    ${loginSpendTime}    call_method    ${droid_helper}    superlab_countLoginTime    ${loginStartTime}    ${loginEndTime}
+    call_method    ${droid_helper}    signout_from_launcher
+    delete_user_by_id    ${server}    ${u_id}
+
+draw_Matplotlib
+    [Tags]    Matplot    superlab
+    [Setup]    Setup    management    draw_Matplotlib
+    ${server}    build_instance    Server
+    ${ret}    draw_MatplotlibServer    ${server}
+    should be equal    ${ret}    0
+
+

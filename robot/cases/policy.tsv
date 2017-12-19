@@ -1,0 +1,54 @@
+*Settings*							
+Library	vmi.robot.caseutil.Cases						
+Library	vmi.robot.vmilib.VMIInstanceFactory						
+Library	vmi.server.servermanager.ServerManager						
+Library	vmi.unia.uniamanager.UniaManager						
+							
+*Test Cases*							
+test01	[Setup]	Setup	management	test01			
+	${server}	build_instance	Server				
+	${unia}	build_instance	Unia	xiang_wang	mac8.6		
+	${app}	build_instance	Application	Gmail.apk			
+	${app_id}	upload_native_application	${server}	${app}			
+	${pc}	build_instance	PolicyChecker				
+	${policy}	build_instance	Profile	profile1	for test		
+	call_method	${policy}	add_app	${app_id}			
+	${g_id}	create_group	${server}	group1			
+	${p_id}	create_profile	${server}	${policy}			
+	${u_id}	create_user_in_group	${server}	${g_id}	xiang_wang	mac8.6	xiang
+	...	wang	xiang_wang@test.com	${p_id}			
+	assign_profile_on_user	${server}	${u_id}	${p_id}			
+	login	${unia}					
+	call_method	${pc}	check_policy	${server}	${unia}	${policy}	
+							
+test02	[Setup]	Setup	management	test02			
+	${server}	build_instance	Server				
+	${unia}	build_instance	Unia	xiang_wang	mac8.6		
+	${app}	build_instance	Application	Gmail.apk			
+	${app_id}	upload_native_application	${server}	${app}			
+	${pc}	build_instance	PolicyChecker				
+	${policy}	build_instance	Profile	profile1	for test		
+	call_method	${policy}	add_app	${app_id}			
+	${g_id}	create_group	${server}	group1			
+	${p_id}	create_profile	${server}	${policy}			
+	${u_id}	create_user_in_group	${server}	${g_id}	xiang_wang	mac8.6	xiang
+	...	wang	xiang_wang@test.com	${p_id}			
+	assign_profile_on_user	${server}	${u_id}	${p_id}			
+	login	${unia}					
+	call_method	${pc}	check_policy	${server}	${unia}	${policy}	
+							
+test03	[Setup]	Setup	management	test03			
+	${server}	build_instance	Server				
+	${unia}	build_instance	Unia	xiang_wang	mac8.6		
+	${app}	build_instance	Application	Gmail.apk			
+	${app_id}	upload_native_application	${server}	${app}			
+	${pc}	build_instance	PolicyChecker				
+	${policy}	build_instance	Profile	profile1	for test		
+	call_method	${policy}	add_app	${app_id}			
+	${g_id}	create_group	${server}	group1			
+	${p_id}	create_profile	${server}	${policy}			
+	${u_id}	create_user_in_group	${server}	${g_id}	xiang_wang	mac8.6	xiang
+	...	wang	xiang_wang@test.com	${p_id}			
+	assign_profile_on_user	${server}	${u_id}	${p_id}			
+	login	${unia}					
+	call_method	${pc}	check_policy	${server}	${unia}	${policy}	

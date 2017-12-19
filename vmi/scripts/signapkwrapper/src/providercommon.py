@@ -1,0 +1,65 @@
+#
+# Common data for provider
+# Author: Wayne Sun
+# Date: 2014-12-04
+#
+#
+
+#public static final String KEY_USERNAME = "username";
+#public static final String KEY_USERNAME_WITHOUT_DOMAIN = "usernameWithoutDomain";
+#public static final String KEY_USERNAME_EMAIL = "usernameEmail";
+#public static final String KEY_PASSWORD = "password";
+#public static final String KEY_EXCHANGE_SERVER = "exchangeServer";
+#public static final String KEY_OTHER_SERVER = "otherServer";
+#public static final String KEY_OTHER_SERVER_PORT = "otherServerPort";
+
+KEY_USERNAME = "username"
+KEY_USERNAME_WITHOUT_DOMAIN = "usernameWithoutDomain"
+KEY_USERNAME_EMAIL = "usernameEmail"
+KEY_PASSWORD = "password"
+KEY_EXCHANGE_SERVER = "exchangeServer"
+KEY_OTHER_SERVER = "otherServer"
+KEY_OTHER_SERVER_PORT = "otherServerPort"
+
+KEY_VALUE_MAP = {}
+KEY_VALUE_MAP["KEY_USERNAME"] = KEY_USERNAME
+KEY_VALUE_MAP["KEY_USERNAME_WITHOUT_DOMAIN"] = KEY_USERNAME_WITHOUT_DOMAIN
+KEY_VALUE_MAP["KEY_USERNAME_EMAIL"] = KEY_USERNAME_EMAIL
+KEY_VALUE_MAP["KEY_PASSWORD"] = KEY_PASSWORD
+KEY_VALUE_MAP["KEY_EXCHANGE_SERVER"] = KEY_EXCHANGE_SERVER
+KEY_VALUE_MAP["KEY_OTHER_SERVER"] = KEY_OTHER_SERVER
+KEY_VALUE_MAP["KEY_OTHER_SERVER_PORT"] = KEY_OTHER_SERVER_PORT
+
+CONTROL_KEYS = [KEY_USERNAME, 
+                KEY_USERNAME_WITHOUT_DOMAIN, 
+                KEY_USERNAME_EMAIL, 
+                KEY_PASSWORD, 
+                KEY_EXCHANGE_SERVER,
+                KEY_OTHER_SERVER,
+                KEY_OTHER_SERVER_PORT]
+
+SPECIAL_KEY = "key"
+SPECIAL_VALUE = "value"
+
+#public static final String STUB_ALWAYS_WITHOUT_DOMAIN = "$ALWAYS_WITHOUT_DOMAIN$";
+#public static final String STUB_WAIT_TIME = "$WAIT_TIME$";
+#public static final String STUB_OTHER_SERVER = "$OTHER_SERVER$";
+#public static final String STUB_OTHER_SERVER_PORT = "$OTHER_SERVER_PORT$";
+
+STUB_ALWAYS_WITHOUT_DOMAIN = "$ALWAYS_WITHOUT_DOMAIN$"
+STUB_WAIT_TIME = "$WAIT_TIME$"
+STUB_OTHER_SERVER = "$OTHER_SERVER$"
+STUB_OTHER_SERVER_PORT = "$OTHER_SERVER_PORT$"
+
+DEFAULT_ALWAYS_WITHOUT_DOMAIN = "false"
+DEFAULT_WAIT_TIME = "3000"
+DEFAULT_OTHER_SERVER = ""
+DEFAULT_OTHER_SERVER_PORT = ""
+
+DEFAULT_DATA_MAP = [
+                    {SPECIAL_KEY: STUB_ALWAYS_WITHOUT_DOMAIN, SPECIAL_VALUE: DEFAULT_ALWAYS_WITHOUT_DOMAIN},
+                    {SPECIAL_KEY: STUB_WAIT_TIME, SPECIAL_VALUE: DEFAULT_WAIT_TIME},
+                    {SPECIAL_KEY: STUB_OTHER_SERVER, SPECIAL_VALUE: DEFAULT_OTHER_SERVER},
+                    {SPECIAL_KEY: STUB_OTHER_SERVER_PORT, SPECIAL_VALUE: DEFAULT_OTHER_SERVER_PORT}
+                    ]
+

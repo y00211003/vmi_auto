@@ -1,0 +1,20 @@
+[general]
+version = 1303
+arch = x86_64
+family = TMVMI
+packagedir = 
+timestamp = 1512724266.07
+discnum = 1
+variant = TMVMI
+totaldiscs = 1
+
+[images-x86_64]
+kernel = images/pxeboot/vmlinuz
+initrd = images/pxeboot/initrd.img
+boot.iso = images/boot.iso
+[images-xen]
+kernel = images/pxeboot/vmlinuz
+initrd = images/pxeboot/initrd.img
+
+[stage2]
+mainimage = images/install.img

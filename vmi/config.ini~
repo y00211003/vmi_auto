@@ -1,0 +1,44 @@
+[UniaServer]
+web_protocol = https
+web_ip = 192.168.10.201
+web_port =  443
+portal_protocol = https
+portal_ip = 192.168.10.202
+portal_port = 443
+F_AC = MW-HE2H-KHB89-569ND-9J539-UDGAG-K9P7Q
+
+[Servers]
+ip = 10.64.88.241
+netmask = 255.255.252.0
+ip_range = 10.64.91.2-10.64.91.202
+gateway= 10.64.88.1
+dns = 10.64.1.55
+
+[DroidAutoClient]
+ip= 192.168.10.11
+port=4723
+user=vmi
+password=mac8.6
+android_app=c:\\resources\\tmsmw.sign.apk
+
+
+[UniaClientServer]
+ip = 192.168.10.4
+port = 9999
+user=root
+password=wx2jeacen
+
+[WebUI]
+account = admin
+password = admin
+
+[Gateway]
+protocol = https
+ip = 10.64.91.4
+port = 443
+
+[DataBase]
+host = 192.168.10.201
+account = vmi
+password = vmi4trend
+database = vmi

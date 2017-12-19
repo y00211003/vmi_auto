@@ -1,0 +1,28 @@
+*** Settings ***
+Library           vmi.robot.caseutil.Cases
+Library           vmi.robot.vmilib.VMIInstanceFactory
+Library           vmi.server.servermanager.ServerManager
+Library           vmi.unia.uniamanager.UniaManager
+
+*** Variables ***
+${full_active_code}    MW-B3VH-GU422-3HAZD-FN9FX-HJN7E-VK6TQ    # Full Active Code
+${trail_active_code}    MW-6JE7-9D8RN-AF4FN-YS62Q-WHW6S-5VJ9F
+${trail_expired_active_code}    MW-6TZR-6HAWX-SFWX9-NP99P-86WEK-RJL7P    # Expired trail license
+
+*** Test Cases ***
+License_activeLicenseNotExpiredTrail
+    [Setup]    Setup    management    License_activeLicenseNotExpiredTrail
+    ${server}    build_instance    Server
+    ${sm}    build_instance    ServerManager
+    call_method    ${sm}    active_license    ${server}    MW-B3VH-GU422-3HAZD-FN9FX-HJN7E-VK6TQ
+
+EULA_reject
+    [Tags]    client    eula
+    [Setup]    Setup    unia    EULA_reject
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    reinvoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    reject
+

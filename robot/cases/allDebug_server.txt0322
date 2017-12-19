@@ -1,0 +1,941 @@
+*** Settings ***
+Library           vmi.robot.caseutil.Cases
+Library           vmi.robot.vmilib.VMIInstanceFactory
+Library           vmi.server.servermanager.ServerManager
+Library           vmi.unia.uniamanager.UniaManager
+
+*** Variables ***
+${full_active_code}    MW-B3VH-GU422-3HAZD-FN9FX-HJN7E-VK6TQ    # Full Active Code
+${trail_active_code}    MW-6JE7-9D8RN-AF4FN-YS62Q-WHW6S-5VJ9F
+${trail_expired_active_code}    MW-6TZR-6HAWX-SFWX9-NP99P-86WEK-RJL7P    # Expired trail license
+
+*** Test Cases ***
+
+License_activeLicenseExpiredTrail
+    [Setup]    Setup    management    License_activeLicenseExpiredTrail
+    ${server}    build_instance    Server
+    ${sm}    build_instance    ServerManager
+    ${e_m}    Run Keyword And Expect Error    *    call_method    ${sm}    active_license    ${server}
+    ...    ${trail_expired_active_code}
+    should_contain    ${e_m}    ValueError
+
+License_activeLicenseNotExpiredTrail
+    [Setup]    Setup    management    License_activeLicenseNotExpiredTrail
+    ${server}    build_instance    Server
+    ${sm}    build_instance    ServerManager
+    call_method    ${sm}    active_license    ${server}    MW-B3VH-GU422-3HAZD-FN9FX-HJN7E-VK6TQ
+
+User_createLocalUserInDefaultGroup
+    [Setup]    Setup    management    User_createLocalUserInDefaultGroup
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+
+User_create_local_user_with_special_char
+    [Setup]    Setup    management    User_create_local_user_with_special_char
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${e_m}    Run Keyword And Expect Error    *    create_user_in_group    ${server}    ${g_id}    user_^%$$@!
+    ...    pass    1
+    should_contain    ${e_m}    Failed to create user
+
+User_create_local_user_with_chinese_charactors
+    [Setup]    Setup    management    User_create_local_user_with_chinese_charactors
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${e_m}    Run Keyword And Expect Error    *    create_user_in_group    ${server}    ${g_id}    user_对象
+    ...    pass    1
+    should_contain    ${e_m}    Failed to create user
+
+User_create_2_local_users_with_same_name
+    [Setup]    Setup    management    User_create_2_local_users_with_same_name
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${e_m}    Run Keyword And Expect Error    *    create_user_in_group    ${server}    ${g_id}    user
+    ...    pass    1
+    should_contain    ${e_m}    ValueError
+
+User_create_local_group
+    [Setup]    Setup    management    User_create_local_group
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${group_id}    create_group    ${server}    group1
+
+User_create_local_group_with_special_char
+    [Setup]    Setup    management    User_create_local_group
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${group_id}    create_group    ${server}    group!@#
+
+User_create_local_group_with_chinese_charactors
+    [Setup]    Setup    management    User_create_local_group_with_chinese_charactors
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${group_id}    create_group    ${server}    group对象
+
+User_create_localUser_in_group
+    [Setup]    Setup    management    User_create_localUser_in_group
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    create_group    ${server}    group1
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+
+License_active_license_full01
+    [Setup]    Setup    management    License_active_license_full01
+    ${server}    build_instance    Server
+    active_license    ${server}    MW-ECNQ-3GZ3Q-ZHXLH-FMDZT-G47F3-JH4AK
+
+License_active_license_full02
+    [Setup]    Setup    management    License_active_license_full02
+    ${server}    build_instance    Server
+    ${sm}    build_instance    ServerManager
+    call_method    ${sm}    active_license    ${server}    ${full_active_code}
+
+License_active_license_twice01
+    [Setup]    Setup    management    License_active_license_twice01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${e_m}    Run Keyword And Expect Error    *    active_license    ${server}    ${full_active_code}
+    should_contain    ${e_m}    Fail to Active License
+
+User_delete_local_user
+    [Setup]    Setup    management    User_delete_local_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    delete_user_by_id    ${server}    ${u_id}
+
+Profile_create_profile
+    [Setup]    Setup    management    Profile_create_profile
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+
+#edit by gannicus
+Profile_copy_from_default_profile_while_changing_its_applications
+    [Setup]    Setup    management    Profile_copy_from_default_profile_while_changing_its_applications
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_native_application    ${server}    ${a}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    call_method    ${p}    add_app    ${a_id}
+    ${p_id}    create_profile    ${server}    ${p}
+
+Profile_delete_profile
+    [Setup]    Setup    management    Profile_delete_profile
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    delete_profiles    ${server}    ${p_id}
+
+Profile_assign_profile_on_DefaultGroup
+    [Setup]    Setup    management    Profile_assign_profile_on_DefaultGroup
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    assign_profile_on_group    ${server}    ${g_id}    ${p_id}
+
+Profile_assign_profile_on_CreatedGroup
+    [Setup]    Setup    management    Profile_assign_profile_on_CreatedGroup
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    create_group    ${server}    group1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    -1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    assign_profile_on_group    ${server}    ${g_id}    ${p_id}
+
+Profile_assign_profile_on_user
+    [Setup]    Setup    management    Profile_assign_profile_on_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    assign_profile_on_user    ${server}    ${u_id}    ${p_id}
+
+Profile_delete_profile_assigned_user
+    [Setup]    Setup    management    Profile_delete_profile_on_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    assign_profile_on_user    ${server}    ${u_id}    ${p_id}
+    delete_user_by_id    ${server}    ${u_id}
+
+AD_enable_active_directory
+    [Setup]    Setup    management    AD_enable_active_directory
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+
+AD_enable_active_directory02
+    [Setup]    Setup    management    AD_enable_active_directory02
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\qa1    1234
+
+AD_change_active_directory
+    [Setup]    Setup    management    AD_change_active_directory
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\qa1    1234
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+
+AD_disable_active_directory
+    [Setup]    Setup    management    AD_disable_active_directory
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    disable_active_directory    ${server}
+
+AD_disable_active_directory_and_create_local_singleUser
+    [Setup]    Setup    management    AD_disable_active_directory_and_create_local_singleUser
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    disable_active_directory    ${server}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+
+AD_disable_active_directory_and_create_local_userInGroup
+    [Setup]    Setup    management    AD_disable_active_directory_and_create_local_userInGroup
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    disable_active_directory    ${server}
+    ${g_id}    create_group    ${server}    group1
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+
+AD_localUser_EnableLdapUser_disableLdap_Create_local_userInGroup
+    [Setup]    Setup    management    AD_localUser_EnableLdapUser_disableLdap_Create_local_userInGroup
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    disable_active_directory    ${server}
+    ${g_id}    create_group    ${server}    group1
+    create_user_in_group    ${server}    ${g_id}    user02    pass    1
+
+AD_localUser_EnableLdapUser_disableLdap_Create_Existed_Localuser
+    [Setup]    Setup    management    AD_localUser_EnableLdapUser_disableLdap_Create_Existed_Localuser
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    disable_active_directory    ${server}
+    ${g_id}    create_group    ${server}    group1
+    ${e_m}    Run Keyword And Expect Error    *    create_user_in_group    ${server}    ${g_id}    user
+    ...    pass    1
+    should_contain    ${e_m}    ValueError
+
+User_enable_local_user
+    [Setup]    Setup    managment    User_enable_local_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    enable_user_by_id    ${server}    ${user_id}
+
+User_disable_local_user
+    [Setup]    Setup    management    User_disable_local_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    disable_user_by_id    ${server}    ${user_id}
+
+User_enable_ldap_user
+    [Setup]    Setup    management    User_enable_ldap_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001001    10001001001    person
+    ${user_id}    get_user_id_by_name    ${server}    10001001001
+    enable_user_by_id    ${server}    ${user_id}
+
+User_disable_ldap_user
+    [Setup]    Setup    management    User_disable_ldap_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001001    10001001001    person
+    ${user_id}    get_user_id_by_name    ${server}    10001001001
+    disable_user_by_id    ${server}    ${user_id}
+
+User_import_ldap_singleuser
+    [Setup]    Setup    management    User_import_ldap_singleuser
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001001    10001001001    person
+
+User_import_ldap_user_then_import_hisGroup
+    [Setup]    Setup    management    User_import_ldap_user_then_import_hisGroup
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    exch_admin    Exchange Admin    person
+    import_group_or_users    ${server}    Enterprise Admins    Enterprise Admins    group
+
+User_import_ldap_alreadyImportedUser
+    [Setup]    Setup    management    User_import_ldap_alreadyImportedUser
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001001    10001001001    person
+    ${e_m}    Run Keyword And Expect Error    *    import_group_or_users    ${server}    10001001001    10001001001    person
+    should_contain    ${e_m}    is already imported
+
+User_import_ldap_singleGroup
+    [Setup]    Setup    management    User_import_ldap_singleGroup
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    Enterprise Admins    Enterprise Admins    group
+
+User_import_ldap_alreadyImporteGroup
+    [Setup]    Setup    management    User_import_ldap_alreadyImporteGroup
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    Enterprise Admins    Enterprise Admins    group
+    ${e_m}    Run Keyword And Expect Error    *    import_group_or_users    ${server}    exch_admin    Exchange Admin    person
+    should_contain    ${e_m}    is already imported
+
+User_delete_ldap_user01
+    [Setup]    Setup    management    User_import_ldap_user01
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001001    10001001001    person
+    ${u_id}    get_user_id_by_name    ${server}    10001001001
+    delete_user_by_id    ${server}    ${u_id}
+
+#add by gannicus
+License_change_ac_trail_full
+    [Setup]    Setup    management    License_change_ac_trail_full
+    ${server}    build_instance    Server
+    active_license    ${server}    ${trail_active_code}
+    active_license    ${server}    ${full_active_code}
+
+#add by gannicus
+Setting_set_a_vaild_proxy_with_auth_on_server
+    [Setup]    Setup    management    Setting_set_a_vaild_proxy_with_auth_on_server
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${proxy}    build_instance    ProxySetting    10.64.1.62    8080    trend\\richard_yuan    26288DFF26A13128
+    set_proxy_setting    ${server}    ${proxy}
+    ${serverproxy}    get_proxy_setting    ${server}
+    ${result}    call_method    ${proxy}    __eq__    ${serverproxy}
+    should be true    ${result}  
+    
+#add by gannicus
+Application_check_mars_result_in_application_page
+    [Setup]    Setup    management    Application_check_mars_result_in_application_page
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_native_application    ${server}    ${a}
+    ${risklevel}    get_app_risklevel    ${server}    ${a_id}
+    should be equal    ${risklevel}    100
+
+#add by gannicus
+User_set_a_user_as_VIP
+    [Setup]    Setup    management    User_set_a_user_as_VIP
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    set_vip    ${server}    test
+
+#debuged
+Application_add_webclip_and_upload_new_icon
+    [Setup]    Setup    management    Application_add_webclip_and_upload_new_icon
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a_id}    add_webclip    ${server}    http:\/\/www.stackoverflow.com
+    update_web_clip_icon    ${server}    ${a_id}    cdcbbs.png
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    call_method    ${p}    add_app    ${a_id}
+    update_profile    ${server}    ${p}
+
+Admin_edit_my_ccount_without_input_full_name_or_Last_name
+    [Setup]    Setup    management    Admin_my_account_without_input_full_name_or_Last_name
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    edit_admin_info    ${server}    123@321.com    Xuan
+
+#add by richard
+Sandbox_upload_android_app
+    [Setup]    Setup    management    Sandbox_upload_android_app
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${packagename}    get_sandboxapp_packagename    ${server}    ${a_id}
+    should be equal    ${packagename}    net.sourceforge.opencamera
+
+#add by richard
+Sandbox_upload_ios_app
+    [Setup]    Setup    management    Sandbox_upload_ios_app
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    diamond.ipa
+    ${a_id}    upload_sandbox_iosapp    ${server}    ${a}
+    ${packagename}    get_sandboxapp_packagename    ${server}    ${a_id}
+    should be equal    ${packagename}    com.trendmicro.diamond.ent
+
+#add by richard
+Sandbox_delete_android_app
+    [Setup]    Setup    management    Sandbox_delete_android_app
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${Res_Detail}    del_sandbox_app    ${server}    ${a_id}
+    should be equal    ${Res_Detail}    Success
+
+#add by richard
+Sandbox_delete_ios_app
+    [Setup]    Setup    management    Sandbox_delete_ios_app
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    diamond.ipa
+    ${a_id}    upload_sandbox_iosapp    ${server}    ${a}
+    ${Res_Detail}    del_sandbox_app    ${server}    ${a_id}
+    should be equal    ${Res_Detail}    Success
+
+#add by richard
+Application_add_Workspace_application
+    [Setup]    Setup    management    Application_add_Workspace_application
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_native_application    ${server}    ${a}
+    ${packagename}    get_workspaceapp_packagename    ${server}    ${a_id}
+    should be equal    ${packagename}    net.sourceforge.opencamera
+
+#add by richard
+Application_add_WallPaper
+    [Setup]    Setup    management    Application_add_WallPaper
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${w}    build_instance    Paper    wallpaper1.jpg
+    ${wp_id}    upload_wallpaper    ${server}    ${w}
+    should be equal as numbers   ${wp_id}   13
+
+#add by richard
+Application_del_WallPaper
+    [Setup]    Setup    management    Application_del_WallPaper
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${w}    build_instance    Paper    wallpaper1.jpg
+    ${wp_id}    upload_wallpaper    ${server}    ${w}
+    ${Res_Detail}    del_wallpaper    ${server}    ${wp_id}
+    should be equal    ${Res_Detail}    Success
+
+#add by richard
+Application_del_Workspaceapp
+    [Setup]    Setup    management    Application_del_Workspaceapp
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_native_application    ${server}    ${a}
+    ${Res_Detail}    del_workspace_app    ${server}    ${a_id}
+    should be equal    ${Res_Detail}    Success
+
+#add by richard
+Application_disableThenEnable_Workspaceapp
+    [Setup]    Setup    management    Application_disableThenEnable_Workspaceapp
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${Res_Detail_dis}    disable_workspace_app    ${server}    1000
+    should be equal    ${Res_Detail_dis}    Success
+    ${Res_Detail_en}    enable_workspace_app    ${server}    1000
+    should be equal    ${Res_Detail_en}    Success
+
+#add by richard
+Application_hideThenUnhide_Workspaceapp
+    [Setup]    Setup    management    Application_hideThenUnhide_Workspaceapp
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${Res_Detail_hide}    hide_app    ${server}    1000
+    should be equal    ${Res_Detail_hide}    Success
+    ${Hide_flag_hidden}    get_app_hidestatus    ${server}    1000
+    should be equal    ${Hide_flag_hidden}    1
+    ${Res_Detail_unhide}    unhide_app    ${server}    1000
+    should be equal    ${Res_Detail_unhide}    Success
+    ${Hide_flag_unhidden}    get_app_hidestatus    ${server}    1000
+    should be equal    ${Hide_flag_unhidden}    0
+
+#add by richard
+Application_edit_workspace_app
+    [Setup]    Setup    management    Application_edit_workspace_app
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_native_application    ${server}    ${a}
+    ${description}    edit_workspace_app    ${server}    ${a_id}    testTxtDemo
+    should be equal    ${description}    testTxtDemo
+
+#add by richard
+Sandbox_edit_app
+    [Setup]    Setup    management    Sandbox_edit_app
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${Res_Detail_edit}    edit_sandbox_app    ${server}    ${a_id}    testTxtDemo
+    should be equal    ${Res_Detail_edit}    Success
+    ${description}    get_sandboxapp_description    ${server}    ${a_id}
+    should be equal    ${description}    testTxtDemo
+
+#add by richard
+Application_edit_webclip
+    [Setup]    Setup    management    Application_edit_webclip
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a_id}    add_webclip    ${server}    http:\/\/www.stackoverflow.com
+    ${description}    edit_webclip    ${server}    ${a_id}    testTxtDemo
+    should be equal    ${description}    testTxtDemo
+
+#add by richard
+Sandbox_create_sandboxprofile_DisableCopyAndPaste
+    [Setup]    Setup    management    Sandbox_create_sandboxprofile_DisableCopyAndPaste
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    1,0,0,0,0    3    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+
+#add by richard
+Sandbox_create_sandboxprofile_DisableScreenCapture
+    [Setup]    Setup    management    Sandbox_create_sandboxprofile_DisableScreenCapture
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    0,1,0,0,0    3    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+
+#add by richard
+Sandbox_create_sandboxprofile_DisableFileSharing
+    [Setup]    Setup    management    Sandbox_create_sandboxprofile_DisableFileSharing
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    0,0,1,0,0    3    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+
+#add by richard
+Sandbox_create_sandboxprofile_DisableNonEncrypted
+    [Setup]    Setup    management    Sandbox_create_sandboxprofile_DisableNonEncrypted
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    0,0,0,1,0    3    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+
+#add by richard
+Sandbox_create_sandboxprofile_DisableRoot
+    [Setup]    Setup    management    Sandbox_create_sandboxprofile_DisableRoot
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    0,0,0,0,1    3    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+
+#add by richard
+Sandbox_create_sandboxprofile_DisableAll
+    [Setup]    Setup    management    Sandbox_create_sandboxprofile_DisableAll
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    1,1,1,1,1    3    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+
+#add by richard
+Sandbox_create_sandboxprofile_DisableMultiple
+    [Setup]    Setup    management    Sandbox_create_sandboxprofile_DisableMultiple
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    1,0,1,0,1    3    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+
+#add by richard
+Sandbox_create_sandboxprofile_DisableNone
+    [Setup]    Setup    management    Sandbox_create_sandboxprofile_DisableNone
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    0,0,0,0,0    3    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+
+#add by richard
+Sandbox_create_sandboxprofile_offline20d
+    [Setup]    Setup    management    Sandbox_create_sandboxprofile_offline20d
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    1,1,1,1,1    20    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+
+#add by richard
+Sandbox_create_sandboxprofile_enableMDM
+    [Setup]    Setup    management    Sandbox_create_sandboxprofile_enableMDM
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    1,1,1,1,1    7    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+
+#add by richard
+Sandbox_create_sandboxprofile_disableMDM
+    [Setup]    Setup    management    Sandbox_create_sandboxprofile_disableMDM
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    1,1,1,1,1    7    ${a_id}    0
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+
+
+#--2017--02--23
+#add by richard
+Sandbox_delete_sandboxprofile
+    [Setup]    Setup    management    Sandbox_delete_sandboxprofile
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    1,1,1,1,1    7    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+    ${Res_Detail}    del_sandboxprofile    ${server}    ${p_id}
+    should be equal    ${Res_Detail}    Success
+
+#add by richard
+Sandbox_assign_sandboxprofile_on_DefaultGroup
+    [Setup]    Setup    management    Sandbox_assign_sandboxprofile_on_DefaultGroup
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    1,1,1,1,1    7    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+    assign_profile_on_group    ${server}    ${g_id}    ${p_id}
+
+#add by richard
+Sandbox_assign_sandboxprofile_on_CreatedGroup
+    [Setup]    Setup    management    Sandbox_assign_sandboxprofile_on_CreatedGroup
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    create_group    ${server}    group1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    -1
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    1,1,1,1,1    7    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+    assign_profile_on_group    ${server}    ${g_id}    ${p_id}
+
+#add by richard
+Sandbox_assign_sandboxprofile_on_user
+    [Setup]    Setup    management    Sandbox_assign_sandboxprofile_on_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    1,1,1,1,1    7    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+    assign_profile_on_user    ${server}    ${u_id}    ${p_id}
+
+#add by richard
+Sandbox_delete_sandboxprofile_assigned_user
+    [Setup]    Setup    management    Sandbox_delete_sandboxprofile_assigned_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    test    testTxtDemo    1,1,1,1,1    7    ${a_id}    1
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+    assign_profile_on_user    ${server}    ${u_id}    ${p_id}
+    delete_user_by_id    ${server}    ${u_id}
+
+#add by richard
+Sandbox_changeprofile_2sandbox_on_user
+    [Setup]    Setup    management    Sandbox_changeprofile_2sandbox_on_user
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p_1}    build_instance    Profile    test    test
+    ${p_id_1}    create_profile    ${server}    ${p_1}
+    assign_profile_on_user    ${server}    ${u_id}    ${p_id_1}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p_2}    build_instance    SandboxProfile    SandboxTest    testTxtDemo    1,1,1,1,1    7    ${a_id}    1
+    ${p_id_2}    create_sandboxprofile    ${server}    ${p_2}
+    change_userprofile    ${server}    ${u_id}    ${p_id_2}
+    ${res_p_id}    get_userprofile    ${server}    ${u_id}
+    should be equal    ${res_p_id}    ${p_id_2}
+
+#add by richard
+Sandbox_changeprofile_2sandbox_on_DefaultGroup
+    [Setup]    Setup    management    Sandbox_changeprofile_2sandbox_on_DefaultGroup
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${p1}    build_instance    Profile    test    test
+    ${p_id1}    create_profile    ${server}    ${p1}
+    assign_profile_on_group    ${server}    ${g_id}    ${p_id1}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p_2}    build_instance    SandboxProfile    SandboxTest    testTxtDemo    1,1,1,1,1    7    ${a_id}    1
+    ${p_id_2}    create_sandboxprofile    ${server}    ${p_2}
+    change_groupprofile    ${server}    ${g_id}    ${p_id_2}
+    ${res_p_id}    get_groupprofile    ${server}    ${g_id}
+    should be equal    ${res_p_id}    ${p_id_2} 
+
+#add by richard
+Sandbox_changeprofile_2sandbox_on_CreatedGroup
+    [Setup]    Setup    management    Sandbox_changeprofile_2sandbox_on_CreatedGroup 
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    create_group    ${server}    group1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    -1
+    ${p_1}    build_instance    Profile    test    test
+    ${p_id_1}    create_profile    ${server}    ${p_1}
+    assign_profile_on_group    ${server}    ${g_id}    ${p_id_1}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p_2}    build_instance    SandboxProfile    SandboxTest    testTxtDemo    1,1,1,1,1    7    ${a_id}    1
+    ${p_id_2}    create_sandboxprofile    ${server}    ${p_2}
+    change_groupprofile    ${server}    ${g_id}    ${p_id_2}
+    ${res_p_id}    get_groupprofile    ${server}    ${g_id}
+    should be equal    ${res_p_id}    ${p_id_2}
+
+#add by richard
+#userBindingOption
+UserDevice_enable_userBinding
+    [Setup]    Setup    management    UserDevice_enable_userBinding
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    userBindingOption    ${server}    1
+    should be equal    ${res_code}    200
+
+#add by richard
+#userBindingOption
+UserDevice_disable_userBinding
+    [Setup]    Setup    management    UserDevice_disable_userBinding
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code1}    userBindingOption    ${server}    1
+    should be equal    ${res_code1}    200
+    ${res_code2}    userBindingOption    ${server}    0
+    should be equal    ${res_code2}    200
+
+#add by richard
+#importDeviceBindCommand
+UserDevice_import_devices
+    [Setup]    Setup    management    UserDevice_import_devices
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    userBindingOption    ${server}    1
+    should be equal    ${res_code}    200
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${txtfile}    build_instance    TXT    userBindingImport.txt    
+    ${import_success}    importDeviceBindCommand    ${server}    ${txtfile}
+    should be equal    ${import_success}    1
+
+#add by richard
+#userBindingActionCommand
+UserDevice_unbindDevice
+    [Setup]    Setup    management    UserDevice_unbindDevice
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    userBindingOption    ${server}    1
+    should be equal    ${res_code}    200
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${txtfile}    build_instance    TXT    userBindingImport.txt
+    ${import_success}    importDeviceBindCommand    ${server}    ${txtfile}
+    should be equal    ${import_success}    1
+    ${res_code}    userBindingAction_byNameInfo    ${server}    0    user    123456789012345
+    should be equal    ${res_code}    200
+    ${bind_status}    getDeviceBindStatus_byNameInfo    ${server}    user    123456789012345
+    should be equal    ${bind_status}    0
+
+#add by richard
+UserDevice_bindDevice
+    [Setup]    Setup    management    UserDevice_bindDevice
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    userBindingOption    ${server}    1
+    should be equal    ${res_code}    200
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    user    pass    1
+    ${txtfile}    build_instance    TXT    userBindingImport.txt
+    ${import_success}    importDeviceBindCommand    ${server}    ${txtfile}
+    should be equal    ${import_success}    1
+    ${res_code}    userBindingAction_byNameInfo    ${server}    0    user    123456789012345
+    should be equal    ${res_code}    200
+    ${bind_status}    getDeviceBindStatus_byNameInfo    ${server}    user    123456789012345
+    should be equal    ${bind_status}    0
+    ${res_code2}    userBindingAction_byNameInfo    ${server}    1    user    123456789012345
+    should be equal    ${res_code2}    200
+    ${bind_status2}    getDeviceBindStatus_byNameInfo    ${server}    user    123456789012345
+    should be equal    ${bind_status2}    1
+
+#add by richard
+#unia_cfgOptionCommand
+SystemSetting_mobileclient_antiscreen
+    [Setup]    Setup    management    SystemSetting_mobileclient_antiscreen
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    unia_cfgOptionCommand    ${server}    1,0,0,0
+    should be equal    ${res_code}    200
+
+#add by richard
+SystemSetting_mobileclient_root_or_jailbreak
+    [Setup]    Setup    management    SystemSetting_root_or_jailbreak
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    unia_cfgOptionCommand    ${server}    0,1,0,0
+    should be equal    ${res_code}    200
+
+#add by richard
+SystemSetting_mobileclient_input_method_builtin
+    [Setup]    Setup    management    SystemSetting_mobileclient_input_method_builtin
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    unia_cfgOptionCommand    ${server}    0,0,1,0
+    should be equal    ${res_code}    200
+
+#add by richard
+SystemSetting_mobileclient_input_method_device
+    [Setup]    Setup    management    SystemSetting_mobileclient_input_method_device
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    unia_cfgOptionCommand    ${server}    0,0,0,0
+    should be equal    ${res_code}    200
+
+#add by richard
+SystemSetting_mobileclient_audio_video
+    [Setup]    Setup    management    SystemSetting_mobileclient_audio_video
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    unia_cfgOptionCommand    ${server}    0,0,0,1
+    should be equal    ${res_code}    200
+
+#remember_passwdOptionCommand
+#add by richard
+SystemSetting_mobileclient_remember_passwd
+    [Setup]    Setup    management    SystemSetting_mobileclient_remember_passwd
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    remember_passwdOptionCommand    ${server}    1
+    should be equal    ${res_code}    200
+
+#auto_alertOptionCommand
+#add by richard
+SystemSetting_mobileclient_auto_alert
+    [Setup]    Setup    management    SystemSetting_mobileclient_auto_alert
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    auto_alertOptionCommand    ${server}    1
+    should be equal    ${res_code}    200
+
+#ldap_lockOptionCommand
+#add by richard
+SystemSetting_mobileclient_ldap_lock
+    [Setup]    Setup    management    SystemSetting_mobileclient_ldap_lock
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    ldap_lockOptionCommand    ${server}    1    5    120
+    should be equal    ${res_code}    200
+
+#password_levelOptionCommand
+#add by richard
+SystemSetting_mobileclient_password_level_all
+    [Setup]    Setup    management    SystemSetting_mobileclient_password_level_all
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    password_levelOptionCommand    ${server}    0
+    should be equal    ${res_code}    200
+
+#add by richard
+SystemSetting_mobileclient_password_level_pattenpinpasswd
+    [Setup]    Setup    management    SystemSetting_mobileclient_password_pattenpinpasswd
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    password_levelOptionCommand    ${server}    1
+    should be equal    ${res_code}    200
+
+#add by richard
+SystemSetting_mobileclient_password_level_pinpasswd
+    [Setup]    Setup    management    SystemSetting_mobileclient_password_pinpasswd
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    password_levelOptionCommand    ${server}    2
+    should be equal    ${res_code}    200
+
+#add by richard
+SystemSetting_mobileclient_password_level_passwd
+    [Setup]    Setup    management    SystemSetting_mobileclient_password_passwd
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    password_levelOptionCommand    ${server}    3
+    should be equal    ${res_code}    200
+
+#sacfgCommand
+#add by richard
+SystemSetting_mobileclient_sacfg
+    [Setup]    Setup    management    SystemSetting_mobileclient_sacfg
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${res_code}    sacfgCommand    ${server}    10.206.139.3    443
+    should be equal    ${res_code}    200
+
+

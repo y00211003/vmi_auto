@@ -1,0 +1,1773 @@
+2017-12-13 11:23:01:405 | INFO | ClientSimulator | /root/vmi_client/vmi_client.jar
+2017-12-13 11:23:01:421 | INFO | ClientSimulator | ------------------- Start to run fake Android VMI client -------------------
+2017-12-13 11:23:01:439 | INFO | LoginManager | request the cfg API
+2017-12-13 11:23:01:776 | DEBUG | Network | http post url: https://10.206.139.119:443/api/v1/portal/cfg
+2017-12-13 11:23:01:777 | DEBUG | Network | http post body: {"demo_flag":0,"username":"vmi\\10001001001"}
+2017-12-13 11:23:04:015 | DEBUG | Network | Response body:
+2017-12-13 11:23:04:016 | DEBUG | Network | {"manager_version": "5.5.1303", "unia_version": "5.5.1303", "url": "/api/v1/portal/", "salt": "4aMCP7ybOwCw", "timestamp": "2017-12-13T03:31:24.382139+00:00", "enabled_ldap": false, "encryption": 1, "min_android_client_version": "5.5.1143", "current_android_client_version": "5.5.1143", "heart_beat": 3000, "connection_timeout": 300000, "server": "https://192.168.20.201", "last_boot_time": 3, "remember_passwd": false, "anti_screen": "False", "auth_type": 1, "auth_parameters": {"authorize_uri": null, "state": null, "salt": null}, "current_ios_client_version": "5.5.1115", "current_win_client_version": "5.5.1009", "min_ios_client_version": "1.0.1000", "min_win_client_version": "5.5.1009", "customize": 0, "single_app": 0, "package": {"package_name": "", "class_name": null, "extras": null}, "codelist": null, "change_password": true, "server_guid": "4354daf9-6a7c-43ee-81de-c7cac6dc855a", "password_level": 0, "sa_http_port": 80, "wrap_sha1": "477E5F7B6B4D3D51475BAD9F34D0EEA138FC2766", "root_or_jailbreak": 0, "custom_auth": 0, "custom_auth_url": "", "is_native_dpi": false}
+2017-12-13 11:23:04:018 | VERBOSE | SafeMobileApplication | Unia version is: 5.5.1303
+2017-12-13 11:23:04:019 | DEBUG | URLConfig | Gateway onGetConfigSucceed
+2017-12-13 11:23:04:029 | INFO | LoginManager | request the login API
+2017-12-13 11:23:04:030 | DEBUG | Network | http post url: https://10.206.139.119:443/api/v1/portal/login
+2017-12-13 11:23:04:030 | DEBUG | Network | http post body: {"password":"otRhAcWxlGwKaFU8tfmxVA96ZAAgCFCO+sbH2dCaqbMUfaT6kkF7CkcqsK9yZHdUXGXZVXOE/HHg\nUqTUPtux01sOq4GFL3sscSNRi/i3FvvzphUhaqG3FililUmjIpKnAiDJpBa71q6bPCfgPRHQjPVj\nN/F2ZTa6Raek7AgNUjgLJ3GSNjQ/O2a3He0vl/hgprV3RpZuUtlZf/9s/3iFdlsOq4GFL3ssClqt\nVVb5x5sMD11uIKKhHQ==\n","os_info":"Android,4.4.4","demo_flag":0,"display":{"mode":0,"density":320,"x":720,"y":1280},"locale":"en_US","username":"vmi\\10001001001"}
+2017-12-13 11:23:04:722 | DEBUG | Network | Response body:
+2017-12-13 11:23:04:722 | DEBUG | Network | {"token": "L+hojzLLfCThzK9KOyjOX+urp6sySyZMC01aZhr5zFYZlZE1IAUEDeu5mZiNwPe9Gp0EhJRVlz8SFtX07w4YvA==", "expire_date": "2017-12-14", "unia": "unia://192.168.20.201:5903", "display": {"x": 720, "y": 1280, "density": 320, "mode": 0, "maxdst": 320, "mindst": 96}, "vnc_token": null, "app_info": [{"icon": "store/5887cc5c-3fb5-4163-b870-583f24301769-ic_launcher.png", "id": 1103, "name": "ScrollAnimation", "package": "com.qa.trendmicro.ScrollAutoanimation", "type": 0, "download_url": null, "open_url": null, "version_code": null, "size": 2013585, "version": "1.0", "sso_enable": false}, {"icon": "store/deab0e7c-c6ee-45d6-b94b-96164f234b85-ic_launcher.png", "id": 1104, "name": "ZoomAnimation", "package": "com.qa.trendmicro.ZoomAutoanimation", "type": 0, "download_url": null, "open_url": null, "version_code": null, "size": 2013561, "version": "1.0", "sso_enable": false}, {"icon": "/admin/images/noicon.png", "id": 1105, "name": "\u65b0\u6d6a\u7f51\u9996\u9875_\u624b\u673a\u65b0\u6d6a\u7f51", "package": "http://10.206.139.99:8080/sina.html", "type": 0, "download_url": null, "open_url": null, "version_code": null, "size": 0, "version": "", "sso_enable": false}], "lock_pw_type": 0, "lock_pw_hash": null, "wall_paper": "/admin/images/wallpaper/red.jpg", "loc_token": "rUcps3Gl9j9OseitKJTzj0Em4DR48C8G", "watermark_enable": false, "watermark_text": "", "sa_server": "", "mdm_enable": false, "device_mdm_status": 0, "sandbox_user": false, "ac_expire": false, "sandbox_encryption_key": "", "bt_info": null, "user_name": null, "passw": null}
+2017-12-13 11:23:04:725 | INFO | LoginManager | request the chkunia API
+2017-12-13 11:23:04:727 | DEBUG | Network | http post url: https://10.206.139.119:443/api/v1/portal/chkunia
+2017-12-13 11:23:04:727 | DEBUG | Network | http post body: {"demo_flag":0,"username":"vmi\\10001001001","token":"L+hojzLLfCThzK9KOyjOX+urp6sySyZMC01aZhr5zFbcgj/WvKEb1XL49MAqz8os8rsQjeibIG/S\n8wnH0ZxbyprmQHGEP1/2Rr4OAEBwIMM3YbT9e9oM4WrQ/VR5f/WTJhRHume2QKIuSW0Np55fUea/\npsfELNG/TufWcDGrI4FrowyttFJUJ91B2RjWoBCMDA9dbiCioR0=\n"}
+2017-12-13 11:23:04:761 | DEBUG | Network | Response body:
+2017-12-13 11:23:04:761 | DEBUG | Network | {"code": 1, "detail": "General failure", "data": ""}
+2017-12-13 11:23:05:762 | DEBUG | Network | http post url: https://10.206.139.119:443/api/v1/portal/chkunia
+2017-12-13 11:23:05:762 | DEBUG | Network | http post body: {"demo_flag":0,"username":"vmi\\10001001001","token":"L+hojzLLfCThzK9KOyjOX+urp6sySyZMC01aZhr5zFY/s6030p732R3yCSDT1Hmw2aWziNVWefIS\nHAT+GNhUorafaqqAYYWZJZDDSGpnSOX6og4kSwDiCRNM/hLnSEarfGNypDziMEkCct9Z/fdwilsO\nq4GFL3ssq+huiA9SE9NzdadD9hEaWyPaOjpxrnt7\n"}
+2017-12-13 11:23:05:894 | DEBUG | Network | Response body:
+2017-12-13 11:23:05:894 | DEBUG | Network | {"code": 1, "detail": "General failure", "data": ""}
+2017-12-13 11:23:06:895 | DEBUG | Network | http post url: https://10.206.139.119:443/api/v1/portal/chkunia
+2017-12-13 11:23:06:895 | DEBUG | Network | http post body: {"demo_flag":0,"username":"vmi\\10001001001","token":"L+hojzLLfCThzK9KOyjOX+urp6sySyZMC01aZhr5zFYjoeoIOYzGaYEHkjMbvDJo8arjd9AwgwEw\nSPGeDQMcNFsOq4GFL3ss+r/gqtNDqa5jSVZ3A1GBiaD99V8u3WZLeMdeuI6oUANGN+1eKsnNO3Ct\nZ1vH0o3DYmwAAMHoLIWXHy2DGaCR6qFeMqKWoi08dm31sKXxtHmisup1gWjhqg==\n"}
+2017-12-13 11:23:07:030 | DEBUG | Network | Response body:
+2017-12-13 11:23:07:030 | DEBUG | Network | {"code": 1, "detail": "General failure", "data": ""}
+2017-12-13 11:23:08:031 | DEBUG | Network | http post url: https://10.206.139.119:443/api/v1/portal/chkunia
+2017-12-13 11:23:08:031 | DEBUG | Network | http post body: {"demo_flag":0,"username":"vmi\\10001001001","token":"L+hojzLLfCThzK9KOyjOX+urp6sySyZMC01aZhr5zFZ2g3ML82CGkcd9JIz8c8p32TGPXRbavCth\nCZf4YjVp/MhMgo/IQPeblRKTb1fXpry+8sPR2eKyO3KQN9yQFkufLmw2uPRUQ2lbDquBhS97LK+T\nT28pwtcU/CttveY0bzFnIq10WAJEhMrkkHUSxnYLI3/qVuE4Rf8caW1PejAk4A==\n"}
+2017-12-13 11:23:08:162 | DEBUG | Network | Response body:
+2017-12-13 11:23:08:162 | DEBUG | Network | {"code": 1, "detail": "General failure", "data": ""}
+2017-12-13 11:23:09:163 | DEBUG | Network | http post url: https://10.206.139.119:443/api/v1/portal/chkunia
+2017-12-13 11:23:09:164 | DEBUG | Network | http post body: {"demo_flag":0,"username":"vmi\\10001001001","token":"L+hojzLLfCThzK9KOyjOX+urp6sySyZMC01aZhr5zFautmrxhEJ+RY7+OXGNWa32Ww6rgYUveyw0\nYmrPuDQE7yomTeQjOOJwBeukptajn4jVdSSciPXrB4vsfvOu/sjVYmsAPfaKFJjdcAcxI+9yLPJ0\nDqpCDR8/u0KjMDH4OVBwZawpOyV7qm/cxqEBMbSx9qyws+bKF3I=\n"}
+2017-12-13 11:23:09:291 | DEBUG | Network | Response body:
+2017-12-13 11:23:09:291 | DEBUG | Network | {"code": 1, "detail": "General failure", "data": ""}
+2017-12-13 11:23:10:292 | DEBUG | Network | http post url: https://10.206.139.119:443/api/v1/portal/chkunia
+2017-12-13 11:23:10:292 | DEBUG | Network | http post body: {"demo_flag":0,"username":"vmi\\10001001001","token":"L+hojzLLfCThzK9KOyjOX+urp6sySyZMC01aZhr5zFbC1QnqKNJnDD7wZHTzKuHls8veXWmjLsEV\n1eGU1URsJRwkCafNPQYdXOHwH3UWOkkSWZR5e5pymCFmjDO608++Avg8hwcFr4FiGiGlBkSL4eiT\nfS7MVWDSe+wsWVPj/q2Pknjq57HcrVHzAl4A96fp4PxYJS7RNugcaW1PejAk4A==\n"}
+2017-12-13 11:23:10:421 | DEBUG | Network | Response body:
+2017-12-13 11:23:10:421 | DEBUG | Network | {"vnc_token": "DEEgAA1ramqyWsKOwJ1x5I8vJANfL19JmgWyFLMfORAZlZE1IAUEDeu5mZiNwPe9UF3A8VVXnDMSFtX07w4YvA==", "code": 0, "detail": "Success"}
+2017-12-13 11:23:10:422 | INFO | LoginManager | Unia is booted successfully!
+2017-12-13 11:23:10:423 | INFO | LoginManager | request the get_app_info API
+2017-12-13 11:23:10:423 | DEBUG | Network | http post url: https://10.206.139.119:443/api/v1/portal/get_app_info
+2017-12-13 11:23:10:423 | DEBUG | Network | http post body: {"locale":"en_US","username":"vmi\\10001001001"}
+2017-12-13 11:23:10:485 | DEBUG | Network | Response body:
+2017-12-13 11:23:10:485 | DEBUG | Network | {"app_info": [{"icon": "store/5887cc5c-3fb5-4163-b870-583f24301769-ic_launcher.png", "id": 1103, "name": "ScrollAnimation", "package": "com.qa.trendmicro.ScrollAutoanimation", "type": 0, "download_url": null, "open_url": null, "version_code": null, "size": 2013585, "version": "1.0", "sso_enable": false}, {"icon": "store/deab0e7c-c6ee-45d6-b94b-96164f234b85-ic_launcher.png", "id": 1104, "name": "ZoomAnimation", "package": "com.qa.trendmicro.ZoomAutoanimation", "type": 0, "download_url": null, "open_url": null, "version_code": null, "size": 2013561, "version": "1.0", "sso_enable": false}, {"icon": "/admin/images/noicon.png", "id": 1105, "name": "\u65b0\u6d6a\u7f51\u9996\u9875_\u624b\u673a\u65b0\u6d6a\u7f51", "package": "http://10.206.139.99:8080/sina.html", "type": 0, "download_url": null, "open_url": null, "version_code": null, "size": 0, "version": "", "sso_enable": false}]}
+2017-12-13 11:23:10:487 | DEBUG | UniaService | initialize UniaService
+2017-12-13 11:23:10:487 | INFO | UniaEngine | UniaEngine construct
+2017-12-13 11:23:10 | JNI init completed
+2017-12-13 11:23:10 | Java_com_trendmicro_virdroid_service_UniaEngine_initCtx
+2017-12-13 11:23:10:488 | DEBUG | connectUnia | connect UNIA using RMX 2.0
+2017-12-13 11:23:10:488 | DEBUG | connectUnia | gateway is: 10.206.139.119, gateway_port: 443
+[2017-12-13 11:23:10.488] [RMX] [info] new client with 10s timeout
+[2017-12-13 11:23:10.488] [RMX] [info] start kMain [0] connection to 192.168.20.201:5903
+[2017-12-13 11:23:10.488] [RMX] [info] through gateway 10.206.139.119:443
+[2017-12-13 11:23:10.488] [RMX] [info] start kSub [1] connection to 192.168.20.201:5903
+[2017-12-13 11:23:10.488] [RMX] [info] through gateway 10.206.139.119:443
+2017-12-13 11:23:10 | g_network_handler end
+2017-12-13 11:23:10 | destroyGlobalHandlers end
+2017-12-13 11:23:10:489 | DEBUG | UniaEngine | onStartConnect
+[2017-12-13 11:23:10.489] [RMX] [info] client network thread joined
+[2017-12-13 11:23:10.489] [RMX] [info] client network thread started
+[2017-12-13 11:23:10.489] [RMX] [info] client TcpConnection{socket=29, remote=0.0.0.0:0} connected to 10.206.139.119:443
+[2017-12-13 11:23:10.490] [RMX] [info] client TcpConnection{socket=30, remote=0.0.0.0:0} connected to 10.206.139.119:443
+[2017-12-13 11:23:10.493] [RMX] [info] remote endpoint is 10.206.139.119:443
+[2017-12-13 11:23:10.494] [RMX] [info] connect gateway successful: HTTP/1.0 200 Connection established
+[2017-12-13 11:23:10.494] [RMX] [info] authentication passed
+[2017-12-13 11:23:10.494] [RMX] [info] add kMain [0] connection TcpConnection{socket=29, remote=10.206.139.119:443} to session
+[2017-12-13 11:23:10.494] [RMX] [info] total 1 connections in session 0x640a0230
+[2017-12-13 11:23:10.494] [RMX] [info] remote endpoint is 10.206.139.119:443
+[2017-12-13 11:23:10.495] [RMX] [info] connect gateway successful: HTTP/1.0 200 Connection established
+[2017-12-13 11:23:10.495] [RMX] [info] authentication passed
+[2017-12-13 11:23:10.495] [RMX] [info] add kSub [1] connection TcpConnection{socket=30, remote=10.206.139.119:443} to session
+[2017-12-13 11:23:10.495] [RMX] [info] total 2 connections in session 0x640a0230
+2017-12-13 11:23:10 | RMX Client::OnOpen
+2017-12-13 11:23:10:496 | DEBUG | UniaEngine | onFinishConnect
+2017-12-13 11:23:10:497 | DEBUG | VirtualSettings | settings message: {"datetime":"20171213T112310:24","screen_lock":"eyJhY3Rpb24iOiJzZXQiLCJwYXNzd29yZCI6IiIsInBhc3N3b3JkX3F1YWxpdHkiOjB9","timezone":"Asia/Shanghai","auto-rotate":"0","locale":"en_US","change_mode":{"mode":1}}
+2017-12-13 11:23:10:497 | DEBUG | VirtualSettings | Ready to send message:{"datetime":"20171213T112310:24","screen_lock":"eyJhY3Rpb24iOiJzZXQiLCJwYXNzd29yZCI6IiIsInBhc3N3b3JkX3F1YWxpdHkiOjB9","timezone":"Asia/Shanghai","auto-rotate":"0","locale":"en_US","change_mode":{"mode":1}}, length=205
+2017-12-13 11:23:10 | debug_add: getCacheMD5sFromSDCard
+2017-12-13 11:23:10 | debug_add getCacheMD5sFromSDCard totalsize=5, datasize=0
+2017-12-13 11:23:10 | tmpBuffer: connect:init:01
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:498 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:init:01
+2017-12-13 11:23:10 | tmpBuffer: connect:sensors:03
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:499 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sensors:03
+2017-12-13 11:23:10 | tmpBuffer: set:acceleration:1
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:499 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=3,msg=set:acceleration:1
+2017-12-13 11:23:10 | tmpBuffer: connect:vibrator:07
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:499 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:vibrator:07
+2017-12-13 11:23:10 | tmpBuffer: connect:camera:08
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:499 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:camera:08
+2017-12-13 11:23:10 | tmpBuffer: connect:audio_in:09
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:499 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:audio_in:09
+2017-12-13 11:23:10 | tmpBuffer: connect:audio_out:0a
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:500 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:audio_out:0a
+2017-12-13 11:23:10 | tmpBuffer: connect:audio_ctrl:0b
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:500 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:audio_ctrl:0b
+2017-12-13 11:23:10 | tmpBuffer: connect:wifi:0c
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:500 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:wifi:0c
+2017-12-13 11:23:10 | tmpBuffer: connect:gps:0e
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:500 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:gps:0e
+2017-12-13 11:23:10 | In CsrOnRawHandler, this is the first frame, callJavaVoid onUniaImageReady now
+2017-12-13 11:23:10:609 | DEBUG | UniaEngine | onUniaImageReady
+2017-12-13 11:23:10 | tmpBuffer: set:acceleration:0
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:625 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=3,msg=set:acceleration:0
+2017-12-13 11:23:10 | tmpBuffer: connect:settings:10
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:671 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:settings:10
+2017-12-13 11:23:10 | tmpBuffer: password_level_change_to_none
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:671 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=16,msg=password_level_change_to_none
+2017-12-13 11:23:10 | tmpBuffer: disconnect:settings:10
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:671 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:settings:10
+2017-12-13 11:23:10 | tmpBuffer: connect:settings:11
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:679 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:settings:11
+2017-12-13 11:23:10 | tmpBuffer: watermark_change
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:679 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=17,msg=watermark_change
+2017-12-13 11:23:10 | tmpBuffer: disconnect:settings:11
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:680 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:settings:11
+2017-12-13 11:23:10 | tmpBuffer: connect:powerSwitch:12
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:705 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:12
+2017-12-13 11:23:10 | tmpBuffer: OutLuncher
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:706 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=18,msg=OutLuncher
+2017-12-13 11:23:10 | tmpBuffer: disconnect:powerSwitch:12
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:706 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:12
+2017-12-13 11:23:10 | tmpBuffer: connect:settings:13
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:761 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:settings:13
+2017-12-13 11:23:10 | tmpBuffer: wallpaper_change
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:762 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=19,msg=wallpaper_change
+2017-12-13 11:23:10 | tmpBuffer: disconnect:settings:13
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:763 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:settings:13
+2017-12-13 11:23:10 | tmpBuffer: connect:powerSwitch:14
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:826 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:14
+2017-12-13 11:23:10 | tmpBuffer: OnLuncher
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:826 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=20,msg=OnLuncher
+2017-12-13 11:23:10 | tmpBuffer: disconnect:powerSwitch:14
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:826 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:14
+2017-12-13 11:23:10 | tmpBuffer: connect:vime:15
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:863 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:vime:15
+2017-12-13 11:23:10 | tmpBuffer: config:vime:{"inputType":0,"imeOptions":0,"orientation":1,"rotation":0}
+2017-12-13 11:23:10 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:10:945 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=21,msg=config:vime:{"inputType":0,"imeOptions":0,"orientation":1,"rotation":0}
+2017-12-13 11:23:11 | tmpBuffer: connect:settings:16
+2017-12-13 11:23:11 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:11:430 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:settings:16
+2017-12-13 11:23:11 | tmpBuffer: app_change
+2017-12-13 11:23:11 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:11:430 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=22,msg=app_change
+2017-12-13 11:23:11 | tmpBuffer: disconnect:settings:16
+2017-12-13 11:23:11 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:11:430 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:settings:16
+[2017-12-13 11:23:12.495] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0 ms
+2017-12-13 11:23:12 | RTT: 0.000000
+[2017-12-13 11:23:12.498] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0 ms
+2017-12-13 11:23:12 | RTT: 0.000000
+2017-12-13 11:23:14 | tmpBuffer: vmiWIFI_scan
+2017-12-13 11:23:14 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:14:369 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=12,msg=vmiWIFI_scan
+[2017-12-13 11:23:14.495] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:1 ms
+2017-12-13 11:23:14 | RTT: 1.000000
+[2017-12-13 11:23:14.498] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0 ms
+2017-12-13 11:23:14 | RTT: 0.000000
+[2017-12-13 11:23:16.496] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:1 ms
+2017-12-13 11:23:16 | RTT: 1.000000
+[2017-12-13 11:23:16.498] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0 ms
+2017-12-13 11:23:16 | RTT: 0.000000
+[2017-12-13 11:23:18.496] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:1 ms
+2017-12-13 11:23:18 | RTT: 1.000000
+[2017-12-13 11:23:18.498] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:1 ms
+2017-12-13 11:23:18 | RTT: 1.000000
+2017-12-13 11:23:19 | tmpBuffer: vmiWIFI_scan
+2017-12-13 11:23:19 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:19:370 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=12,msg=vmiWIFI_scan
+[2017-12-13 11:23:20.496] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:1 ms
+2017-12-13 11:23:20 | RTT: 1.000000
+[2017-12-13 11:23:20.499] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:1 ms
+2017-12-13 11:23:20 | RTT: 1.000000
+2017-12-13 11:23:20:611 | INFO | TaskRunner | ------------------- VMI server super lab test -------------------
+2017-12-13 11:23:20:611 | DEBUG | VirtualSettings | in launchApp, app name http://10.206.139.99:8080/sina.html
+2017-12-13 11:23:20:611 | DEBUG | VirtualSettings | settings message: {"launch_app":"eyJ3ZWJjbGlwX3VybCI6Imh0dHA6Ly8xMC4yMDYuMTM5Ljk5OjgwODAvc2luYS5odG1sIiwidHlwZSI6MX0="}
+2017-12-13 11:23:20:611 | DEBUG | VirtualSettings | Send command to launch app {"webclip_url":"http://10.206.139.99:8080/sina.html","type":1}
+2017-12-13 11:23:20:611 | DEBUG | VirtualSettings | settings message: {"launch_cover":"0"}
+2017-12-13 11:23:20:612 | DEBUG | VirtualSettings | Ready to send on pause message.
+2017-12-13 11:23:20:612 | DEBUG | VirtualSettings | settings message: {"screen_lock":"eyJhY3Rpb24iOiJkb25lIn0="}
+2017-12-13 11:23:20 | tmpBuffer: connect:sso:17
+2017-12-13 11:23:20 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:20:707 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sso:17
+2017-12-13 11:23:20 | tmpBuffer: disconnect:sso:17
+2017-12-13 11:23:20 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:20:708 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:sso:17
+2017-12-13 11:23:20 | tmpBuffer: connect:powerSwitch:18
+2017-12-13 11:23:20 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:20:710 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:18
+2017-12-13 11:23:20 | tmpBuffer: OutLuncher
+2017-12-13 11:23:20 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:20:710 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=24,msg=OutLuncher
+2017-12-13 11:23:20 | tmpBuffer: disconnect:powerSwitch:18
+2017-12-13 11:23:20 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:20:711 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:18
+2017-12-13 11:23:20 | tmpBuffer: connect:powerSwitch:19
+2017-12-13 11:23:20 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:20:712 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:19
+2017-12-13 11:23:20 | tmpBuffer: SuccessLaunch
+2017-12-13 11:23:20 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:20:712 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=25,msg=SuccessLaunch
+2017-12-13 11:23:20 | tmpBuffer: disconnect:powerSwitch:19
+2017-12-13 11:23:20 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:20:712 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:19
+[2017-12-13 11:23:22.496] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.5 ms
+2017-12-13 11:23:22 | RTT: 0.500000
+[2017-12-13 11:23:22.499] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:1 ms
+2017-12-13 11:23:22 | RTT: 1.000000
+2017-12-13 11:23:24 | tmpBuffer: vmiWIFI_scan
+2017-12-13 11:23:24 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:24:371 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=12,msg=vmiWIFI_scan
+[2017-12-13 11:23:24.496] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.75 ms
+2017-12-13 11:23:24 | RTT: 0.750000
+[2017-12-13 11:23:24.499] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:1 ms
+2017-12-13 11:23:24 | RTT: 1.000000
+[2017-12-13 11:23:26.497] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.875 ms
+2017-12-13 11:23:26 | RTT: 0.875000
+[2017-12-13 11:23:26.499] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.5 ms
+2017-12-13 11:23:26 | RTT: 0.500000
+[2017-12-13 11:23:28.497] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.9375 ms
+2017-12-13 11:23:28 | RTT: 0.937500
+[2017-12-13 11:23:28.499] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.25 ms
+2017-12-13 11:23:28 | RTT: 0.250000
+2017-12-13 11:23:29 | tmpBuffer: vmiWIFI_scan
+2017-12-13 11:23:29 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:29:371 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=12,msg=vmiWIFI_scan
+[2017-12-13 11:23:30.497] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.96875 ms
+2017-12-13 11:23:30 | RTT: 0.968750
+[2017-12-13 11:23:30.499] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.125 ms
+2017-12-13 11:23:30 | RTT: 0.125000
+[2017-12-13 11:23:32.497] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.984375 ms
+2017-12-13 11:23:32 | RTT: 0.984375
+[2017-12-13 11:23:32.499] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.0625 ms
+2017-12-13 11:23:32 | RTT: 0.062500
+2017-12-13 11:23:34 | tmpBuffer: vmiWIFI_scan
+2017-12-13 11:23:34 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:34:371 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=12,msg=vmiWIFI_scan
+[2017-12-13 11:23:34.497] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.492188 ms
+2017-12-13 11:23:34 | RTT: 0.492188
+[2017-12-13 11:23:34.499] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.03125 ms
+2017-12-13 11:23:34 | RTT: 0.031250
+[2017-12-13 11:23:36.497] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.246094 ms
+2017-12-13 11:23:36 | RTT: 0.246094
+[2017-12-13 11:23:36.499] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.015625 ms
+2017-12-13 11:23:36 | RTT: 0.015625
+[2017-12-13 11:23:38.497] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.623047 ms
+2017-12-13 11:23:38 | RTT: 0.623047
+[2017-12-13 11:23:38.499] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.507812 ms
+2017-12-13 11:23:38 | RTT: 0.507812
+2017-12-13 11:23:39 | tmpBuffer: vmiWIFI_scan
+2017-12-13 11:23:39 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:23:39:372 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=12,msg=vmiWIFI_scan
+[2017-12-13 11:23:40.498] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.811523 ms
+2017-12-13 11:23:40 | RTT: 0.811523
+[2017-12-13 11:23:40.500] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.753906 ms
+2017-12-13 11:23:40 | RTT: 0.753906
+[2017-12-13 11:23:42.498] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.905762 ms
+2017-12-13 11:23:42 | RTT: 0.905762
+[2017-12-13 11:23:42.500] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.876953 ms
+2017-12-13 11:23:42 | RTT: 0.876953
+[2017-12-13 11:23:44.498] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.452881 ms
+2017-12-13 11:23:44 | RTT: 0.452881
+[2017-12-13 11:23:44.500] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.938477 ms
+2017-12-13 11:23:44 | RTT: 0.938477
+[2017-12-13 11:23:46.499] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.72644 ms
+2017-12-13 11:23:46 | RTT: 0.726440
+[2017-12-13 11:23:46.500] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.469238 ms
+2017-12-13 11:23:46 | RTT: 0.469238
+[2017-12-13 11:23:48.498] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.86322 ms
+2017-12-13 11:23:48 | RTT: 0.863220
+[2017-12-13 11:23:48.500] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.234619 ms
+2017-12-13 11:23:48 | RTT: 0.234619
+[2017-12-13 11:23:50.499] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.93161 ms
+2017-12-13 11:23:50 | RTT: 0.931610
+[2017-12-13 11:23:50.500] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.11731 ms
+2017-12-13 11:23:50 | RTT: 0.117310
+[2017-12-13 11:23:52.499] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.965805 ms
+2017-12-13 11:23:52 | RTT: 0.965805
+[2017-12-13 11:23:52.500] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.0586548 ms
+2017-12-13 11:23:52 | RTT: 0.058655
+[2017-12-13 11:23:54.499] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.982903 ms
+2017-12-13 11:23:54 | RTT: 0.982903
+[2017-12-13 11:23:54.500] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.0293274 ms
+2017-12-13 11:23:54 | RTT: 0.029327
+[2017-12-13 11:23:56.499] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.491451 ms
+2017-12-13 11:23:56 | RTT: 0.491451
+[2017-12-13 11:23:56.500] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.514664 ms
+2017-12-13 11:23:56 | RTT: 0.514664
+[2017-12-13 11:23:58.500] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.745726 ms
+2017-12-13 11:23:58 | RTT: 0.745726
+[2017-12-13 11:23:58.500] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.757332 ms
+2017-12-13 11:23:58 | RTT: 0.757332
+[2017-12-13 11:24:00.500] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.872863 ms
+2017-12-13 11:24:00 | RTT: 0.872863
+[2017-12-13 11:24:00.501] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.878666 ms
+2017-12-13 11:24:00 | RTT: 0.878666
+[2017-12-13 11:24:02.500] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.936431 ms
+2017-12-13 11:24:02 | RTT: 0.936431
+[2017-12-13 11:24:02.501] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.939333 ms
+2017-12-13 11:24:02 | RTT: 0.939333
+[2017-12-13 11:24:04.501] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.968216 ms
+2017-12-13 11:24:04 | RTT: 0.968216
+[2017-12-13 11:24:04.501] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.969666 ms
+2017-12-13 11:24:04 | RTT: 0.969666
+[2017-12-13 11:24:06.501] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.984108 ms
+2017-12-13 11:24:06 | RTT: 0.984108
+[2017-12-13 11:24:06.501] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.484833 ms
+2017-12-13 11:24:06 | RTT: 0.484833
+2017-12-13 11:24:07:612 | INFO | Utils | send long press BACK key to let VMI client back to launcher
+2017-12-13 11:24:07:612 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: true
+2017-12-13 11:24:07:612 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: false
+2017-12-13 11:24:07 | tmpBuffer: connect:powerSwitch:1a
+2017-12-13 11:24:07 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:24:07:617 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:1a
+2017-12-13 11:24:07 | tmpBuffer: OutLuncher
+2017-12-13 11:24:07 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:24:07:617 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=26,msg=OutLuncher
+2017-12-13 11:24:07 | tmpBuffer: disconnect:powerSwitch:1a
+2017-12-13 11:24:07 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:24:07:617 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:1a
+[2017-12-13 11:24:08.501] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.992054 ms
+2017-12-13 11:24:08 | RTT: 0.992054
+[2017-12-13 11:24:08.501] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.242417 ms
+2017-12-13 11:24:08 | RTT: 0.242417
+[2017-12-13 11:24:10.501] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.996027 ms
+2017-12-13 11:24:10 | RTT: 0.996027
+[2017-12-13 11:24:10.501] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.121208 ms
+2017-12-13 11:24:10 | RTT: 0.121208
+[2017-12-13 11:24:12.501] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.998013 ms
+2017-12-13 11:24:12 | RTT: 0.998013
+[2017-12-13 11:24:12.501] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.560604 ms
+2017-12-13 11:24:12 | RTT: 0.560604
+[2017-12-13 11:24:14.502] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999007 ms
+2017-12-13 11:24:14 | RTT: 0.999007
+[2017-12-13 11:24:14.502] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.780302 ms
+2017-12-13 11:24:14 | RTT: 0.780302
+[2017-12-13 11:24:16.501] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999503 ms
+2017-12-13 11:24:16 | RTT: 0.999503
+[2017-12-13 11:24:16.502] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.890151 ms
+2017-12-13 11:24:16 | RTT: 0.890151
+[2017-12-13 11:24:18.502] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999752 ms
+2017-12-13 11:24:18 | RTT: 0.999752
+[2017-12-13 11:24:18.502] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.445076 ms
+2017-12-13 11:24:18 | RTT: 0.445076
+[2017-12-13 11:24:20.502] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.222538 ms
+2017-12-13 11:24:20 | RTT: 0.222538
+[2017-12-13 11:24:20.502] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999876 ms
+2017-12-13 11:24:20 | RTT: 0.999876
+[2017-12-13 11:24:22.502] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.499938 ms
+2017-12-13 11:24:22 | RTT: 0.499938
+[2017-12-13 11:24:22.502] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.611269 ms
+2017-12-13 11:24:22 | RTT: 0.611269
+[2017-12-13 11:24:24.503] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.749969 ms
+2017-12-13 11:24:24 | RTT: 0.749969
+[2017-12-13 11:24:24.503] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.805634 ms
+2017-12-13 11:24:24 | RTT: 0.805634
+[2017-12-13 11:24:26.503] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.902817 ms
+2017-12-13 11:24:26 | RTT: 0.902817
+[2017-12-13 11:24:26.503] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.874984 ms
+2017-12-13 11:24:26 | RTT: 0.874984
+[2017-12-13 11:24:28.503] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.451409 ms
+2017-12-13 11:24:28 | RTT: 0.451409
+[2017-12-13 11:24:28.503] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.937492 ms
+2017-12-13 11:24:28 | RTT: 0.937492
+2017-12-13 11:24:28:613 | DEBUG | VirtualSettings | in launchApp, app name http://10.206.139.99:8080/sina.html
+2017-12-13 11:24:28:613 | DEBUG | VirtualSettings | settings message: {"launch_app":"eyJ3ZWJjbGlwX3VybCI6Imh0dHA6Ly8xMC4yMDYuMTM5Ljk5OjgwODAvc2luYS5odG1sIiwidHlwZSI6MX0="}
+2017-12-13 11:24:28:613 | DEBUG | VirtualSettings | Send command to launch app {"webclip_url":"http://10.206.139.99:8080/sina.html","type":1}
+2017-12-13 11:24:28:613 | DEBUG | VirtualSettings | settings message: {"launch_cover":"0"}
+2017-12-13 11:24:28:613 | DEBUG | VirtualSettings | Ready to send on pause message.
+2017-12-13 11:24:28:613 | DEBUG | VirtualSettings | settings message: {"screen_lock":"eyJhY3Rpb24iOiJkb25lIn0="}
+2017-12-13 11:24:28 | tmpBuffer: connect:sso:1b
+2017-12-13 11:24:28 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:24:28:705 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sso:1b
+2017-12-13 11:24:28 | tmpBuffer: disconnect:sso:1b
+2017-12-13 11:24:28 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:24:28:706 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:sso:1b
+2017-12-13 11:24:28 | tmpBuffer: connect:powerSwitch:1c
+2017-12-13 11:24:28 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:24:28:707 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:1c
+2017-12-13 11:24:28 | tmpBuffer: connect:powerSwitch:1d
+2017-12-13 11:24:28 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:24:28:707 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:1d
+2017-12-13 11:24:28 | tmpBuffer: SuccessLaunch
+2017-12-13 11:24:28 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:24:28:707 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=28,msg=SuccessLaunch
+2017-12-13 11:24:28 | tmpBuffer: disconnect:powerSwitch:1c
+2017-12-13 11:24:28 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:24:28:708 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:1c
+2017-12-13 11:24:28 | tmpBuffer: OutLuncher
+2017-12-13 11:24:28 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:24:28:708 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=29,msg=OutLuncher
+2017-12-13 11:24:28 | tmpBuffer: disconnect:powerSwitch:1d
+2017-12-13 11:24:28 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:24:28:708 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:1d
+[2017-12-13 11:24:30.503] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.468746 ms
+2017-12-13 11:24:30 | RTT: 0.468746
+[2017-12-13 11:24:30.503] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.225704 ms
+2017-12-13 11:24:30 | RTT: 0.225704
+[2017-12-13 11:24:32.503] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.112852 ms
+2017-12-13 11:24:32 | RTT: 0.112852
+[2017-12-13 11:24:32.503] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.734373 ms
+2017-12-13 11:24:32 | RTT: 0.734373
+[2017-12-13 11:24:34.504] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.556426 ms
+2017-12-13 11:24:34 | RTT: 0.556426
+[2017-12-13 11:24:34.504] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.867187 ms
+2017-12-13 11:24:34 | RTT: 0.867187
+[2017-12-13 11:24:36.504] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.778213 ms
+2017-12-13 11:24:36 | RTT: 0.778213
+[2017-12-13 11:24:36.504] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.933593 ms
+2017-12-13 11:24:36 | RTT: 0.933593
+[2017-12-13 11:24:38.504] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.389107 ms
+2017-12-13 11:24:38 | RTT: 0.389107
+[2017-12-13 11:24:38.504] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.966797 ms
+2017-12-13 11:24:38 | RTT: 0.966797
+[2017-12-13 11:24:40.504] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.483398 ms
+2017-12-13 11:24:40 | RTT: 0.483398
+[2017-12-13 11:24:40.504] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.694553 ms
+2017-12-13 11:24:40 | RTT: 0.694553
+[2017-12-13 11:24:42.505] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.847277 ms
+2017-12-13 11:24:42 | RTT: 0.847277
+[2017-12-13 11:24:42.505] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.741699 ms
+2017-12-13 11:24:42 | RTT: 0.741699
+[2017-12-13 11:24:44.505] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.923638 ms
+2017-12-13 11:24:44 | RTT: 0.923638
+[2017-12-13 11:24:44.506] [RMX] [info] Connection[0x64903cfc] add new duration 2 , RTT:1.37085 ms
+2017-12-13 11:24:44 | RTT: 1.370850
+[2017-12-13 11:24:46.506] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:1.18542 ms
+2017-12-13 11:24:46 | RTT: 1.185425
+[2017-12-13 11:24:46.506] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.961819 ms
+2017-12-13 11:24:46 | RTT: 0.961819
+[2017-12-13 11:24:48.506] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.98091 ms
+2017-12-13 11:24:48 | RTT: 0.980910
+[2017-12-13 11:24:48.506] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:1.09271 ms
+2017-12-13 11:24:48 | RTT: 1.092712
+[2017-12-13 11:24:50.506] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.490455 ms
+2017-12-13 11:24:50 | RTT: 0.490455
+[2017-12-13 11:24:50.506] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.546356 ms
+2017-12-13 11:24:50 | RTT: 0.546356
+[2017-12-13 11:24:52.506] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.745227 ms
+2017-12-13 11:24:52 | RTT: 0.745227
+[2017-12-13 11:24:52.506] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.773178 ms
+2017-12-13 11:24:52 | RTT: 0.773178
+[2017-12-13 11:24:54.507] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.872614 ms
+2017-12-13 11:24:54 | RTT: 0.872614
+[2017-12-13 11:24:54.507] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.886589 ms
+2017-12-13 11:24:54 | RTT: 0.886589
+[2017-12-13 11:24:56.507] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.943295 ms
+2017-12-13 11:24:56 | RTT: 0.943295
+[2017-12-13 11:24:56.507] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.936307 ms
+2017-12-13 11:24:56 | RTT: 0.936307
+[2017-12-13 11:24:58.507] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.468153 ms
+2017-12-13 11:24:58 | RTT: 0.468153
+[2017-12-13 11:24:58.507] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.971647 ms
+2017-12-13 11:24:58 | RTT: 0.971647
+[2017-12-13 11:25:00.508] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.734077 ms
+2017-12-13 11:25:00 | RTT: 0.734077
+[2017-12-13 11:25:00.508] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.985824 ms
+2017-12-13 11:25:00 | RTT: 0.985824
+[2017-12-13 11:25:02.508] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.867038 ms
+2017-12-13 11:25:02 | RTT: 0.867038
+[2017-12-13 11:25:02.508] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.992912 ms
+2017-12-13 11:25:02 | RTT: 0.992912
+[2017-12-13 11:25:04.508] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.433519 ms
+2017-12-13 11:25:04 | RTT: 0.433519
+[2017-12-13 11:25:04.508] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.996456 ms
+2017-12-13 11:25:04 | RTT: 0.996456
+[2017-12-13 11:25:06.508] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.21676 ms
+2017-12-13 11:25:06 | RTT: 0.216760
+[2017-12-13 11:25:06.508] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.498228 ms
+2017-12-13 11:25:06 | RTT: 0.498228
+[2017-12-13 11:25:08.508] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.60838 ms
+2017-12-13 11:25:08 | RTT: 0.608380
+[2017-12-13 11:25:08.509] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.749114 ms
+2017-12-13 11:25:08 | RTT: 0.749114
+[2017-12-13 11:25:10.509] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.80419 ms
+2017-12-13 11:25:10 | RTT: 0.804190
+[2017-12-13 11:25:10.509] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.874557 ms
+2017-12-13 11:25:10 | RTT: 0.874557
+[2017-12-13 11:25:12.509] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.937278 ms
+2017-12-13 11:25:12 | RTT: 0.937278
+[2017-12-13 11:25:12.509] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.902095 ms
+2017-12-13 11:25:12 | RTT: 0.902095
+[2017-12-13 11:25:14.509] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.451047 ms
+2017-12-13 11:25:14 | RTT: 0.451047
+[2017-12-13 11:25:14.509] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.968639 ms
+2017-12-13 11:25:14 | RTT: 0.968639
+2017-12-13 11:25:14:614 | INFO | Utils | send long press BACK key to let VMI client back to launcher
+2017-12-13 11:25:14:614 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: true
+2017-12-13 11:25:14:614 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: false
+2017-12-13 11:25:14 | tmpBuffer: connect:powerSwitch:1e
+2017-12-13 11:25:14 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:25:14:617 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:1e
+2017-12-13 11:25:14 | tmpBuffer: OutLuncher
+2017-12-13 11:25:14 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:25:14:618 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=30,msg=OutLuncher
+2017-12-13 11:25:14 | tmpBuffer: disconnect:powerSwitch:1e
+2017-12-13 11:25:14 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:25:14:618 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:1e
+[2017-12-13 11:25:16.509] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.725524 ms
+2017-12-13 11:25:16 | RTT: 0.725524
+[2017-12-13 11:25:16.510] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.98432 ms
+2017-12-13 11:25:16 | RTT: 0.984320
+[2017-12-13 11:25:18.510] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.862762 ms
+2017-12-13 11:25:18 | RTT: 0.862762
+[2017-12-13 11:25:18.510] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.99216 ms
+2017-12-13 11:25:18 | RTT: 0.992160
+[2017-12-13 11:25:20.510] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.431381 ms
+2017-12-13 11:25:20 | RTT: 0.431381
+[2017-12-13 11:25:20.510] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.49608 ms
+2017-12-13 11:25:20 | RTT: 0.496080
+[2017-12-13 11:25:22.510] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.21569 ms
+2017-12-13 11:25:22 | RTT: 0.215690
+[2017-12-13 11:25:22.510] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.74804 ms
+2017-12-13 11:25:22 | RTT: 0.748040
+[2017-12-13 11:25:24.510] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.607845 ms
+2017-12-13 11:25:24 | RTT: 0.607845
+[2017-12-13 11:25:24.511] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.87402 ms
+2017-12-13 11:25:24 | RTT: 0.874020
+[2017-12-13 11:25:26.511] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.803923 ms
+2017-12-13 11:25:26 | RTT: 0.803923
+[2017-12-13 11:25:26.511] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.93701 ms
+2017-12-13 11:25:26 | RTT: 0.937010
+[2017-12-13 11:25:28.511] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.401961 ms
+2017-12-13 11:25:28 | RTT: 0.401961
+[2017-12-13 11:25:28.511] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.968505 ms
+2017-12-13 11:25:28 | RTT: 0.968505
+[2017-12-13 11:25:30.511] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.200981 ms
+2017-12-13 11:25:30 | RTT: 0.200981
+[2017-12-13 11:25:30.511] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.484252 ms
+2017-12-13 11:25:30 | RTT: 0.484252
+[2017-12-13 11:25:32.511] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.242126 ms
+2017-12-13 11:25:32 | RTT: 0.242126
+[2017-12-13 11:25:32.511] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.60049 ms
+2017-12-13 11:25:32 | RTT: 0.600490
+[2017-12-13 11:25:34.511] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.621063 ms
+2017-12-13 11:25:34 | RTT: 0.621063
+[2017-12-13 11:25:34.512] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.800245 ms
+2017-12-13 11:25:34 | RTT: 0.800245
+2017-12-13 11:25:34:614 | DEBUG | VirtualSettings | in launchApp, app name com.qa.trendmicro.ZoomAutoanimation
+2017-12-13 11:25:34:615 | DEBUG | VirtualSettings | settings message: {"launch_app":"eyJwYWNrYWdlX25hbWUiOiJjb20ucWEudHJlbmRtaWNyby5ab29tQXV0b2FuaW1hdGlvbiIsInR5cGUiOjB9"}
+2017-12-13 11:25:34:615 | DEBUG | VirtualSettings | Send command to launch app {"package_name":"com.qa.trendmicro.ZoomAutoanimation","type":0}
+2017-12-13 11:25:34:615 | DEBUG | VirtualSettings | settings message: {"launch_cover":"0"}
+2017-12-13 11:25:34:615 | DEBUG | VirtualSettings | Ready to send on pause message.
+2017-12-13 11:25:34:615 | DEBUG | VirtualSettings | settings message: {"screen_lock":"eyJhY3Rpb24iOiJkb25lIn0="}
+2017-12-13 11:25:34 | tmpBuffer: connect:sso:1f
+2017-12-13 11:25:34 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:25:34:710 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sso:1f
+2017-12-13 11:25:34 | tmpBuffer: disconnect:sso:1f
+2017-12-13 11:25:34 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:25:34:711 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:sso:1f
+2017-12-13 11:25:34 | tmpBuffer: connect:powerSwitch:20
+2017-12-13 11:25:34 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:25:34:715 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:20
+2017-12-13 11:25:34 | tmpBuffer: connect:powerSwitch:21
+2017-12-13 11:25:34 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:25:34:715 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:21
+2017-12-13 11:25:34 | tmpBuffer: OutLuncher
+2017-12-13 11:25:34 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:25:34:717 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=32,msg=OutLuncher
+2017-12-13 11:25:34 | tmpBuffer: disconnect:powerSwitch:20
+2017-12-13 11:25:34 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:25:34:717 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:20
+2017-12-13 11:25:34 | tmpBuffer: SuccessLaunch
+2017-12-13 11:25:34 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:25:34:718 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=33,msg=SuccessLaunch
+2017-12-13 11:25:34 | tmpBuffer: disconnect:powerSwitch:21
+2017-12-13 11:25:34 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:25:34:718 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:21
+[2017-12-13 11:25:36.512] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.810532 ms
+2017-12-13 11:25:36 | RTT: 0.810532
+[2017-12-13 11:25:36.512] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.900123 ms
+2017-12-13 11:25:36 | RTT: 0.900123
+[2017-12-13 11:25:38.512] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.450061 ms
+2017-12-13 11:25:38 | RTT: 0.450061
+[2017-12-13 11:25:38.512] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.905266 ms
+2017-12-13 11:25:38 | RTT: 0.905266
+[2017-12-13 11:25:40.512] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.225031 ms
+2017-12-13 11:25:40 | RTT: 0.225031
+[2017-12-13 11:25:40.512] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.952633 ms
+2017-12-13 11:25:40 | RTT: 0.952633
+[2017-12-13 11:25:42.513] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.612515 ms
+2017-12-13 11:25:42 | RTT: 0.612515
+[2017-12-13 11:25:42.513] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.976316 ms
+2017-12-13 11:25:42 | RTT: 0.976316
+[2017-12-13 11:25:44.513] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.806258 ms
+2017-12-13 11:25:44 | RTT: 0.806258
+[2017-12-13 11:25:44.513] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.988158 ms
+2017-12-13 11:25:44 | RTT: 0.988158
+[2017-12-13 11:25:46.513] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.903129 ms
+2017-12-13 11:25:46 | RTT: 0.903129
+[2017-12-13 11:25:46.513] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.994079 ms
+2017-12-13 11:25:46 | RTT: 0.994079
+[2017-12-13 11:25:48.513] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.451564 ms
+2017-12-13 11:25:48 | RTT: 0.451564
+[2017-12-13 11:25:48.513] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.99704 ms
+2017-12-13 11:25:48 | RTT: 0.997040
+[2017-12-13 11:25:50.513] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.99852 ms
+2017-12-13 11:25:50 | RTT: 0.998520
+[2017-12-13 11:25:50.514] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.725782 ms
+2017-12-13 11:25:50 | RTT: 0.725782
+[2017-12-13 11:25:52.514] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.862891 ms
+2017-12-13 11:25:52 | RTT: 0.862891
+[2017-12-13 11:25:52.514] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.99926 ms
+2017-12-13 11:25:52 | RTT: 0.999260
+[2017-12-13 11:25:54.514] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.431446 ms
+2017-12-13 11:25:54 | RTT: 0.431446
+[2017-12-13 11:25:54.514] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.99963 ms
+2017-12-13 11:25:54 | RTT: 0.999630
+[2017-12-13 11:25:56.514] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.499815 ms
+2017-12-13 11:25:56 | RTT: 0.499815
+[2017-12-13 11:25:56.514] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.215723 ms
+2017-12-13 11:25:56 | RTT: 0.215723
+[2017-12-13 11:25:58.515] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.607861 ms
+2017-12-13 11:25:58 | RTT: 0.607861
+[2017-12-13 11:25:58.515] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.749907 ms
+2017-12-13 11:25:58 | RTT: 0.749907
+[2017-12-13 11:26:00.515] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.803931 ms
+2017-12-13 11:26:00 | RTT: 0.803931
+[2017-12-13 11:26:00.515] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.874954 ms
+2017-12-13 11:26:00 | RTT: 0.874954
+[2017-12-13 11:26:02.515] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.437477 ms
+2017-12-13 11:26:02 | RTT: 0.437477
+[2017-12-13 11:26:02.515] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.401965 ms
+2017-12-13 11:26:02 | RTT: 0.401965
+[2017-12-13 11:26:04.515] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.718738 ms
+2017-12-13 11:26:04 | RTT: 0.718738
+[2017-12-13 11:26:04.516] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.700983 ms
+2017-12-13 11:26:04 | RTT: 0.700983
+[2017-12-13 11:26:06.516] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.859369 ms
+2017-12-13 11:26:06 | RTT: 0.859369
+[2017-12-13 11:26:06.516] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.850491 ms
+2017-12-13 11:26:06 | RTT: 0.850491
+[2017-12-13 11:26:08.516] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.929685 ms
+2017-12-13 11:26:08 | RTT: 0.929685
+[2017-12-13 11:26:08.516] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.425246 ms
+2017-12-13 11:26:08 | RTT: 0.425246
+[2017-12-13 11:26:10.516] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.712623 ms
+2017-12-13 11:26:10 | RTT: 0.712623
+[2017-12-13 11:26:10.517] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.964842 ms
+2017-12-13 11:26:10 | RTT: 0.964842
+[2017-12-13 11:26:12.517] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.856311 ms
+2017-12-13 11:26:12 | RTT: 0.856311
+[2017-12-13 11:26:12.517] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.982421 ms
+2017-12-13 11:26:12 | RTT: 0.982421
+[2017-12-13 11:26:14.517] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.928156 ms
+2017-12-13 11:26:14 | RTT: 0.928156
+[2017-12-13 11:26:14.517] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.991211 ms
+2017-12-13 11:26:14 | RTT: 0.991211
+2017-12-13 11:26:15:615 | INFO | Utils | send long press BACK key to let VMI client back to launcher
+2017-12-13 11:26:15:615 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: true
+2017-12-13 11:26:15:615 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: false
+[2017-12-13 11:26:16.517] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.464078 ms
+2017-12-13 11:26:16 | RTT: 0.464078
+[2017-12-13 11:26:16.517] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.995605 ms
+2017-12-13 11:26:16 | RTT: 0.995605
+[2017-12-13 11:26:18.518] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.732039 ms
+2017-12-13 11:26:18 | RTT: 0.732039
+[2017-12-13 11:26:18.518] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.997803 ms
+2017-12-13 11:26:18 | RTT: 0.997803
+[2017-12-13 11:26:20.518] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.866019 ms
+2017-12-13 11:26:20 | RTT: 0.866019
+[2017-12-13 11:26:20.518] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.998901 ms
+2017-12-13 11:26:20 | RTT: 0.998901
+[2017-12-13 11:26:22.518] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.93301 ms
+2017-12-13 11:26:22 | RTT: 0.933010
+[2017-12-13 11:26:22.518] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999451 ms
+2017-12-13 11:26:22 | RTT: 0.999451
+[2017-12-13 11:26:24.518] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.466505 ms
+2017-12-13 11:26:24 | RTT: 0.466505
+[2017-12-13 11:26:24.518] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999725 ms
+2017-12-13 11:26:24 | RTT: 0.999725
+[2017-12-13 11:26:26.519] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999863 ms
+2017-12-13 11:26:26 | RTT: 0.999863
+[2017-12-13 11:26:26.519] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.733252 ms
+2017-12-13 11:26:26 | RTT: 0.733252
+[2017-12-13 11:26:28.519] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.866626 ms
+2017-12-13 11:26:28 | RTT: 0.866626
+[2017-12-13 11:26:28.519] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999931 ms
+2017-12-13 11:26:28 | RTT: 0.999931
+[2017-12-13 11:26:30.519] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.433313 ms
+2017-12-13 11:26:30 | RTT: 0.433313
+[2017-12-13 11:26:30.519] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.499966 ms
+2017-12-13 11:26:30 | RTT: 0.499966
+[2017-12-13 11:26:32.519] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.716657 ms
+2017-12-13 11:26:32 | RTT: 0.716657
+[2017-12-13 11:26:32.520] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.749983 ms
+2017-12-13 11:26:32 | RTT: 0.749983
+[2017-12-13 11:26:34.520] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.858328 ms
+2017-12-13 11:26:34 | RTT: 0.858328
+[2017-12-13 11:26:34.520] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.874991 ms
+2017-12-13 11:26:34 | RTT: 0.874991
+[2017-12-13 11:26:36.520] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.929164 ms
+2017-12-13 11:26:36 | RTT: 0.929164
+[2017-12-13 11:26:36.520] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.937496 ms
+2017-12-13 11:26:36 | RTT: 0.937496
+2017-12-13 11:26:37:616 | DEBUG | VirtualSettings | in launchApp, app name com.qa.trendmicro.ZoomAutoanimation
+2017-12-13 11:26:37:616 | DEBUG | VirtualSettings | settings message: {"launch_app":"eyJwYWNrYWdlX25hbWUiOiJjb20ucWEudHJlbmRtaWNyby5ab29tQXV0b2FuaW1hdGlvbiIsInR5cGUiOjB9"}
+2017-12-13 11:26:37:616 | DEBUG | VirtualSettings | Send command to launch app {"package_name":"com.qa.trendmicro.ZoomAutoanimation","type":0}
+2017-12-13 11:26:37:616 | DEBUG | VirtualSettings | settings message: {"launch_cover":"0"}
+2017-12-13 11:26:37:616 | DEBUG | VirtualSettings | Ready to send on pause message.
+2017-12-13 11:26:37:616 | DEBUG | VirtualSettings | settings message: {"screen_lock":"eyJhY3Rpb24iOiJkb25lIn0="}
+2017-12-13 11:26:37 | tmpBuffer: connect:sso:22
+2017-12-13 11:26:37 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:26:37:710 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sso:22
+2017-12-13 11:26:37 | tmpBuffer: disconnect:sso:22
+2017-12-13 11:26:37 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:26:37:712 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:sso:22
+2017-12-13 11:26:37 | tmpBuffer: connect:powerSwitch:23
+2017-12-13 11:26:37 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:26:37:712 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:23
+2017-12-13 11:26:37 | tmpBuffer: SuccessLaunch
+2017-12-13 11:26:37 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:26:37:712 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=35,msg=SuccessLaunch
+2017-12-13 11:26:37 | tmpBuffer: disconnect:powerSwitch:23
+2017-12-13 11:26:37 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:26:37:712 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:23
+2017-12-13 11:26:37 | tmpBuffer: connect:powerSwitch:24
+2017-12-13 11:26:37 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:26:37:713 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:24
+2017-12-13 11:26:37 | tmpBuffer: OutLuncher
+2017-12-13 11:26:37 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:26:37:713 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=36,msg=OutLuncher
+2017-12-13 11:26:37 | tmpBuffer: disconnect:powerSwitch:24
+2017-12-13 11:26:37 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:26:37:713 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:24
+[2017-12-13 11:26:38.520] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.468748 ms
+2017-12-13 11:26:38 | RTT: 0.468748
+[2017-12-13 11:26:38.520] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.464582 ms
+2017-12-13 11:26:38 | RTT: 0.464582
+[2017-12-13 11:26:40.520] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.734374 ms
+2017-12-13 11:26:40 | RTT: 0.734374
+[2017-12-13 11:26:40.521] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.732291 ms
+2017-12-13 11:26:40 | RTT: 0.732291
+[2017-12-13 11:26:42.521] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.866146 ms
+2017-12-13 11:26:42 | RTT: 0.866146
+[2017-12-13 11:26:42.521] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.867187 ms
+2017-12-13 11:26:42 | RTT: 0.867187
+[2017-12-13 11:26:44.521] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.933073 ms
+2017-12-13 11:26:44 | RTT: 0.933073
+[2017-12-13 11:26:44.521] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.933593 ms
+2017-12-13 11:26:44 | RTT: 0.933593
+[2017-12-13 11:26:46.521] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.466536 ms
+2017-12-13 11:26:46 | RTT: 0.466536
+[2017-12-13 11:26:46.521] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.466797 ms
+2017-12-13 11:26:46 | RTT: 0.466797
+[2017-12-13 11:26:48.521] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.733268 ms
+2017-12-13 11:26:48 | RTT: 0.733268
+[2017-12-13 11:26:48.522] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.733398 ms
+2017-12-13 11:26:48 | RTT: 0.733398
+[2017-12-13 11:26:50.522] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.866634 ms
+2017-12-13 11:26:50 | RTT: 0.866634
+[2017-12-13 11:26:50.522] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.866699 ms
+2017-12-13 11:26:50 | RTT: 0.866699
+[2017-12-13 11:26:52.522] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.933317 ms
+2017-12-13 11:26:52 | RTT: 0.933317
+[2017-12-13 11:26:52.522] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.93335 ms
+2017-12-13 11:26:52 | RTT: 0.933350
+[2017-12-13 11:26:54.522] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.466659 ms
+2017-12-13 11:26:54 | RTT: 0.466659
+[2017-12-13 11:26:54.522] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.966675 ms
+2017-12-13 11:26:54 | RTT: 0.966675
+[2017-12-13 11:26:56.523] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.733329 ms
+2017-12-13 11:26:56 | RTT: 0.733329
+[2017-12-13 11:26:56.523] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.983337 ms
+2017-12-13 11:26:56 | RTT: 0.983337
+[2017-12-13 11:26:58.523] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.866665 ms
+2017-12-13 11:26:58 | RTT: 0.866665
+[2017-12-13 11:26:58.523] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.991669 ms
+2017-12-13 11:26:58 | RTT: 0.991669
+[2017-12-13 11:27:00.523] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.995834 ms
+2017-12-13 11:27:00 | RTT: 0.995834
+[2017-12-13 11:27:00.523] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.933332 ms
+2017-12-13 11:27:00 | RTT: 0.933332
+[2017-12-13 11:27:02.523] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.497917 ms
+2017-12-13 11:27:02 | RTT: 0.497917
+[2017-12-13 11:27:02.523] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.466666 ms
+2017-12-13 11:27:02 | RTT: 0.466666
+[2017-12-13 11:27:04.523] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.233333 ms
+2017-12-13 11:27:04 | RTT: 0.233333
+[2017-12-13 11:27:04.523] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.748959 ms
+2017-12-13 11:27:04 | RTT: 0.748959
+[2017-12-13 11:27:06.524] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.874479 ms
+2017-12-13 11:27:06 | RTT: 0.874479
+[2017-12-13 11:27:06.524] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.616667 ms
+2017-12-13 11:27:06 | RTT: 0.616667
+[2017-12-13 11:27:08.524] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.808333 ms
+2017-12-13 11:27:08 | RTT: 0.808333
+[2017-12-13 11:27:08.524] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.93724 ms
+2017-12-13 11:27:08 | RTT: 0.937240
+[2017-12-13 11:27:10.524] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.404167 ms
+2017-12-13 11:27:10 | RTT: 0.404167
+[2017-12-13 11:27:10.524] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.46862 ms
+2017-12-13 11:27:10 | RTT: 0.468620
+[2017-12-13 11:27:12.525] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.73431 ms
+2017-12-13 11:27:12 | RTT: 0.734310
+[2017-12-13 11:27:12.525] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.702083 ms
+2017-12-13 11:27:12 | RTT: 0.702083
+[2017-12-13 11:27:14.525] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.851042 ms
+2017-12-13 11:27:14 | RTT: 0.851042
+[2017-12-13 11:27:14.525] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.867155 ms
+2017-12-13 11:27:14 | RTT: 0.867155
+[2017-12-13 11:27:16.525] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.925521 ms
+2017-12-13 11:27:16 | RTT: 0.925521
+[2017-12-13 11:27:16.525] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.933577 ms
+2017-12-13 11:27:16 | RTT: 0.933577
+[2017-12-13 11:27:18.525] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.46276 ms
+2017-12-13 11:27:18 | RTT: 0.462760
+[2017-12-13 11:27:18.525] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.966789 ms
+2017-12-13 11:27:18 | RTT: 0.966789
+[2017-12-13 11:27:20.525] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.23138 ms
+2017-12-13 11:27:20 | RTT: 0.231380
+[2017-12-13 11:27:20.525] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.983394 ms
+2017-12-13 11:27:20 | RTT: 0.983394
+[2017-12-13 11:27:22.526] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.61569 ms
+2017-12-13 11:27:22 | RTT: 0.615690
+[2017-12-13 11:27:22.526] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.991697 ms
+2017-12-13 11:27:22 | RTT: 0.991697
+[2017-12-13 11:27:24.526] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.807845 ms
+2017-12-13 11:27:24 | RTT: 0.807845
+[2017-12-13 11:27:24.526] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.995849 ms
+2017-12-13 11:27:24 | RTT: 0.995849
+2017-12-13 11:27:25:617 | INFO | Utils | send long press BACK key to let VMI client back to launcher
+2017-12-13 11:27:25:617 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: true
+2017-12-13 11:27:25:617 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: false
+[2017-12-13 11:27:26.526] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.403923 ms
+2017-12-13 11:27:26 | RTT: 0.403923
+[2017-12-13 11:27:26.526] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.497924 ms
+2017-12-13 11:27:26 | RTT: 0.497924
+[2017-12-13 11:27:28.527] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.701961 ms
+2017-12-13 11:27:28 | RTT: 0.701961
+[2017-12-13 11:27:28.527] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.748962 ms
+2017-12-13 11:27:28 | RTT: 0.748962
+[2017-12-13 11:27:30.527] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.850981 ms
+2017-12-13 11:27:30 | RTT: 0.850981
+[2017-12-13 11:27:30.527] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.874481 ms
+2017-12-13 11:27:30 | RTT: 0.874481
+[2017-12-13 11:27:32.527] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.42549 ms
+2017-12-13 11:27:32 | RTT: 0.425490
+[2017-12-13 11:27:32.527] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.937241 ms
+2017-12-13 11:27:32 | RTT: 0.937241
+[2017-12-13 11:27:34.527] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.212745 ms
+2017-12-13 11:27:34 | RTT: 0.212745
+[2017-12-13 11:27:34.527] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.96862 ms
+2017-12-13 11:27:34 | RTT: 0.968620
+[2017-12-13 11:27:36.528] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.606373 ms
+2017-12-13 11:27:36 | RTT: 0.606373
+[2017-12-13 11:27:36.528] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.98431 ms
+2017-12-13 11:27:36 | RTT: 0.984310
+[2017-12-13 11:27:38.528] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.803186 ms
+2017-12-13 11:27:38 | RTT: 0.803186
+[2017-12-13 11:27:38.528] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.992155 ms
+2017-12-13 11:27:38 | RTT: 0.992155
+[2017-12-13 11:27:40.528] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.401593 ms
+2017-12-13 11:27:40 | RTT: 0.401593
+[2017-12-13 11:27:40.528] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.996078 ms
+2017-12-13 11:27:40 | RTT: 0.996078
+[2017-12-13 11:27:42.528] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.700797 ms
+2017-12-13 11:27:42 | RTT: 0.700797
+[2017-12-13 11:27:42.529] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.998039 ms
+2017-12-13 11:27:42 | RTT: 0.998039
+[2017-12-13 11:27:44.529] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.850398 ms
+2017-12-13 11:27:44 | RTT: 0.850398
+[2017-12-13 11:27:44.529] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999019 ms
+2017-12-13 11:27:44 | RTT: 0.999019
+[2017-12-13 11:27:46.529] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.925199 ms
+2017-12-13 11:27:46 | RTT: 0.925199
+[2017-12-13 11:27:46.529] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.99951 ms
+2017-12-13 11:27:46 | RTT: 0.999510
+2017-12-13 11:27:47:618 | DEBUG | VirtualSettings | in launchApp, app name http://10.206.139.99:8080/sina.html
+2017-12-13 11:27:47:618 | DEBUG | VirtualSettings | settings message: {"launch_app":"eyJ3ZWJjbGlwX3VybCI6Imh0dHA6Ly8xMC4yMDYuMTM5Ljk5OjgwODAvc2luYS5odG1sIiwidHlwZSI6MX0="}
+2017-12-13 11:27:47:618 | DEBUG | VirtualSettings | Send command to launch app {"webclip_url":"http://10.206.139.99:8080/sina.html","type":1}
+2017-12-13 11:27:47:618 | DEBUG | VirtualSettings | settings message: {"launch_cover":"0"}
+2017-12-13 11:27:47:618 | DEBUG | VirtualSettings | Ready to send on pause message.
+2017-12-13 11:27:47:618 | DEBUG | VirtualSettings | settings message: {"screen_lock":"eyJhY3Rpb24iOiJkb25lIn0="}
+2017-12-13 11:27:47 | tmpBuffer: connect:sso:25
+2017-12-13 11:27:47 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:27:47:713 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sso:25
+2017-12-13 11:27:47 | tmpBuffer: disconnect:sso:25
+2017-12-13 11:27:47 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:27:47:713 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:sso:25
+2017-12-13 11:27:47 | tmpBuffer: connect:powerSwitch:26
+2017-12-13 11:27:47 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:27:47:715 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:26
+2017-12-13 11:27:47 | tmpBuffer: connect:powerSwitch:27
+2017-12-13 11:27:47 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:27:47:715 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:27
+2017-12-13 11:27:47 | tmpBuffer: OutLuncher
+2017-12-13 11:27:47 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:27:47:715 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=39,msg=OutLuncher
+2017-12-13 11:27:47 | tmpBuffer: SuccessLaunch
+2017-12-13 11:27:47 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:27:47:716 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=38,msg=SuccessLaunch
+2017-12-13 11:27:47 | tmpBuffer: disconnect:powerSwitch:26
+2017-12-13 11:27:47 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:27:47:716 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:26
+2017-12-13 11:27:47 | tmpBuffer: disconnect:powerSwitch:27
+2017-12-13 11:27:47 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:27:47:716 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:27
+[2017-12-13 11:27:48.529] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.4626 ms
+2017-12-13 11:27:48 | RTT: 0.462600
+[2017-12-13 11:27:48.529] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999755 ms
+2017-12-13 11:27:48 | RTT: 0.999755
+[2017-12-13 11:27:50.529] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.2313 ms
+2017-12-13 11:27:50 | RTT: 0.231300
+[2017-12-13 11:27:50.529] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999877 ms
+2017-12-13 11:27:50 | RTT: 0.999877
+[2017-12-13 11:27:52.530] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.61565 ms
+2017-12-13 11:27:52 | RTT: 0.615650
+[2017-12-13 11:27:52.530] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999939 ms
+2017-12-13 11:27:52 | RTT: 0.999939
+[2017-12-13 11:27:54.530] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.807825 ms
+2017-12-13 11:27:54 | RTT: 0.807825
+[2017-12-13 11:27:54.530] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999969 ms
+2017-12-13 11:27:54 | RTT: 0.999969
+[2017-12-13 11:27:56.530] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.403912 ms
+2017-12-13 11:27:56 | RTT: 0.403912
+[2017-12-13 11:27:56.530] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999985 ms
+2017-12-13 11:27:56 | RTT: 0.999985
+[2017-12-13 11:27:58.530] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999992 ms
+2017-12-13 11:27:58 | RTT: 0.999992
+[2017-12-13 11:27:58.531] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.701956 ms
+2017-12-13 11:27:58 | RTT: 0.701956
+[2017-12-13 11:28:00.531] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.850978 ms
+2017-12-13 11:28:00 | RTT: 0.850978
+[2017-12-13 11:28:00.531] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999996 ms
+2017-12-13 11:28:00 | RTT: 0.999996
+[2017-12-13 11:28:02.531] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.925489 ms
+2017-12-13 11:28:02 | RTT: 0.925489
+[2017-12-13 11:28:02.531] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999998 ms
+2017-12-13 11:28:02 | RTT: 0.999998
+[2017-12-13 11:28:04.531] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.462745 ms
+2017-12-13 11:28:04 | RTT: 0.462745
+[2017-12-13 11:28:04.531] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999999 ms
+2017-12-13 11:28:04 | RTT: 0.999999
+[2017-12-13 11:28:06.532] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.731372 ms
+2017-12-13 11:28:06 | RTT: 0.731372
+[2017-12-13 11:28:06.532] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:1 ms
+2017-12-13 11:28:06 | RTT: 1.000000
+[2017-12-13 11:28:08.532] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.865686 ms
+2017-12-13 11:28:08 | RTT: 0.865686
+[2017-12-13 11:28:08.532] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:1 ms
+2017-12-13 11:28:08 | RTT: 1.000000
+[2017-12-13 11:28:10.532] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.932843 ms
+2017-12-13 11:28:10 | RTT: 0.932843
+[2017-12-13 11:28:10.532] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:1 ms
+2017-12-13 11:28:10 | RTT: 1.000000
+[2017-12-13 11:28:12.532] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.466422 ms
+2017-12-13 11:28:12 | RTT: 0.466422
+[2017-12-13 11:28:12.532] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:1 ms
+2017-12-13 11:28:12 | RTT: 1.000000
+[2017-12-13 11:28:14.532] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.5 ms
+2017-12-13 11:28:14 | RTT: 0.500000
+[2017-12-13 11:28:14.532] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.733211 ms
+2017-12-13 11:28:14 | RTT: 0.733211
+[2017-12-13 11:28:16.533] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.866605 ms
+2017-12-13 11:28:16 | RTT: 0.866605
+[2017-12-13 11:28:16.533] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.75 ms
+2017-12-13 11:28:16 | RTT: 0.750000
+[2017-12-13 11:28:18.533] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.933303 ms
+2017-12-13 11:28:18 | RTT: 0.933303
+[2017-12-13 11:28:18.533] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.875 ms
+2017-12-13 11:28:18 | RTT: 0.875000
+[2017-12-13 11:28:20.533] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.466651 ms
+2017-12-13 11:28:20 | RTT: 0.466651
+[2017-12-13 11:28:20.533] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.4375 ms
+2017-12-13 11:28:20 | RTT: 0.437500
+2017-12-13 11:28:20:619 | INFO | Utils | send long press BACK key to let VMI client back to launcher
+2017-12-13 11:28:20:619 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: true
+2017-12-13 11:28:20:619 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: false
+2017-12-13 11:28:20 | tmpBuffer: connect:powerSwitch:28
+2017-12-13 11:28:20 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:28:20:622 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:28
+2017-12-13 11:28:20 | tmpBuffer: OutLuncher
+2017-12-13 11:28:20 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:28:20:622 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=40,msg=OutLuncher
+2017-12-13 11:28:20 | tmpBuffer: disconnect:powerSwitch:28
+2017-12-13 11:28:20 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:28:20:622 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:28
+[2017-12-13 11:28:22.534] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.733326 ms
+2017-12-13 11:28:22 | RTT: 0.733326
+[2017-12-13 11:28:22.534] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.71875 ms
+2017-12-13 11:28:22 | RTT: 0.718750
+[2017-12-13 11:28:24.534] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.866663 ms
+2017-12-13 11:28:24 | RTT: 0.866663
+[2017-12-13 11:28:24.534] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.859375 ms
+2017-12-13 11:28:24 | RTT: 0.859375
+[2017-12-13 11:28:26.534] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.433331 ms
+2017-12-13 11:28:26 | RTT: 0.433331
+[2017-12-13 11:28:26.534] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.929687 ms
+2017-12-13 11:28:26 | RTT: 0.929687
+[2017-12-13 11:28:28.534] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.216666 ms
+2017-12-13 11:28:28 | RTT: 0.216666
+[2017-12-13 11:28:28.534] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.464844 ms
+2017-12-13 11:28:28 | RTT: 0.464844
+[2017-12-13 11:28:30.534] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.232422 ms
+2017-12-13 11:28:30 | RTT: 0.232422
+[2017-12-13 11:28:30.534] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.608333 ms
+2017-12-13 11:28:30 | RTT: 0.608333
+2017-12-13 11:28:30:619 | DEBUG | VirtualSettings | in launchApp, app name com.qa.trendmicro.ZoomAutoanimation
+2017-12-13 11:28:30:619 | DEBUG | VirtualSettings | settings message: {"launch_app":"eyJwYWNrYWdlX25hbWUiOiJjb20ucWEudHJlbmRtaWNyby5ab29tQXV0b2FuaW1hdGlvbiIsInR5cGUiOjB9"}
+2017-12-13 11:28:30:620 | DEBUG | VirtualSettings | Send command to launch app {"package_name":"com.qa.trendmicro.ZoomAutoanimation","type":0}
+2017-12-13 11:28:30:620 | DEBUG | VirtualSettings | settings message: {"launch_cover":"0"}
+2017-12-13 11:28:30:620 | DEBUG | VirtualSettings | Ready to send on pause message.
+2017-12-13 11:28:30:620 | DEBUG | VirtualSettings | settings message: {"screen_lock":"eyJhY3Rpb24iOiJkb25lIn0="}
+2017-12-13 11:28:30 | tmpBuffer: connect:sso:29
+2017-12-13 11:28:30 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:28:30:712 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sso:29
+2017-12-13 11:28:30 | tmpBuffer: disconnect:sso:29
+2017-12-13 11:28:30 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:28:30:712 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:sso:29
+2017-12-13 11:28:30 | tmpBuffer: connect:powerSwitch:2a
+2017-12-13 11:28:30 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:28:30:713 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:2a
+2017-12-13 11:28:30 | tmpBuffer: connect:powerSwitch:2b
+2017-12-13 11:28:30 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:28:30:714 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:2b
+2017-12-13 11:28:30 | tmpBuffer: SuccessLaunch
+2017-12-13 11:28:30 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:28:30:715 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=42,msg=SuccessLaunch
+2017-12-13 11:28:30 | tmpBuffer: disconnect:powerSwitch:2a
+2017-12-13 11:28:30 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:28:30:715 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:2a
+2017-12-13 11:28:30 | tmpBuffer: OutLuncher
+2017-12-13 11:28:30 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:28:30:715 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=43,msg=OutLuncher
+2017-12-13 11:28:30 | tmpBuffer: disconnect:powerSwitch:2b
+2017-12-13 11:28:30 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:28:30:715 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:2b
+[2017-12-13 11:28:32.535] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.804166 ms
+2017-12-13 11:28:32 | RTT: 0.804166
+[2017-12-13 11:28:32.535] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.616211 ms
+2017-12-13 11:28:32 | RTT: 0.616211
+[2017-12-13 11:28:34.535] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.902083 ms
+2017-12-13 11:28:34 | RTT: 0.902083
+[2017-12-13 11:28:34.535] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.808105 ms
+2017-12-13 11:28:34 | RTT: 0.808105
+[2017-12-13 11:28:36.535] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.451042 ms
+2017-12-13 11:28:36 | RTT: 0.451042
+[2017-12-13 11:28:36.535] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.404053 ms
+2017-12-13 11:28:36 | RTT: 0.404053
+[2017-12-13 11:28:38.535] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.725521 ms
+2017-12-13 11:28:38 | RTT: 0.725521
+[2017-12-13 11:28:38.535] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.702026 ms
+2017-12-13 11:28:38 | RTT: 0.702026
+[2017-12-13 11:28:40.536] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.86276 ms
+2017-12-13 11:28:40 | RTT: 0.862760
+[2017-12-13 11:28:40.536] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.851013 ms
+2017-12-13 11:28:40 | RTT: 0.851013
+[2017-12-13 11:28:42.536] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.93138 ms
+2017-12-13 11:28:42 | RTT: 0.931380
+[2017-12-13 11:28:42.536] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.925507 ms
+2017-12-13 11:28:42 | RTT: 0.925507
+[2017-12-13 11:28:44.536] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.462753 ms
+2017-12-13 11:28:44 | RTT: 0.462753
+[2017-12-13 11:28:44.536] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.46569 ms
+2017-12-13 11:28:44 | RTT: 0.465690
+[2017-12-13 11:28:46.536] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.231377 ms
+2017-12-13 11:28:46 | RTT: 0.231377
+[2017-12-13 11:28:46.536] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.232845 ms
+2017-12-13 11:28:46 | RTT: 0.232845
+[2017-12-13 11:28:48.537] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.615688 ms
+2017-12-13 11:28:48 | RTT: 0.615688
+[2017-12-13 11:28:48.537] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.616423 ms
+2017-12-13 11:28:48 | RTT: 0.616423
+[2017-12-13 11:28:50.537] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.808211 ms
+2017-12-13 11:28:50 | RTT: 0.808211
+[2017-12-13 11:28:50.537] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.807844 ms
+2017-12-13 11:28:50 | RTT: 0.807844
+[2017-12-13 11:28:52.537] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.404106 ms
+2017-12-13 11:28:52 | RTT: 0.404106
+[2017-12-13 11:28:52.537] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.403922 ms
+2017-12-13 11:28:52 | RTT: 0.403922
+[2017-12-13 11:28:54.537] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.702053 ms
+2017-12-13 11:28:54 | RTT: 0.702053
+[2017-12-13 11:28:54.538] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.701961 ms
+2017-12-13 11:28:54 | RTT: 0.701961
+[2017-12-13 11:28:56.538] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.851026 ms
+2017-12-13 11:28:56 | RTT: 0.851026
+[2017-12-13 11:28:56.538] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.850981 ms
+2017-12-13 11:28:56 | RTT: 0.850981
+2017-12-13 11:28:57:620 | INFO | Utils | send long press BACK key to let VMI client back to launcher
+2017-12-13 11:28:57:620 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: true
+2017-12-13 11:28:57:620 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: false
+[2017-12-13 11:28:58.538] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.925513 ms
+2017-12-13 11:28:58 | RTT: 0.925513
+[2017-12-13 11:28:58.538] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.92549 ms
+2017-12-13 11:28:58 | RTT: 0.925490
+[2017-12-13 11:29:00.538] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.462757 ms
+2017-12-13 11:29:00 | RTT: 0.462757
+[2017-12-13 11:29:00.538] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.462745 ms
+2017-12-13 11:29:00 | RTT: 0.462745
+[2017-12-13 11:29:02.538] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.231373 ms
+2017-12-13 11:29:02 | RTT: 0.231373
+[2017-12-13 11:29:02.538] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.731378 ms
+2017-12-13 11:29:02 | RTT: 0.731378
+[2017-12-13 11:29:04.539] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.615686 ms
+2017-12-13 11:29:04 | RTT: 0.615686
+[2017-12-13 11:29:04.539] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.865689 ms
+2017-12-13 11:29:04 | RTT: 0.865689
+[2017-12-13 11:29:06.539] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.932845 ms
+2017-12-13 11:29:06 | RTT: 0.932845
+[2017-12-13 11:29:06.539] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.807843 ms
+2017-12-13 11:29:06 | RTT: 0.807843
+2017-12-13 11:29:07:621 | DEBUG | VirtualSettings | in launchApp, app name http://10.206.139.99:8080/sina.html
+2017-12-13 11:29:07:621 | DEBUG | VirtualSettings | settings message: {"launch_app":"eyJ3ZWJjbGlwX3VybCI6Imh0dHA6Ly8xMC4yMDYuMTM5Ljk5OjgwODAvc2luYS5odG1sIiwidHlwZSI6MX0="}
+2017-12-13 11:29:07:621 | DEBUG | VirtualSettings | Send command to launch app {"webclip_url":"http://10.206.139.99:8080/sina.html","type":1}
+2017-12-13 11:29:07:621 | DEBUG | VirtualSettings | settings message: {"launch_cover":"0"}
+2017-12-13 11:29:07:621 | DEBUG | VirtualSettings | Ready to send on pause message.
+2017-12-13 11:29:07:621 | DEBUG | VirtualSettings | settings message: {"screen_lock":"eyJhY3Rpb24iOiJkb25lIn0="}
+2017-12-13 11:29:07 | tmpBuffer: connect:sso:2c
+2017-12-13 11:29:07 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:29:07:720 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sso:2c
+2017-12-13 11:29:07 | tmpBuffer: disconnect:sso:2c
+2017-12-13 11:29:07 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:29:07:720 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:sso:2c
+2017-12-13 11:29:07 | tmpBuffer: connect:powerSwitch:2d
+2017-12-13 11:29:07 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:29:07:721 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:2d
+2017-12-13 11:29:07 | tmpBuffer: SuccessLaunch
+2017-12-13 11:29:07 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:29:07:722 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=45,msg=SuccessLaunch
+2017-12-13 11:29:07 | tmpBuffer: disconnect:powerSwitch:2d
+2017-12-13 11:29:07 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:29:07:722 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:2d
+2017-12-13 11:29:07 | tmpBuffer: connect:powerSwitch:2e
+2017-12-13 11:29:07 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:29:07:722 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:2e
+2017-12-13 11:29:07 | tmpBuffer: OutLuncher
+2017-12-13 11:29:07 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:29:07:722 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=46,msg=OutLuncher
+2017-12-13 11:29:07 | tmpBuffer: disconnect:powerSwitch:2e
+2017-12-13 11:29:07 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:29:07:723 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:2e
+[2017-12-13 11:29:08.539] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.466422 ms
+2017-12-13 11:29:08 | RTT: 0.466422
+[2017-12-13 11:29:08.539] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.403922 ms
+2017-12-13 11:29:08 | RTT: 0.403922
+[2017-12-13 11:29:10.539] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.733211 ms
+2017-12-13 11:29:10 | RTT: 0.733211
+[2017-12-13 11:29:10.540] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.701961 ms
+2017-12-13 11:29:10 | RTT: 0.701961
+[2017-12-13 11:29:12.540] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.866606 ms
+2017-12-13 11:29:12 | RTT: 0.866606
+[2017-12-13 11:29:12.540] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.85098 ms
+2017-12-13 11:29:12 | RTT: 0.850980
+[2017-12-13 11:29:14.540] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.933303 ms
+2017-12-13 11:29:14 | RTT: 0.933303
+[2017-12-13 11:29:14.540] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.92549 ms
+2017-12-13 11:29:14 | RTT: 0.925490
+[2017-12-13 11:29:16.540] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.466651 ms
+2017-12-13 11:29:16 | RTT: 0.466651
+[2017-12-13 11:29:16.540] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.962745 ms
+2017-12-13 11:29:16 | RTT: 0.962745
+[2017-12-13 11:29:18.540] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.481373 ms
+2017-12-13 11:29:18 | RTT: 0.481373
+[2017-12-13 11:29:18.541] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.733326 ms
+2017-12-13 11:29:18 | RTT: 0.733326
+[2017-12-13 11:29:20.541] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.866663 ms
+2017-12-13 11:29:20 | RTT: 0.866663
+[2017-12-13 11:29:20.541] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.740686 ms
+2017-12-13 11:29:20 | RTT: 0.740686
+[2017-12-13 11:29:22.541] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.933331 ms
+2017-12-13 11:29:22 | RTT: 0.933331
+[2017-12-13 11:29:22.541] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.870343 ms
+2017-12-13 11:29:22 | RTT: 0.870343
+[2017-12-13 11:29:24.541] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.466666 ms
+2017-12-13 11:29:24 | RTT: 0.466666
+[2017-12-13 11:29:24.541] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.935172 ms
+2017-12-13 11:29:24 | RTT: 0.935172
+[2017-12-13 11:29:26.542] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.967586 ms
+2017-12-13 11:29:26 | RTT: 0.967586
+[2017-12-13 11:29:26.542] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.733333 ms
+2017-12-13 11:29:26 | RTT: 0.733333
+[2017-12-13 11:29:28.542] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.983793 ms
+2017-12-13 11:29:28 | RTT: 0.983793
+[2017-12-13 11:29:28.542] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.866666 ms
+2017-12-13 11:29:28 | RTT: 0.866666
+[2017-12-13 11:29:30.542] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.433333 ms
+2017-12-13 11:29:30 | RTT: 0.433333
+[2017-12-13 11:29:30.542] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.991896 ms
+2017-12-13 11:29:30 | RTT: 0.991896
+[2017-12-13 11:29:32.542] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.216667 ms
+2017-12-13 11:29:32 | RTT: 0.216667
+[2017-12-13 11:29:32.542] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.995948 ms
+2017-12-13 11:29:32 | RTT: 0.995948
+[2017-12-13 11:29:34.543] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.608333 ms
+2017-12-13 11:29:34 | RTT: 0.608333
+[2017-12-13 11:29:34.543] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.997974 ms
+2017-12-13 11:29:34 | RTT: 0.997974
+[2017-12-13 11:29:36.543] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.804167 ms
+2017-12-13 11:29:36 | RTT: 0.804167
+[2017-12-13 11:29:36.543] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.998987 ms
+2017-12-13 11:29:36 | RTT: 0.998987
+[2017-12-13 11:29:38.543] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.402083 ms
+2017-12-13 11:29:38 | RTT: 0.402083
+[2017-12-13 11:29:38.543] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999494 ms
+2017-12-13 11:29:38 | RTT: 0.999494
+[2017-12-13 11:29:40.543] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.701042 ms
+2017-12-13 11:29:40 | RTT: 0.701042
+[2017-12-13 11:29:40.543] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999747 ms
+2017-12-13 11:29:40 | RTT: 0.999747
+[2017-12-13 11:29:42.544] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999873 ms
+2017-12-13 11:29:42 | RTT: 0.999873
+[2017-12-13 11:29:42.544] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.850521 ms
+2017-12-13 11:29:42 | RTT: 0.850521
+2017-12-13 11:29:42:621 | INFO | Utils | send long press BACK key to let VMI client back to launcher
+2017-12-13 11:29:42:622 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: true
+2017-12-13 11:29:42:622 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: false
+2017-12-13 11:29:42 | tmpBuffer: connect:powerSwitch:2f
+2017-12-13 11:29:42 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:29:42:625 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:2f
+2017-12-13 11:29:42 | tmpBuffer: OutLuncher
+2017-12-13 11:29:42 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:29:42:625 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=47,msg=OutLuncher
+2017-12-13 11:29:42 | tmpBuffer: disconnect:powerSwitch:2f
+2017-12-13 11:29:42 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:29:42:625 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:2f
+[2017-12-13 11:29:44.544] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.92526 ms
+2017-12-13 11:29:44 | RTT: 0.925260
+[2017-12-13 11:29:44.544] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999937 ms
+2017-12-13 11:29:44 | RTT: 0.999937
+[2017-12-13 11:29:46.544] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.96263 ms
+2017-12-13 11:29:46 | RTT: 0.962630
+[2017-12-13 11:29:46.544] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999968 ms
+2017-12-13 11:29:46 | RTT: 0.999968
+[2017-12-13 11:29:48.544] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.481315 ms
+2017-12-13 11:29:48 | RTT: 0.481315
+[2017-12-13 11:29:48.544] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999984 ms
+2017-12-13 11:29:48 | RTT: 0.999984
+[2017-12-13 11:29:50.544] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.740658 ms
+2017-12-13 11:29:50 | RTT: 0.740658
+[2017-12-13 11:29:50.545] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999992 ms
+2017-12-13 11:29:50 | RTT: 0.999992
+[2017-12-13 11:29:52.545] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.870329 ms
+2017-12-13 11:29:52 | RTT: 0.870329
+[2017-12-13 11:29:52.545] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999996 ms
+2017-12-13 11:29:52 | RTT: 0.999996
+[2017-12-13 11:29:54.545] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.935164 ms
+2017-12-13 11:29:54 | RTT: 0.935164
+[2017-12-13 11:29:54.545] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999998 ms
+2017-12-13 11:29:54 | RTT: 0.999998
+[2017-12-13 11:29:56.545] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.467582 ms
+2017-12-13 11:29:56 | RTT: 0.467582
+[2017-12-13 11:29:56.545] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.499999 ms
+2017-12-13 11:29:56 | RTT: 0.499999
+[2017-12-13 11:29:58.545] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.233791 ms
+2017-12-13 11:29:58 | RTT: 0.233791
+[2017-12-13 11:29:58.545] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.75 ms
+2017-12-13 11:29:58 | RTT: 0.750000
+[2017-12-13 11:30:00.546] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.616896 ms
+2017-12-13 11:30:00 | RTT: 0.616896
+[2017-12-13 11:30:00.546] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.875 ms
+2017-12-13 11:30:00 | RTT: 0.875000
+[2017-12-13 11:30:02.546] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.808448 ms
+2017-12-13 11:30:02 | RTT: 0.808448
+[2017-12-13 11:30:02.546] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.9375 ms
+2017-12-13 11:30:02 | RTT: 0.937500
+2017-12-13 11:30:02:622 | DEBUG | VirtualSettings | in launchApp, app name com.qa.trendmicro.ScrollAutoanimation
+2017-12-13 11:30:02:622 | DEBUG | VirtualSettings | settings message: {"launch_app":"eyJwYWNrYWdlX25hbWUiOiJjb20ucWEudHJlbmRtaWNyby5TY3JvbGxBdXRvYW5pbWF0aW9uIiwidHlwZSI6MH0="}
+2017-12-13 11:30:02:622 | DEBUG | VirtualSettings | Send command to launch app {"package_name":"com.qa.trendmicro.ScrollAutoanimation","type":0}
+2017-12-13 11:30:02:622 | DEBUG | VirtualSettings | settings message: {"launch_cover":"0"}
+2017-12-13 11:30:02:623 | DEBUG | VirtualSettings | Ready to send on pause message.
+2017-12-13 11:30:02:623 | DEBUG | VirtualSettings | settings message: {"screen_lock":"eyJhY3Rpb24iOiJkb25lIn0="}
+2017-12-13 11:30:02 | tmpBuffer: connect:sso:30
+2017-12-13 11:30:02 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:02:717 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sso:30
+2017-12-13 11:30:02 | tmpBuffer: disconnect:sso:30
+2017-12-13 11:30:02 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:02:717 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:sso:30
+2017-12-13 11:30:02 | tmpBuffer: connect:powerSwitch:31
+2017-12-13 11:30:02 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:02:723 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:31
+2017-12-13 11:30:02 | tmpBuffer: connect:powerSwitch:32
+2017-12-13 11:30:02 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:02:728 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:32
+2017-12-13 11:30:02 | tmpBuffer: OutLuncher
+2017-12-13 11:30:02 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:02:728 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=49,msg=OutLuncher
+2017-12-13 11:30:02 | tmpBuffer: disconnect:powerSwitch:31
+2017-12-13 11:30:02 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:02:729 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:31
+2017-12-13 11:30:02 | tmpBuffer: SuccessLaunch
+2017-12-13 11:30:02 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:02:729 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=50,msg=SuccessLaunch
+2017-12-13 11:30:02 | tmpBuffer: disconnect:powerSwitch:32
+2017-12-13 11:30:02 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:02:729 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:32
+[2017-12-13 11:30:04.546] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.904224 ms
+2017-12-13 11:30:04 | RTT: 0.904224
+[2017-12-13 11:30:04.546] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.96875 ms
+2017-12-13 11:30:04 | RTT: 0.968750
+[2017-12-13 11:30:06.546] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.484375 ms
+2017-12-13 11:30:06 | RTT: 0.484375
+[2017-12-13 11:30:06.546] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.452112 ms
+2017-12-13 11:30:06 | RTT: 0.452112
+[2017-12-13 11:30:08.546] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.726056 ms
+2017-12-13 11:30:08 | RTT: 0.726056
+[2017-12-13 11:30:08.546] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.742187 ms
+2017-12-13 11:30:08 | RTT: 0.742187
+[2017-12-13 11:30:10.547] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.863028 ms
+2017-12-13 11:30:10 | RTT: 0.863028
+[2017-12-13 11:30:10.547] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.871094 ms
+2017-12-13 11:30:10 | RTT: 0.871094
+[2017-12-13 11:30:12.547] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.935547 ms
+2017-12-13 11:30:12 | RTT: 0.935547
+[2017-12-13 11:30:12.547] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.931514 ms
+2017-12-13 11:30:12 | RTT: 0.931514
+[2017-12-13 11:30:14.547] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.465757 ms
+2017-12-13 11:30:14 | RTT: 0.465757
+[2017-12-13 11:30:14.547] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.467773 ms
+2017-12-13 11:30:14 | RTT: 0.467773
+[2017-12-13 11:30:16.547] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.232878 ms
+2017-12-13 11:30:16 | RTT: 0.232878
+[2017-12-13 11:30:16.547] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.233887 ms
+2017-12-13 11:30:16 | RTT: 0.233887
+[2017-12-13 11:30:18.548] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.616439 ms
+2017-12-13 11:30:18 | RTT: 0.616439
+[2017-12-13 11:30:18.548] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.616943 ms
+2017-12-13 11:30:18 | RTT: 0.616943
+[2017-12-13 11:30:20.548] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.80822 ms
+2017-12-13 11:30:20 | RTT: 0.808220
+[2017-12-13 11:30:20.548] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.808472 ms
+2017-12-13 11:30:20 | RTT: 0.808472
+[2017-12-13 11:30:22.548] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.90411 ms
+2017-12-13 11:30:22 | RTT: 0.904110
+[2017-12-13 11:30:22.548] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.904236 ms
+2017-12-13 11:30:22 | RTT: 0.904236
+[2017-12-13 11:30:24.548] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.452055 ms
+2017-12-13 11:30:24 | RTT: 0.452055
+[2017-12-13 11:30:24.548] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.952118 ms
+2017-12-13 11:30:24 | RTT: 0.952118
+[2017-12-13 11:30:26.548] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.226027 ms
+2017-12-13 11:30:26 | RTT: 0.226027
+[2017-12-13 11:30:26.548] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.476059 ms
+2017-12-13 11:30:26 | RTT: 0.476059
+[2017-12-13 11:30:28.548] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.613014 ms
+2017-12-13 11:30:28 | RTT: 0.613014
+[2017-12-13 11:30:28.549] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.738029 ms
+2017-12-13 11:30:28 | RTT: 0.738029
+[2017-12-13 11:30:30.549] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.806507 ms
+2017-12-13 11:30:30 | RTT: 0.806507
+[2017-12-13 11:30:30.549] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.869015 ms
+2017-12-13 11:30:30 | RTT: 0.869015
+[2017-12-13 11:30:32.549] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.903253 ms
+2017-12-13 11:30:32 | RTT: 0.903253
+[2017-12-13 11:30:32.549] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.934507 ms
+2017-12-13 11:30:32 | RTT: 0.934507
+[2017-12-13 11:30:34.549] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.451627 ms
+2017-12-13 11:30:34 | RTT: 0.451627
+[2017-12-13 11:30:34.549] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.467254 ms
+2017-12-13 11:30:34 | RTT: 0.467254
+[2017-12-13 11:30:36.549] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.225813 ms
+2017-12-13 11:30:36 | RTT: 0.225813
+[2017-12-13 11:30:36.549] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.233627 ms
+2017-12-13 11:30:36 | RTT: 0.233627
+[2017-12-13 11:30:38.549] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.616813 ms
+2017-12-13 11:30:38 | RTT: 0.616813
+[2017-12-13 11:30:38.549] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.612907 ms
+2017-12-13 11:30:38 | RTT: 0.612907
+[2017-12-13 11:30:40.550] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.806453 ms
+2017-12-13 11:30:40 | RTT: 0.806453
+[2017-12-13 11:30:40.550] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.808407 ms
+2017-12-13 11:30:40 | RTT: 0.808407
+[2017-12-13 11:30:42.550] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.403227 ms
+2017-12-13 11:30:42 | RTT: 0.403227
+[2017-12-13 11:30:42.550] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.404203 ms
+2017-12-13 11:30:42 | RTT: 0.404203
+[2017-12-13 11:30:44.550] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.201613 ms
+2017-12-13 11:30:44 | RTT: 0.201613
+[2017-12-13 11:30:44.550] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.702102 ms
+2017-12-13 11:30:44 | RTT: 0.702102
+2017-12-13 11:30:45:623 | INFO | Utils | send long press BACK key to let VMI client back to launcher
+2017-12-13 11:30:45:623 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: true
+2017-12-13 11:30:45:623 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: false
+[2017-12-13 11:30:46.551] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.600807 ms
+2017-12-13 11:30:46 | RTT: 0.600807
+[2017-12-13 11:30:46.551] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.851051 ms
+2017-12-13 11:30:46 | RTT: 0.851051
+[2017-12-13 11:30:48.551] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.800403 ms
+2017-12-13 11:30:48 | RTT: 0.800403
+[2017-12-13 11:30:48.551] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.925525 ms
+2017-12-13 11:30:48 | RTT: 0.925525
+[2017-12-13 11:30:50.551] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.900202 ms
+2017-12-13 11:30:50 | RTT: 0.900202
+[2017-12-13 11:30:50.551] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.962763 ms
+2017-12-13 11:30:50 | RTT: 0.962763
+[2017-12-13 11:30:52.551] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.450101 ms
+2017-12-13 11:30:52 | RTT: 0.450101
+[2017-12-13 11:30:52.551] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.481381 ms
+2017-12-13 11:30:52 | RTT: 0.481381
+[2017-12-13 11:30:54.551] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.22505 ms
+2017-12-13 11:30:54 | RTT: 0.225050
+[2017-12-13 11:30:54.551] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.740691 ms
+2017-12-13 11:30:54 | RTT: 0.740691
+[2017-12-13 11:30:56.552] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.612525 ms
+2017-12-13 11:30:56 | RTT: 0.612525
+[2017-12-13 11:30:56.552] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.870345 ms
+2017-12-13 11:30:56 | RTT: 0.870345
+2017-12-13 11:30:57:624 | DEBUG | VirtualSettings | in launchApp, app name com.qa.trendmicro.ScrollAutoanimation
+2017-12-13 11:30:57:624 | DEBUG | VirtualSettings | settings message: {"launch_app":"eyJwYWNrYWdlX25hbWUiOiJjb20ucWEudHJlbmRtaWNyby5TY3JvbGxBdXRvYW5pbWF0aW9uIiwidHlwZSI6MH0="}
+2017-12-13 11:30:57:624 | DEBUG | VirtualSettings | Send command to launch app {"package_name":"com.qa.trendmicro.ScrollAutoanimation","type":0}
+2017-12-13 11:30:57:624 | DEBUG | VirtualSettings | settings message: {"launch_cover":"0"}
+2017-12-13 11:30:57:624 | DEBUG | VirtualSettings | Ready to send on pause message.
+2017-12-13 11:30:57:624 | DEBUG | VirtualSettings | settings message: {"screen_lock":"eyJhY3Rpb24iOiJkb25lIn0="}
+2017-12-13 11:30:57 | tmpBuffer: connect:sso:33
+2017-12-13 11:30:57 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:57:719 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sso:33
+2017-12-13 11:30:57 | tmpBuffer: disconnect:sso:33
+2017-12-13 11:30:57 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:57:719 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:sso:33
+2017-12-13 11:30:57 | tmpBuffer: connect:powerSwitch:34
+2017-12-13 11:30:57 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:57:720 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:34
+2017-12-13 11:30:57 | tmpBuffer: connect:powerSwitch:35
+2017-12-13 11:30:57 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:57:721 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:35
+2017-12-13 11:30:57 | tmpBuffer: SuccessLaunch
+2017-12-13 11:30:57 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:57:721 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=52,msg=SuccessLaunch
+2017-12-13 11:30:57 | tmpBuffer: disconnect:powerSwitch:34
+2017-12-13 11:30:57 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:57:721 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:34
+2017-12-13 11:30:57 | tmpBuffer: OutLuncher
+2017-12-13 11:30:57 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:57:721 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=53,msg=OutLuncher
+2017-12-13 11:30:57 | tmpBuffer: disconnect:powerSwitch:35
+2017-12-13 11:30:57 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:30:57:721 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:35
+[2017-12-13 11:30:58.552] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.806263 ms
+2017-12-13 11:30:58 | RTT: 0.806263
+[2017-12-13 11:30:58.552] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.935173 ms
+2017-12-13 11:30:58 | RTT: 0.935173
+[2017-12-13 11:31:00.552] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.403131 ms
+2017-12-13 11:31:00 | RTT: 0.403131
+[2017-12-13 11:31:00.552] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.967586 ms
+2017-12-13 11:31:00 | RTT: 0.967586
+[2017-12-13 11:31:02.552] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.201566 ms
+2017-12-13 11:31:02 | RTT: 0.201566
+[2017-12-13 11:31:02.552] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.483793 ms
+2017-12-13 11:31:02 | RTT: 0.483793
+[2017-12-13 11:31:04.552] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.100783 ms
+2017-12-13 11:31:04 | RTT: 0.100783
+[2017-12-13 11:31:04.552] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.741897 ms
+2017-12-13 11:31:04 | RTT: 0.741897
+[2017-12-13 11:31:06.553] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.870948 ms
+2017-12-13 11:31:06 | RTT: 0.870948
+[2017-12-13 11:31:06.553] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.550391 ms
+2017-12-13 11:31:06 | RTT: 0.550391
+[2017-12-13 11:31:08.553] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.775196 ms
+2017-12-13 11:31:08 | RTT: 0.775196
+[2017-12-13 11:31:08.553] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.935474 ms
+2017-12-13 11:31:08 | RTT: 0.935474
+[2017-12-13 11:31:10.553] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.387598 ms
+2017-12-13 11:31:10 | RTT: 0.387598
+[2017-12-13 11:31:10.553] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.467737 ms
+2017-12-13 11:31:10 | RTT: 0.467737
+[2017-12-13 11:31:12.553] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.193799 ms
+2017-12-13 11:31:12 | RTT: 0.193799
+[2017-12-13 11:31:12.553] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.733869 ms
+2017-12-13 11:31:12 | RTT: 0.733869
+[2017-12-13 11:31:14.553] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.0968995 ms
+2017-12-13 11:31:14 | RTT: 0.096899
+[2017-12-13 11:31:14.553] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.866934 ms
+2017-12-13 11:31:14 | RTT: 0.866934
+[2017-12-13 11:31:16.554] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.933467 ms
+2017-12-13 11:31:16 | RTT: 0.933467
+[2017-12-13 11:31:16.554] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.54845 ms
+2017-12-13 11:31:16 | RTT: 0.548450
+[2017-12-13 11:31:18.554] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.774225 ms
+2017-12-13 11:31:18 | RTT: 0.774225
+[2017-12-13 11:31:18.554] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.966734 ms
+2017-12-13 11:31:18 | RTT: 0.966734
+[2017-12-13 11:31:20.554] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.387112 ms
+2017-12-13 11:31:20 | RTT: 0.387112
+[2017-12-13 11:31:20.554] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.983367 ms
+2017-12-13 11:31:20 | RTT: 0.983367
+[2017-12-13 11:31:22.554] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.491683 ms
+2017-12-13 11:31:22 | RTT: 0.491683
+[2017-12-13 11:31:22.554] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.693556 ms
+2017-12-13 11:31:22 | RTT: 0.693556
+[2017-12-13 11:31:24.554] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.846778 ms
+2017-12-13 11:31:24 | RTT: 0.846778
+[2017-12-13 11:31:24.555] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.745842 ms
+2017-12-13 11:31:24 | RTT: 0.745842
+[2017-12-13 11:31:26.555] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.923389 ms
+2017-12-13 11:31:26 | RTT: 0.923389
+[2017-12-13 11:31:26.555] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.872921 ms
+2017-12-13 11:31:26 | RTT: 0.872921
+[2017-12-13 11:31:28.555] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.461695 ms
+2017-12-13 11:31:28 | RTT: 0.461695
+[2017-12-13 11:31:28.555] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.93646 ms
+2017-12-13 11:31:28 | RTT: 0.936460
+[2017-12-13 11:31:30.555] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.230847 ms
+2017-12-13 11:31:30 | RTT: 0.230847
+[2017-12-13 11:31:30.555] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.96823 ms
+2017-12-13 11:31:30 | RTT: 0.968230
+[2017-12-13 11:31:32.555] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.615424 ms
+2017-12-13 11:31:32 | RTT: 0.615424
+[2017-12-13 11:31:32.556] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.984115 ms
+2017-12-13 11:31:32 | RTT: 0.984115
+[2017-12-13 11:31:34.556] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.807712 ms
+2017-12-13 11:31:34 | RTT: 0.807712
+[2017-12-13 11:31:34.556] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.992058 ms
+2017-12-13 11:31:34 | RTT: 0.992058
+[2017-12-13 11:31:36.556] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.903856 ms
+2017-12-13 11:31:36 | RTT: 0.903856
+[2017-12-13 11:31:36.556] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.996029 ms
+2017-12-13 11:31:36 | RTT: 0.996029
+[2017-12-13 11:31:38.556] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.451928 ms
+2017-12-13 11:31:38 | RTT: 0.451928
+[2017-12-13 11:31:38.556] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.498014 ms
+2017-12-13 11:31:38 | RTT: 0.498014
+[2017-12-13 11:31:40.556] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.225964 ms
+2017-12-13 11:31:40 | RTT: 0.225964
+[2017-12-13 11:31:40.556] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.249007 ms
+2017-12-13 11:31:40 | RTT: 0.249007
+[2017-12-13 11:31:42.557] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.612982 ms
+2017-12-13 11:31:42 | RTT: 0.612982
+[2017-12-13 11:31:42.557] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.624504 ms
+2017-12-13 11:31:42 | RTT: 0.624504
+2017-12-13 11:31:42:624 | INFO | Utils | send long press BACK key to let VMI client back to launcher
+2017-12-13 11:31:42:625 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: true
+2017-12-13 11:31:42:625 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: false
+[2017-12-13 11:31:44.557] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.806491 ms
+2017-12-13 11:31:44 | RTT: 0.806491
+[2017-12-13 11:31:44.557] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.812252 ms
+2017-12-13 11:31:44 | RTT: 0.812252
+[2017-12-13 11:31:46.557] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.906126 ms
+2017-12-13 11:31:46 | RTT: 0.906126
+[2017-12-13 11:31:46.557] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.403245 ms
+2017-12-13 11:31:46 | RTT: 0.403245
+[2017-12-13 11:31:48.557] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.201623 ms
+2017-12-13 11:31:48 | RTT: 0.201623
+[2017-12-13 11:31:48.557] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.953063 ms
+2017-12-13 11:31:48 | RTT: 0.953063
+[2017-12-13 11:31:50.558] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.976531 ms
+2017-12-13 11:31:50 | RTT: 0.976531
+[2017-12-13 11:31:50.558] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.600811 ms
+2017-12-13 11:31:50 | RTT: 0.600811
+[2017-12-13 11:31:52.558] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.800406 ms
+2017-12-13 11:31:52 | RTT: 0.800406
+[2017-12-13 11:31:52.558] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.988266 ms
+2017-12-13 11:31:52 | RTT: 0.988266
+[2017-12-13 11:31:54.558] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.400203 ms
+2017-12-13 11:31:54 | RTT: 0.400203
+[2017-12-13 11:31:54.558] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.994133 ms
+2017-12-13 11:31:54 | RTT: 0.994133
+[2017-12-13 11:31:56.558] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.200101 ms
+2017-12-13 11:31:56 | RTT: 0.200101
+[2017-12-13 11:31:56.558] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.497066 ms
+2017-12-13 11:31:56 | RTT: 0.497066
+[2017-12-13 11:31:58.558] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.100051 ms
+2017-12-13 11:31:58 | RTT: 0.100051
+[2017-12-13 11:31:58.558] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.748533 ms
+2017-12-13 11:31:58 | RTT: 0.748533
+2017-12-13 11:31:58:626 | DEBUG | VirtualSettings | in launchApp, app name com.qa.trendmicro.ScrollAutoanimation
+2017-12-13 11:31:58:626 | DEBUG | VirtualSettings | settings message: {"launch_app":"eyJwYWNrYWdlX25hbWUiOiJjb20ucWEudHJlbmRtaWNyby5TY3JvbGxBdXRvYW5pbWF0aW9uIiwidHlwZSI6MH0="}
+2017-12-13 11:31:58:626 | DEBUG | VirtualSettings | Send command to launch app {"package_name":"com.qa.trendmicro.ScrollAutoanimation","type":0}
+2017-12-13 11:31:58:626 | DEBUG | VirtualSettings | settings message: {"launch_cover":"0"}
+2017-12-13 11:31:58:626 | DEBUG | VirtualSettings | Ready to send on pause message.
+2017-12-13 11:31:58:626 | DEBUG | VirtualSettings | settings message: {"screen_lock":"eyJhY3Rpb24iOiJkb25lIn0="}
+2017-12-13 11:31:58 | tmpBuffer: connect:sso:36
+2017-12-13 11:31:58 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:31:58:723 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sso:36
+2017-12-13 11:31:58 | tmpBuffer: disconnect:sso:36
+2017-12-13 11:31:58 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:31:58:723 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:sso:36
+2017-12-13 11:31:58 | tmpBuffer: connect:powerSwitch:37
+2017-12-13 11:31:58 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:31:58:725 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:37
+2017-12-13 11:31:58 | tmpBuffer: SuccessLaunch
+2017-12-13 11:31:58 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:31:58:725 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=55,msg=SuccessLaunch
+2017-12-13 11:31:58 | tmpBuffer: disconnect:powerSwitch:37
+2017-12-13 11:31:58 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:31:58:725 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:37
+2017-12-13 11:31:58 | tmpBuffer: connect:powerSwitch:38
+2017-12-13 11:31:58 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:31:58:726 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:38
+2017-12-13 11:31:58 | tmpBuffer: OutLuncher
+2017-12-13 11:31:58 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:31:58:726 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=56,msg=OutLuncher
+2017-12-13 11:31:58 | tmpBuffer: disconnect:powerSwitch:38
+2017-12-13 11:31:58 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:31:58:727 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:38
+[2017-12-13 11:32:00.559] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.550025 ms
+2017-12-13 11:32:00 | RTT: 0.550025
+[2017-12-13 11:32:00.559] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.874267 ms
+2017-12-13 11:32:00 | RTT: 0.874267
+[2017-12-13 11:32:02.559] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.775013 ms
+2017-12-13 11:32:02 | RTT: 0.775013
+[2017-12-13 11:32:02.559] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.937133 ms
+2017-12-13 11:32:02 | RTT: 0.937133
+[2017-12-13 11:32:04.559] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.387506 ms
+2017-12-13 11:32:04 | RTT: 0.387506
+[2017-12-13 11:32:04.559] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.468567 ms
+2017-12-13 11:32:04 | RTT: 0.468567
+[2017-12-13 11:32:06.559] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.193753 ms
+2017-12-13 11:32:06 | RTT: 0.193753
+[2017-12-13 11:32:06.559] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.234283 ms
+2017-12-13 11:32:06 | RTT: 0.234283
+[2017-12-13 11:32:08.559] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.596877 ms
+2017-12-13 11:32:08 | RTT: 0.596877
+[2017-12-13 11:32:08.559] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.617142 ms
+2017-12-13 11:32:08 | RTT: 0.617142
+[2017-12-13 11:32:10.560] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.798438 ms
+2017-12-13 11:32:10 | RTT: 0.798438
+[2017-12-13 11:32:10.560] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.808571 ms
+2017-12-13 11:32:10 | RTT: 0.808571
+[2017-12-13 11:32:12.560] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.904285 ms
+2017-12-13 11:32:12 | RTT: 0.904285
+[2017-12-13 11:32:12.560] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.899219 ms
+2017-12-13 11:32:12 | RTT: 0.899219
+[2017-12-13 11:32:14.560] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.44961 ms
+2017-12-13 11:32:14 | RTT: 0.449610
+[2017-12-13 11:32:14.560] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.452143 ms
+2017-12-13 11:32:14 | RTT: 0.452143
+[2017-12-13 11:32:16.560] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.724805 ms
+2017-12-13 11:32:16 | RTT: 0.724805
+[2017-12-13 11:32:16.561] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.726071 ms
+2017-12-13 11:32:16 | RTT: 0.726071
+[2017-12-13 11:32:18.561] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.862402 ms
+2017-12-13 11:32:18 | RTT: 0.862402
+[2017-12-13 11:32:18.561] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.863036 ms
+2017-12-13 11:32:18 | RTT: 0.863036
+[2017-12-13 11:32:20.561] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.931201 ms
+2017-12-13 11:32:20 | RTT: 0.931201
+[2017-12-13 11:32:20.561] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.931518 ms
+2017-12-13 11:32:20 | RTT: 0.931518
+[2017-12-13 11:32:22.561] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.465601 ms
+2017-12-13 11:32:22 | RTT: 0.465601
+[2017-12-13 11:32:22.561] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.965759 ms
+2017-12-13 11:32:22 | RTT: 0.965759
+[2017-12-13 11:32:24.561] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.2328 ms
+2017-12-13 11:32:24 | RTT: 0.232800
+[2017-12-13 11:32:24.561] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.482879 ms
+2017-12-13 11:32:24 | RTT: 0.482879
+[2017-12-13 11:32:26.561] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.6164 ms
+2017-12-13 11:32:26 | RTT: 0.616400
+[2017-12-13 11:32:26.561] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.74144 ms
+2017-12-13 11:32:26 | RTT: 0.741440
+[2017-12-13 11:32:28.562] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.8082 ms
+2017-12-13 11:32:28 | RTT: 0.808200
+[2017-12-13 11:32:28.562] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.87072 ms
+2017-12-13 11:32:28 | RTT: 0.870720
+[2017-12-13 11:32:30.562] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.9041 ms
+2017-12-13 11:32:30 | RTT: 0.904100
+[2017-12-13 11:32:30.562] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.93536 ms
+2017-12-13 11:32:30 | RTT: 0.935360
+[2017-12-13 11:32:32.562] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.45205 ms
+2017-12-13 11:32:32 | RTT: 0.452050
+[2017-12-13 11:32:32.562] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.46768 ms
+2017-12-13 11:32:32 | RTT: 0.467680
+[2017-12-13 11:32:34.562] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.226025 ms
+2017-12-13 11:32:34 | RTT: 0.226025
+[2017-12-13 11:32:34.562] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.23384 ms
+2017-12-13 11:32:34 | RTT: 0.233840
+[2017-12-13 11:32:36.562] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.613013 ms
+2017-12-13 11:32:36 | RTT: 0.613013
+[2017-12-13 11:32:36.563] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.61692 ms
+2017-12-13 11:32:36 | RTT: 0.616920
+2017-12-13 11:32:37:627 | INFO | Utils | send long press BACK key to let VMI client back to launcher
+2017-12-13 11:32:37:627 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: true
+2017-12-13 11:32:37:627 | DEBUG | VirtualSettings | key event, key: 65515, metaState: 0, down: false
+[2017-12-13 11:32:38.563] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.80846 ms
+2017-12-13 11:32:38 | RTT: 0.808460
+[2017-12-13 11:32:38.563] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.806506 ms
+2017-12-13 11:32:38 | RTT: 0.806506
+[2017-12-13 11:32:40.563] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.403253 ms
+2017-12-13 11:32:40 | RTT: 0.403253
+[2017-12-13 11:32:40.563] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.90423 ms
+2017-12-13 11:32:40 | RTT: 0.904230
+[2017-12-13 11:32:42.563] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.201627 ms
+2017-12-13 11:32:42 | RTT: 0.201627
+[2017-12-13 11:32:42.563] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.952115 ms
+2017-12-13 11:32:42 | RTT: 0.952115
+[2017-12-13 11:32:44.564] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.600813 ms
+2017-12-13 11:32:44 | RTT: 0.600813
+[2017-12-13 11:32:44.564] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.976057 ms
+2017-12-13 11:32:44 | RTT: 0.976057
+[2017-12-13 11:32:46.564] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.800407 ms
+2017-12-13 11:32:46 | RTT: 0.800407
+[2017-12-13 11:32:46.564] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.988029 ms
+2017-12-13 11:32:46 | RTT: 0.988029
+[2017-12-13 11:32:48.564] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.400203 ms
+2017-12-13 11:32:48 | RTT: 0.400203
+[2017-12-13 11:32:48.564] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.994014 ms
+2017-12-13 11:32:48 | RTT: 0.994014
+[2017-12-13 11:32:50.565] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.700102 ms
+2017-12-13 11:32:50 | RTT: 0.700102
+[2017-12-13 11:32:50.565] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.997007 ms
+2017-12-13 11:32:50 | RTT: 0.997007
+[2017-12-13 11:32:52.565] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.998504 ms
+2017-12-13 11:32:52 | RTT: 0.998504
+[2017-12-13 11:32:52.565] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.850051 ms
+2017-12-13 11:32:52 | RTT: 0.850051
+2017-12-13 11:32:52:627 | DEBUG | VirtualSettings | in launchApp, app name com.qa.trendmicro.ZoomAutoanimation
+2017-12-13 11:32:52:628 | DEBUG | VirtualSettings | settings message: {"launch_app":"eyJwYWNrYWdlX25hbWUiOiJjb20ucWEudHJlbmRtaWNyby5ab29tQXV0b2FuaW1hdGlvbiIsInR5cGUiOjB9"}
+2017-12-13 11:32:52:628 | DEBUG | VirtualSettings | Send command to launch app {"package_name":"com.qa.trendmicro.ZoomAutoanimation","type":0}
+2017-12-13 11:32:52:628 | DEBUG | VirtualSettings | settings message: {"launch_cover":"0"}
+2017-12-13 11:32:52:628 | DEBUG | VirtualSettings | Ready to send on pause message.
+2017-12-13 11:32:52:628 | DEBUG | VirtualSettings | settings message: {"screen_lock":"eyJhY3Rpb24iOiJkb25lIn0="}
+2017-12-13 11:32:52 | tmpBuffer: connect:sso:39
+2017-12-13 11:32:52 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:32:52:722 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:sso:39
+2017-12-13 11:32:52 | tmpBuffer: disconnect:sso:39
+2017-12-13 11:32:52 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:32:52:722 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:sso:39
+2017-12-13 11:32:52 | tmpBuffer: connect:powerSwitch:3a
+2017-12-13 11:32:52 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:32:52:723 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:3a
+2017-12-13 11:32:52 | tmpBuffer: connect:powerSwitch:3b
+2017-12-13 11:32:52 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:32:52:724 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=connect:powerSwitch:3b
+2017-12-13 11:32:52 | tmpBuffer: OutLuncher
+2017-12-13 11:32:52 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:32:52:724 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=58,msg=OutLuncher
+2017-12-13 11:32:52 | tmpBuffer: disconnect:powerSwitch:3a
+2017-12-13 11:32:52 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:32:52:725 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:3a
+2017-12-13 11:32:52 | tmpBuffer: SuccessLaunch
+2017-12-13 11:32:52 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:32:52:725 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=59,msg=SuccessLaunch
+2017-12-13 11:32:52 | tmpBuffer: disconnect:powerSwitch:3b
+2017-12-13 11:32:52 | HandleVdsMsg AttachCurrentThread ret: 0
+2017-12-13 11:32:52:725 | DEBUG | UniaEngine | handleVirtualDeviceMessage channel=0,msg=disconnect:powerSwitch:3b
+[2017-12-13 11:32:54.565] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.925025 ms
+2017-12-13 11:32:54 | RTT: 0.925025
+[2017-12-13 11:32:54.565] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.999252 ms
+2017-12-13 11:32:54 | RTT: 0.999252
+[2017-12-13 11:32:56.565] [RMX] [info] Connection[0x64903cfc] add new duration 0 , RTT:0.499626 ms
+2017-12-13 11:32:56 | RTT: 0.499626
+[2017-12-13 11:32:56.565] [RMX] [info] Connection[0x64917464] add new duration 0 , RTT:0.462513 ms
+2017-12-13 11:32:56 | RTT: 0.462513
+[2017-12-13 11:32:58.565] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.749813 ms
+2017-12-13 11:32:58 | RTT: 0.749813
+[2017-12-13 11:32:58.566] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.731256 ms
+2017-12-13 11:32:58 | RTT: 0.731256
+[2017-12-13 11:33:00.566] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.865628 ms
+2017-12-13 11:33:00 | RTT: 0.865628
+[2017-12-13 11:33:00.566] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.874906 ms
+2017-12-13 11:33:00 | RTT: 0.874906
+[2017-12-13 11:33:02.566] [RMX] [info] Connection[0x64917464] add new duration 1 , RTT:0.932814 ms
+2017-12-13 11:33:02 | RTT: 0.932814
+[2017-12-13 11:33:02.566] [RMX] [info] Connection[0x64903cfc] add new duration 1 , RTT:0.937453 ms
+2017-12-13 11:33:02 | RTT: 0.937453

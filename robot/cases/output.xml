@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20170104 14:41:56.711" generator="Robot 2.8.4 (Python 2.6.6 on linux2)">
+<suite source="/root/vmi/robot/cases/test.txt" id="s1" name="Test">
+<test id="s1-t1" name="assign_profile_on_user01">
+<kw type="setup" name="Setup">
+<doc></doc>
+<arguments>
+<arg>management</arg>
+<arg>assign_profile_on_user01</arg>
+</arguments>
+<msg timestamp="20170104 14:41:56.755" level="FAIL">No keyword with name 'Setup' found.</msg>
+<status status="FAIL" endtime="20170104 14:41:56.755" starttime="20170104 14:41:56.754"></status>
+</kw>
+<doc></doc>
+<tags>
+</tags>
+<status status="FAIL" endtime="20170104 14:41:56.755" critical="yes" starttime="20170104 14:41:56.753">Setup failed:
+No keyword with name 'Setup' found.</status>
+</test>
+<doc></doc>
+<metadata>
+</metadata>
+<status status="FAIL" endtime="20170104 14:41:56.755" starttime="20170104 14:41:56.711"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="0">Critical Tests</stat>
+<stat fail="1" pass="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="1" pass="0" id="s1" name="Test">Test</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20170104 14:41:56.751" level="ERROR">Error in file '/root/vmi/robot/cases/test.txt': Importing test library 'vmi.robot.caseutil.Cases' failed: ImportError: No module named vmi.robot.caseutil
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/lib/python2.6/site-packages/robot/libraries
+  /usr/lib/python2.6/site-packages
+  /usr/bin
+  /usr/lib64/python26.zip
+  /usr/lib64/python2.6
+  /usr/lib64/python2.6/plat-linux2
+  /usr/lib64/python2.6/lib-tk
+  /usr/lib64/python2.6/lib-old
+  /usr/lib64/python2.6/lib-dynload
+  /usr/lib64/python2.6/site-packages
+  /usr/lib/python2.6/site-packages/setuptools-0.6c11-py2.6.egg-info
+  .
+  /root/vmi/robot/cases</msg>
+<msg timestamp="20170104 14:41:56.751" level="ERROR">Error in file '/root/vmi/robot/cases/test.txt': Importing test library 'vmi.robot.vmilib.VMIInstanceFactory' failed: ImportError: No module named vmi.robot.vmilib
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/lib/python2.6/site-packages/robot/libraries
+  /usr/lib/python2.6/site-packages
+  /usr/bin
+  /usr/lib64/python26.zip
+  /usr/lib64/python2.6
+  /usr/lib64/python2.6/plat-linux2
+  /usr/lib64/python2.6/lib-tk
+  /usr/lib64/python2.6/lib-old
+  /usr/lib64/python2.6/lib-dynload
+  /usr/lib64/python2.6/site-packages
+  /usr/lib/python2.6/site-packages/setuptools-0.6c11-py2.6.egg-info
+  .
+  /root/vmi/robot/cases</msg>
+<msg timestamp="20170104 14:41:56.752" level="ERROR">Error in file '/root/vmi/robot/cases/test.txt': Importing test library 'vmi.server.servermanager.ServerManager' failed: ImportError: No module named vmi.server.servermanager
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/lib/python2.6/site-packages/robot/libraries
+  /usr/lib/python2.6/site-packages
+  /usr/bin
+  /usr/lib64/python26.zip
+  /usr/lib64/python2.6
+  /usr/lib64/python2.6/plat-linux2
+  /usr/lib64/python2.6/lib-tk
+  /usr/lib64/python2.6/lib-old
+  /usr/lib64/python2.6/lib-dynload
+  /usr/lib64/python2.6/site-packages
+  /usr/lib/python2.6/site-packages/setuptools-0.6c11-py2.6.egg-info
+  .
+  /root/vmi/robot/cases</msg>
+<msg timestamp="20170104 14:41:56.752" level="ERROR">Error in file '/root/vmi/robot/cases/test.txt': Importing test library 'vmi.unia.uniamanager.UniaManager' failed: ImportError: No module named vmi.unia.uniamanager
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /usr/lib/python2.6/site-packages/robot/libraries
+  /usr/lib/python2.6/site-packages
+  /usr/bin
+  /usr/lib64/python26.zip
+  /usr/lib64/python2.6
+  /usr/lib64/python2.6/plat-linux2
+  /usr/lib64/python2.6/lib-tk
+  /usr/lib64/python2.6/lib-old
+  /usr/lib64/python2.6/lib-dynload
+  /usr/lib64/python2.6/site-packages
+  /usr/lib/python2.6/site-packages/setuptools-0.6c11-py2.6.egg-info
+  .
+  /root/vmi/robot/cases</msg>
+</errors>
+</robot>

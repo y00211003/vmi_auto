@@ -1,0 +1,1044 @@
+# -*- coding: utf-8 -*-
+'''
+Author      :  xiang _wang@trendmicro.com.cn
+Description :  Web Related Actions
+'''
+import requests
+from requests.adapters import HTTPAdapter
+requests.adapters.DEFAULT_RETRIES=1000
+import os , time
+import simplejson as json
+from vmi.configure import Configure
+from vmi.utility.logger import Logger
+from vmi.utility.timeutil import current_time_millis
+from vmi.server.access import AccessSetting
+from vmi.server.adrestrict import ADRestrictSetting
+from vmi.server.proxy import ProxySetting
+from application import Application
+from subprocess import call
+import unicodedata as ud
+from vmi.dal.dalservice import DalService
+from vmi.utility.cipher import encode_with_pkcs7_bf
+import base64, urllib
+
+log = Logger(__name__)
+
+class WebCommand(object):
+
+    _receiver = None
+    _description = None
+
+    def __init__(self):
+
+        self.session = requests.Session()
+
+
+        self.config = Configure.Instance()
+
+        config = self.config
+	self.dalService = DalService()
+
+        web_port = config['UniaServer']['web_port']
+        if web_port == '80' or web_port == '443':
+            self._uri_prefix = config['UniaServer']['web_protocol'] + '://' + \
+                               config['UniaServer']['web_ip']
+        else:
+            self._uri_prefix = config['UniaServer']['web_protocol'] + '://' + \
+                               config['UniaServer']['web_ip'] + ':' + config['UniaServer']['web_port']
+        self.session.mount(self._uri_prefix, HTTPAdapter(max_retries=100))
+        self._login_vmi_server()
+
+    def __call__(self):
+
+        raise NotImplementedError
+
+    def _login_vmi_server(self):
+
+        config = self.config
+
+        uri = self._uri_prefix +  '/api/v1/account/login/'
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        payload = {'username':config['WebUI']['account'],
+                    'password':config['WebUI']['password']}
+        headers = {'content-type': 'application/json'}
+        r = self.session.post(uri, json.dumps(payload), headers=headers, verify = False)
+        result = json.loads(r.text)
+        if not r.status_code == 200 :
+            if result['code'] == 5003:
+                pass
+            else:
+                raise ValueError("Fail to login to Unia Server")
+
+        if not result['code'] is 0 and not result['code'] == 5003: raise ValueError('Fail to login to Unia Server with error code %d' % result['code'])
+        self._cookies = r.cookies
+        self._csr_token = r.cookies['csrftoken']
+        self._headers = {'content-type': 'application/json','X-CSRFToken':self._csr_token}
+
+class SetServerCommand(WebCommand):
+    '''
+    Set up Servers
+    '''
+    def __init__(self,receiver):
+
+        super(SetServerCommand,self).__init__()
+        self._description = 'Set up Servers'
+
+    def __call__(self):
+
+        config = self.config
+
+        uri = self._uri_prefix + '/api/v1/system/servers/detail/1/'
+
+        r = self.session.post(uri,'', headers = self._headers, verify = False)
+
+        result = json.loads(r.text)
+
+        payload = result['data']
+
+        if not result['code'] is 0:
+            raise ValueError("Get Server List failed with error code %d" % result['code'])
+
+        managedIP = result['data']['managedIP']
+
+        uri = self._uri_prefix + '/api/v1/system/servers/probe/0/'
+
+        data = { 'managedIP' : managedIP }
+
+        r = self.session.post(uri, json.dumps(data), headers= self._headers, verify = False)
+
+        result = json.loads(r.text)
+        payload['ifs'] = result['data']['ifs']
+
+        payload['ifs'][1]['netmask'] = config['Servers']['netmask']
+        payload['ifs'][1]['gateway'] = config['Servers']['gateway']
+        payload['ifs'][1]['range'] = config['Servers']['ip_range']
+        payload['ifs'][1]['configure'] = 'bridge'
+        payload['changed'] = True
+        payload['action'] = 'connect'
+
+        r = self.session.put(uri, data = json.dumps(payload), headers = self._headers)
+        result = json.loads(r.text)
+        if not result['code'] is 0:
+            raise ValueError("Fail to Set Servers up with error code %d" % result['code'])
+
+class StartServerCommand(WebCommand):
+
+    def __init__(self,receiver):
+        super(StartServerCommand,self).__init__()
+        self._description = 'Start Server'
+        self._receiver = receiver
+
+    def __call__(self, server_ids):
+
+        config = self.config
+
+        uri = self._uri_prefix + '/api/v1/system/servers/start/0/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+
+        headers['Referer'] = self._uri_prefix + '/servers/index.html'
+
+        r = self.session.post(uri,json.dumps({'ids': server_ids}), headers = headers, verify= False)
+        result = json.loads(r.text)
+
+        if not r.status_code is 200: raise ValueError ("Fail to start server")
+        if not result['code'] == 5000 : raise ValueError ("Fail to start server")
+
+        # uri = self._uri_prefix + '/api/v1/system/hypervisors/tree/0/'
+
+        # r = self.session.post(uri,'', headers = headers , verify = False)
+
+        # result = json.loads(r.text)
+        # print r.text
+        # if result[0]['id'] != server_ids : raise ValueError('Fail to start server')
+
+class StopServerCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(StopServerCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, server_ids):
+
+        uri = self._uri_prefix + '/api/v1/system/servers/stop/0/'
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/server/index.html'
+        r = self.session.post(uri,json.dumps({'ids': server_ids}), headers = headers, verify = False)
+
+        result = json.loads(r.text)
+
+        if not result['code'] is 0:
+            raise ValueError("Get Server List failed with error code %d" % result['code'])
+
+        uri = self._uri_prefix + '/api/v1/system/servers/ping/0/'
+        server_num = len(server_ids)
+        for i in range (100) :
+
+            count = 0
+            r = self.session.post(uri, json.dumps({'ids': server_ids}), headers =
+                                  headers , verify = False)
+            result = json.loads(r.text)
+            for item in result:
+               if item['id'] in server_ids:
+                   if item['state'] == 1:
+                       count = count +1
+            if count == server_num :
+                break
+            time.sleep(2)
+
+class ActiveLicenseCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(ActiveLicenseCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__( self, ac_code):
+
+        uri = self._uri_prefix + '/api/v1/cfg/license/'
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        headers = dict( self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/licenseFirstNewAC.htm?error_id=50003'
+        payload = json.dumps({'ac':ac_code})
+        r = self.session.post(uri, data = payload , headers = headers, verify =False)
+        result = json.loads(r.text)
+
+        if not result['code'] == 0:
+            raise ValueError ("Fail to Active License with code %s" % ac_code)
+        else:
+            self._receiver.update_info()
+
+class UploadAppCommand(WebCommand):
+
+    def __init__(self,receiver):
+        super(UploadAppCommand,self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, app):
+
+        uri = self._uri_prefix + '/api/v1/app/upload/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        log.debug(uri)
+        headers = dict(self._headers)
+
+        del headers['content-type']
+
+        headers['Referer'] = self._uri_prefix + '/apps/addMobileApp.htm?type=1&frame_id=button_add'
+
+        r = self.session.post(uri, data = {u'filename':app.file_name,
+                                           u'csrfmiddlewaretoken':self._csr_token},
+                              files= {u'app_file_path': app.dump_data()},
+                              headers = headers , verify = False)
+        print r.text
+        result = json.loads(r.text)
+
+        result['rating'] = 3
+
+        uri = self._uri_prefix + '/api/v1/app/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        log.debug(uri)
+
+        headers['content-type'] = 'application/json'
+
+        r = self.session.post( uri, data = json.dumps(result), headers = headers, verify = False)
+        print r.text
+        result = json.loads( r.text )
+
+        self._receiver.applications[result['id']] = result
+
+        return result['id']
+
+class UploadWallpaperCommand(WebCommand):
+
+    def __init__( self, receiver):
+        super(UploadWallpaperCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, wallpaper):
+
+        uri = self._uri_prefix + '/api/v1/policy/upload/wallpaper/'
+
+        headers = dict(self._headers)
+
+        headers['Referer'] = self._uri_prefix + '/profiles/wallpaper.htm'
+
+        r = self.session.post( uri, data = {u'filename':wallpaper.file_name,
+                                            u'csrfmiddlewaretoken':self._csr_token},
+                               files={u'wallpaper_file_path':wallpaper.dump_data()},
+                               headers = headers, verify= False)
+
+
+        print 'text',r.text
+        result = json.loads(r.text)
+
+        self._receiver.wallpapers[result['id']] = result
+
+        return result['id']
+
+class AddWebClipCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(AddWebClipCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, url):
+
+        uri = self._uri_prefix + '/api/v1/app/add-webclip/'
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        payload = {'webclip':url}
+        r = self.session.post( uri, data = json.dumps(payload), headers = self._headers, verify=False)
+        result = r.text
+        uri = self._uri_prefix + '/api/v1/app/'
+        payload = json.loads(result)
+        payload['rating']=3
+        r = self.session.post( uri, data = json.dumps(payload), headers = self._headers, verify = False)
+        result = json.loads(r.text)
+        #print result
+        self._receiver.applications[result['id']] = result
+
+        return result['id']
+
+class GetCurrentProfiles(WebCommand):
+
+    def __init__(self, receiver):
+        super(GetCurrentProfiles,self).__init__()
+        self._receiver = receiver
+        self._receiver.profiles = {}
+
+    def __call__(self):
+
+        uri = self._uri_prefix + '/api/v1/policy/template/?page=1&page_size=10000'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        r = self.session.get(uri, headers= self._headers, verify=False)
+
+        result = json.loads(r.text)
+        log.debug('There are %d profiles in currrent VMI server'% result['count'])
+
+        for profile in result['results']:
+            self._receiver.profiles[ profile['id'] ] = profile
+
+
+class GetCurrentApplications(WebCommand):
+
+    def __init__(self, receiver):
+        super(GetCurrentApplications,self).__init__()
+        self._receiver = receiver
+        self._receiver.applications = {}
+
+    def __call__(self):
+
+        uri = self._uri_prefix + '/api/v1/app/?page_size=999999'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        r = self.session.get(uri, headers= self._headers, verify=False)
+
+        result = json.loads(r.text)
+        log.debug('There are %d applications in current VMI server' % result['count'])
+
+        for app in result['results']:
+            self._receiver.applications[ app['id'] ] = app
+
+
+class CreateGroupCommand(WebCommand):
+
+    '''{"policy": {"id": 1, "name": "Default Profile", "inherited": true}, "last_modified": "2013-07-22T05:39:58.589Z", "removable": true, "id": 3, "name": "group1", "permissions": []}
+'''
+    def __init__(self, receiver):
+
+        super(CreateGroupCommand,self).__init__()
+
+        self._receiver = receiver
+
+    def __call__(self, group_name='group'):
+
+        uri = self._uri_prefix + '/api/v1/account/group/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        payload = {'name':group_name, 'policy':'-1'}
+        headers = self._headers
+        headers['Referer'] = self._uri_prefix + '/users/createGroup.htm?policy=Default%20Profile'
+        r = self.session.post(uri, data = json.dumps(payload), headers= headers, verify = False)
+        result = json.loads(r.text)
+        log.debug(result)
+        return result['id']
+
+class CreateUserInGroupCommand(WebCommand):
+
+    '''{"id": 2, "username": "xiang_wang", "is_active": true, "email": "xiang_wang@test.com", "date_joined": "2013-07-22T06:08:21.717586+00:00", "last_login": "2013-07-22T06:08:21.716720+00:00", "first_name": "xiang", "last_name": "wang", "status": 0, "groups": [3], "group_names": ["group1"], "policy": {"id": 2, "name": "profile1", "inherited": true}, "last_modified": "2013-07-22T06:08:21.734Z"}
+'''
+
+    def __init__(self,receiver):
+        super(CreateUserInGroupCommand,self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, group_id , user_name , password ,first_name, last_name , email, policy_id):
+
+        uri = self._uri_prefix + '/api/v1/account/user/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        payload = {'username': user_name, 'first_name':first_name,
+                   'last_name':last_name, 'email':email,
+                   'groups':[group_id],'policy':policy_id}
+
+        headers = self._headers
+        headers['Referer'] = self._uri_prefix + '/users/createUser.htm?group_id=7&policy=Default%20Profile'
+        r = self.session.post(uri, data = json.dumps(payload), headers= headers, verify = False)
+
+        result = json.loads(r.text)
+        log.debug(result)
+        if  'code' in result and result['code'] == 4007 : raise ValueError('Failed to create user')
+        call(['ssh','root@'+self._receiver.host_ip , 'python',
+              '/vmi/manager/change_password.py',user_name, password ])
+
+        self.dalService.disable_change_password(user_name)
+
+        u_id = result['id']
+        self._receiver.auth_users[u_id] = result
+        return u_id
+
+class DeleteUserByID(WebCommand):
+
+    def __init__(self, receiver):
+        super(DeleteUserByID, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, u_id):
+
+        uri = self._uri_prefix + '/api/v1/account/user/' + str(u_id) + '/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        log.debug(uri)
+
+        r = self.session.delete(uri, headers = self._headers, verify=False)
+
+        result = r.text
+        if ud.normalize('NFC', result) == ud.normalize('NFC', unicode(u_id)):
+            raise ValueError("Fail to delete user with id %d "% u_id)
+
+
+class SetGroupProfile(WebCommand):
+
+    def __init__(self,receiver):
+        super(SetGroupProfile, self).__init__()
+        self._receiver =receiver
+
+    def __call__(self, group_id, policy_id):
+
+        uri = self._uri_prefix + '/api/v1/account/group/' + str(group_id) + '/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        payload = {'policy':str(policy_id)}
+
+        r = self.session.put(uri, data = json.dumps(payload), headers = self._headers)
+
+        result = json.loads(r.text)
+
+        if not  result['id'] == group_id :
+
+            raise ValueError("Fail to set group profile")
+
+
+class GetCurrentGroups(WebCommand):
+
+    def __init__(self,receiver):
+        super(GetCurrentGroups, self).__init__()
+        self._receiver = receiver
+        self._receiver.groups = {}
+
+    def __call__(self):
+
+        uri = self._uri_prefix + '/api/v1/account/tree/?id=1'
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        log.debug(uri)
+        r = self.session.get(uri,headers= self._headers, verify=False)
+        result = json.loads(r.text)
+
+        for group in result:
+            self._receiver.groups[group['id']] = group
+
+'''
+class GetProfileIDByName(WebCommand):
+
+    def __init__(self,receiver):
+        super(GetProfileIDByName, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, profile_name):
+
+        uri = self._uri_prefix + '/api/v1/policy/template/?page=1&page_size=10000'
+
+        r = self.session.get(uri)
+
+        result = json.loads(r.text)
+
+        for profile in result['results']:
+            if profile['name'] == profile_name:
+                return profile['id']
+
+        raise ValueError("Invalid profile name %s to find profile id" % profile_name)
+
+'''
+class GetCurrentUsers(WebCommand):
+
+    def __init__(self,receiver):
+
+        super(GetCurrentUsers,self).__init__()
+        self._receiver = receiver
+        self._receiver.auth_users = {}
+    def __call__(self):
+
+        uri = self._uri_prefix + '/api/v1/account/user/?page=1&page_size=10000&groups=1'
+        headers = dict(self._headers)
+        headers['Referer'] =self._uri_prefix + '/usr/index.html'
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        r = self.session.get(uri,headers = headers, verify = False)
+        result = json.loads(r.text)
+
+        for user in result['results']:
+            self._receiver.auth_users[ user['id'] ] = user
+
+
+class SetUserProfile(WebCommand):
+
+    def __init__(self,receiver):
+
+        super(SetUserProfile,self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, user_id, profile_id):
+
+        uri = self._uri_prefix + '/api/v1/account/user/' + str(user_id) + '/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        payload = {'policy':str(profile_id)}
+
+        r = self.session.put(uri, data = json.dumps(payload), headers = self._headers)
+
+        result = json.loads(r.text)
+
+        if not result['id'] == user_id:
+            raise ValueError("Invalid User to set profile")
+
+class CreateProfileCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(CreateProfileCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, profile):
+
+        uri = self._uri_prefix + '/api/v1/policy/template/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        payload = {'name' : profile.name, 'detail' : profile.detail,
+                   'priority':-1, "policies" : [ profile.language, profile.wallpaper.id ],
+                   'apps' : profile.apps, 'single_app': profile.single_app ,
+                   'storage_limit' : profile.storage_limit
+        }
+
+        headers = dict(self._headers)
+
+        headers['Referer'] = self._uri_prefix +'/profiles/create.htm?t=' + str ( int ( time.time()* 1000))
+
+        r = self.session.post(uri, json.dumps(payload), headers = headers, verify = False)
+
+        result = json.loads(r.text)
+
+        profile.p_id = result['id']
+
+        self._receiver.profiles[result['id']] = result
+
+        return result["id"]
+
+class AssignProfileOnUser(WebCommand):
+
+    def __init__(self,receiver):
+        super(AssignProfileOnUser,self).__init__()
+        self._receiver = receiver
+
+    def __call__(self,u_id, p_id):
+
+        uri = self._uri_prefix + '/api/v1/account/user/' + str(u_id) + '/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        payload = {'policy': p_id}
+        headers = dict( self._headers)
+        headers['Referer'] = self._uri_prefix + '/users/changeUserProfile.htm'
+        r = self.session.put(uri, json.dumps(payload),headers = headers, verify=False)
+
+        result = json.loads(r.text)
+
+        if not result['id'] == u_id:
+            raise ValueError('Invalid User ID on profile assignment')
+
+class AssignProfileOnGroup(WebCommand):
+
+    def __init__(self, receiver):
+        super(AssignProfileOnGroup,self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, g_id, p_id):
+
+        uri = self._uri_prefix + '/api/v1/account/group/'+ str(g_id) + '/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+        payload = {'policy':p_id}
+
+        headers = dict( self._headers)
+
+        headers['Referer'] = self._uri_prefix + '/users/editGroup.htm'
+
+        r = self.session.put(uri, json.dumps(payload), headers = headers,
+                             verify = False)
+
+        result = json.loads(r.text)
+
+        if not result['id'] == g_id:
+
+            raise ValueError('Invalid Group id on profile assignment')
+
+class DeleteProfileCommand(WebCommand):
+    def __init__(self, receiver):
+        super(DeleteProfileCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__( self, p_ids):
+
+        uri = self._uri_prefix + '/api/v1/policy/template/batch/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        payload = {"action":"delete", "ids":p_ids}
+
+        headers = dict(self._headers)
+        headers['Referer']= self._uri_prefix + '/profiles/index.htm'
+        r = self.session.post(uri, json.dumps(payload), headers = headers, verify = False)
+
+        result = json.loads(r.text)
+
+        if not result['code'] == 0:
+            raise ValueError ('Fail to delete profiles')
+
+class SetActiveDirectory(WebCommand):
+    def __init__(self, receiver):
+        super(SetActiveDirectory, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, host, port = 389, user = 'user', password='pass', enable_tls=False):
+
+        uri = self._uri_prefix + '/api/v1/cfg/?page_size=1000000&group=ldap'
+	self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/systemsettings.htm'
+
+        r = self.session.get(uri, headers= self._headers, verify=False)
+
+        result = json.loads(r.text)
+        ldap_payload = result['results']
+
+	uri = self._uri_prefix + '/api/v1/cfg/ldap/'
+	self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        encrypt = encode_with_pkcs7_bf('#$vmi4trend', password)
+
+        payload = { 'basedn_input' : '', 'btn_sync_ldap':'Manual Update',
+                    'ldap_enable_ldap':True ,
+                    'ldap_group_attr_map_email':'mail',
+                    'ldap_group_attr_map_user':'member',
+                    'ldap_group_search_filter':'(objectClass=group)',
+                    'ldap_host' : host,
+                    'ldap_password': encrypt,
+                    'ldap_port' : port,
+                    'ldap_use_tls' : enable_tls,
+                    'ldap_user' : user,
+                    'ldap_user_attr_map':'mail',
+                    'ldap_user_attr_map_first_name':'givenNanme',
+                    'ldap_user_attr_map_last_name' : 'sn',
+                    'ldap_user_attr_map_username' : 'sAMAccountName',
+                    'ldap_user_search_filter': '(objectClass=person)',
+                    'proxy_port' :'',
+                    'select_base_dn' :''}
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/systemsettings.htm'
+
+        r = self.session.post(uri, json.dumps(payload), headers = headers, verify = False)
+        result = json.loads(r.text)
+        if not result['code'] == 0: raise ValueError('Failed to setup AD')
+        base_dns = result['detail']['base_dn']
+        #  ["DC=tw,DC=trendnet,DC=org", "DC=trendnet,DC=org"]
+        base_dns_str = None
+        if len(base_dns) > 1 :
+            base_dns_str = ";".join(base_dns)
+        else:
+            base_dns_str = base_dns[0]
+        uri = self._uri_prefix + '/api/v1/cfg/'
+	self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/systemsettings.htm'
+        for i in range(len(ldap_payload)):
+            if ldap_payload[i]['name'] == 'host' : ldap_payload[i]['value'] =host
+            elif ldap_payload[i]['name'] == 'port' : ldap_payload[i]['value'] = port
+            elif ldap_payload[i]['name'] == 'user' : ldap_payload[i]['value'] = user
+            elif ldap_payload[i]['name'] == 'password' : ldap_payload[i]['value'] = encrypt
+            elif ldap_payload[i]['name'] == 'use_tls' : ldap_payload[i]['value'] = enable_tls
+            elif ldap_payload[i]['name'] == 'enable_ldap' : ldap_payload[i]['value'] = True
+            elif ldap_payload[i]['name'] == 'base_dns' : ldap_payload[i]['value'] = base_dns_str
+            elif ldap_payload[i]['name'] == 'select_base_dn' : ldap_payload[i]['value'] =  base_dns[0]
+        payload = {'results': ldap_payload}
+        r = self.session.post(uri, json.dumps(payload), headers = headers, verify = False)
+        if not json.loads(r.text)['code'] == 0 : raise ValueError('Failed to setup Active Directory')
+
+class DisableActiveDirectory(WebCommand):
+
+    def __init__(self, receiver):
+        super(DisableActiveDirectory, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self):
+        uri = self._uri_prefix + '/api/v1/cfg/?page_size=1000000&group=ldap'
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/systemsettings.htm'
+
+        r = self.session.get(uri, headers= self._headers, verify=False)
+
+        result = json.loads(r.text)
+        ldap_payload = result['results']
+
+ 	uri = self._uri_prefix + '/api/v1/cfg/'
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/systemsettings.htm'
+
+	for i in range(len(ldap_payload)):
+	    if ldap_payload[i]['name'] == 'enable_ldap' : ldap_payload[i]['value'] = False
+
+	payload = {'results': ldap_payload}
+
+        r = self.session.post(uri, json.dumps(payload), headers = headers, verify = False)
+        if not json.loads(r.text)['code'] == 0 : raise ValueError('Failed to disable Active Directory')
+
+class SearchGroupOrUsersCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(SearchGroupOrUsersCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, key):
+
+        uri = self._uri_prefix + '/api/v1/account/ldap/groupou/?key='\
+              + urllib.quote(key) + '&size=30&type=3'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        r = self.session.get(uri, headers= self._headers, verify=False)
+
+        print r.text
+
+        return r.text
+
+class ImportGroupOrUsersCommand(WebCommand):
+
+    def __init__(self, receiver):
+
+        super(ImportGroupOrUsersCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, key, o_name, o_type):
+
+        uri = self._uri_prefix + '/api/v1/account/ldap/groupou/?key='\
+              + urllib.quote(key) + '&size=30&type=3'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        r = self.session.get(uri, headers= self._headers, verify=False)
+
+        result = json.loads(r.text)
+        print result
+        find = False
+        dn = None
+        for item in result:
+            for cns in item['cn']:
+                if cns == o_name and item['type'] == o_type:
+                    if item['is_in_db'] == True: raise ValueError('%s is already imported'%(o_name))
+                    find = True
+                    dn = item['dn']
+                    break
+
+        if not find : raise ValueError('%s is not found'%(o_name))
+
+        uri = self._uri_prefix + '/api/v1/account/import-groups/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/users/importGroup.htm'
+        payload = [{'name': o_name, 'dn': dn, 'type':o_type}]
+        print payload
+        r = self.session.post(uri, json.dumps(payload), headers = headers, verify = False)
+
+        result = json.loads(r.text)
+        log.debug(r.text)
+        if not result['code'] == 0: raise ValueError('Failed to import user %s'
+                                                     % (o_name))
+
+
+class EnableOrDisableUserCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(EnableOrDisableUserCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, user_id ,  is_enable=False):
+
+        uri = self._uri_prefix + '/api/v1/account/user/' + str(user_id) + '/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+        headers['Referer']= self._uri_prefix + '/users/index.htm'
+
+        payload = {'is_active': is_enable }
+        r = self.session.put(uri, json.dumps(payload), headers= headers, verify= False)
+
+        result = json.loads(r.text)
+        log.debug(r.text)
+        if not int(result['id']) == int(user_id):
+            raise ValueError('Failed to enable or disable user')
+
+
+
+class WipeUserCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(WipeUserCommand, self).__init__()
+        self._receiver = receiver
+
+
+    def __call__(self, user_id):
+
+        uri = self._uri_prefix + '/api/v1/account/user/wipe-data/'
+
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers =  dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/users/index.htm'
+
+        payload = {'id' : int(user_id)}
+
+        r = self.session.post(uri , json.dumps(payload),
+                              headers = headers ,
+                              verify = False)
+
+        log.debug(r.text)
+        result = json.loads(r.text)
+        if not 'code' in result or not result['code'] == 0 :
+            raise ValueError ('Failed to wipe user')
+
+class ClearWorkspaceScreenLockCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(ClearWorkspaceScreenLockCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self, user_id):
+
+        uri = self._uri_prefix + '/api/v1/account/user/rest-pattern/'
+        self.session.mount(uri,HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/users/index.htm'
+
+        r = self.session.post(uri, json.dumps({'id': str(user_id)}) ,
+                              headers = headers,
+                              verify = False)
+
+        log.debug(r.text)
+
+        result = json.loads(r.text)
+
+        if not 'code' in result or not result['code'] == 0:
+            raise valueError('Failed to clear workspace screen lock')
+
+class GetConfigAccessCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(GetConfigAccessCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self):
+
+        uri = self._uri_prefix + '/api/v1/cfg/access/?_=' + str(current_time_millis())
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/systemsettings.htm'
+
+        r = self.session.get(uri , headers = headers, verify= False)
+
+        log.debug(r.text)
+
+        result = json.loads(r.text)
+
+        if not 'ip' in result and not 'port' in result:
+            raise ValueError('Failed to get access configuration')
+
+        return AccessSetting(result['ip'], result['port'])
+
+class GetConfigRememberPasswordCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(GetConfigRememberPasswordCommand, self).__init__()
+        self._receiver = receiver
+
+
+    def __call__(self):
+
+        uri = self._uri_prefix + '/api/v1/cfg/cli_remember_passwd/?_=' + str(current_time_millis())
+        self.session.mount(uri , HTTPAdapter(max_retries= 100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/systemsettings.htm'
+
+        r = self.session.get(uri, headers = headers , verify = False)
+
+        log.debug(r.text)
+
+        result = json.loads(r.text)
+        if not 'enabled' in result :
+            raise ValueError('Failed to get remember password config')
+
+        return result['enabled']
+
+
+class GetConfigADRestrictCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(GetConfigADRestrictCommand, self).__init__()
+        self._receiver = receiver
+
+
+    def __call__(self):
+
+        uri = self._uri_prefix + '/api/v1/cfg/ldap_lock/?_=' + str(current_time_millis())
+        self.session.mount(uri, HTTPAdapter(max_retries= 100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/systemsettings.htm'
+
+        r = self.session.get(uri, headers = headers, verify = False)
+
+        log.debug(r.text)
+
+        result = json.loads(r.text)
+
+        if not 'lock_num' in result:
+            raise ValueError('Failed to get ad restrict setting')
+
+        ad_restrict = ADRestrictSetting(result['lock_num'],
+                                        result['interval'])
+
+        if result['enable']:
+
+            ad_restrict.enable= 'enabled'
+        else:
+            ad_restrict.enable = 'disabled'
+
+        return ad_restrict
+
+
+class GetConfigUniaIdleTimeCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(GetConfigUniaIdleTimeCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self):
+
+        uri = self._uri_prefix + '/api/v1/cfg/unia_idletime/?_=' + str(current_time_millis())
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/systemsettings.htm'
+
+        r = self.session.get(uri, headers= headers, verify = False)
+
+        log.debug(r.text)
+
+        result = json.loads(r.text)
+
+        if not 'idle_time' in result :
+            raise ValueError('Failed to get unia idle time')
+
+        return result['idle_time']
+
+
+class GetConfigVIPNumberCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(GetConfigVIPNumberCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self):
+
+        uri = self._uri_prefix + '/api/v1/cfg/vip_number/?_=' + str(current_time_millis())
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/systemsettings.htm'
+
+        r = self.session.get(uri, headers = headers , verify = False)
+
+        log.debug(r.text)
+
+        result = json.loads(r.text)
+
+        if not 'vip_number' in result:
+            raise ValueError('Failed to get vip number')
+
+        return result['vip_number']
+
+
+class GetConfigProxyCommand(WebCommand):
+
+    def __init__(self, receiver):
+        super(GetConfigProxyCommand, self).__init__()
+        self._receiver = receiver
+
+    def __call__(self):
+
+        uri = self._uri_prefix + '/api/v1/cfg/proxy/?_=' + str(current_time_millis())
+        self.session.mount(uri, HTTPAdapter(max_retries=100))
+
+        headers = dict(self._headers)
+        headers['Referer'] = self._uri_prefix + '/administration/systemsettings.htm'
+
+        r = self.session.get(uri, headers= headers, verify = False)
+
+        log.debug(r.text)
+
+        result = json.loads(r.text)
+
+        if not 'ip' in result and not 'port' in result:
+            raise ValueError('Failed to get proxy setting')
+
+        proxy = ProxySetting( result['ip'], result['port'], result['username'],
+                              result['password'])
+
+        if result['enable'] :
+            proxy.enable = 'enabled'
+        else:
+            proxy.enable = 'disabled'
+
+        proxy.bypass_address = result['bypass_address']
+
+        return proxy

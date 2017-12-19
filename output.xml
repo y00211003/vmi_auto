@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20171215 15:24:18.047" generator="Robot 2.8.4 (Python 2.6.6 on linux2)">
+<suite source="/root/vmi/robot/cases/allDebug_tags.txt" id="s1" name="allDebug tags">
+<test id="s1-t1" name="License_active_license_twice01">
+<kw type="setup" name="vmi.robot.caseutil.Cases.Set Up">
+<doc></doc>
+<arguments>
+<arg>management</arg>
+<arg>License_active_license_twice01</arg>
+</arguments>
+<msg timestamp="20171215 15:24:23.322" level="DEBUG">start active ac</msg>
+<msg timestamp="20171215 15:24:23.333" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.373" level="DEBUG">"POST /api/v1/account/login/ HTTP/1.1" 200 58</msg>
+<msg timestamp="20171215 15:24:23.382" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.416" level="DEBUG">"POST /api/v1/cfg/license/ HTTP/1.1" 200 58</msg>
+<msg timestamp="20171215 15:24:23.419" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.455" level="DEBUG">"POST /api/v1/account/login/ HTTP/1.1" 200 58</msg>
+<msg timestamp="20171215 15:24:23.457" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.494" level="DEBUG">"GET /api/v1/account/user/?page=1&amp;page_size=10000&amp;groups=1 HTTP/1.1" 200 65</msg>
+<msg timestamp="20171215 15:24:23.496" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.533" level="DEBUG">"POST /api/v1/account/login/ HTTP/1.1" 200 58</msg>
+<msg timestamp="20171215 15:24:23.535" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.574" level="DEBUG">"GET /api/v1/policy/template/?page=1&amp;page_size=10000 HTTP/1.1" 200 353</msg>
+<msg timestamp="20171215 15:24:23.575" level="DEBUG">There are 1 profiles in currrent VMI server</msg>
+<msg timestamp="20171215 15:24:23.577" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.612" level="DEBUG">"POST /api/v1/account/login/ HTTP/1.1" 200 58</msg>
+<msg timestamp="20171215 15:24:23.615" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.660" level="DEBUG">"GET /api/v1/app/?page_size=999999 HTTP/1.1" 200 1032</msg>
+<msg timestamp="20171215 15:24:23.663" level="DEBUG">There are 12 applications in current VMI server</msg>
+<msg timestamp="20171215 15:24:23.664" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.699" level="DEBUG">"POST /api/v1/account/login/ HTTP/1.1" 200 58</msg>
+<msg timestamp="20171215 15:24:23.704" level="DEBUG">https://192.168.20.201:8443/api/v1/account/tree/?id=1</msg>
+<msg timestamp="20171215 15:24:23.705" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.740" level="DEBUG">"GET /api/v1/account/tree/?id=1 HTTP/1.1" 200 64</msg>
+<msg timestamp="20171215 15:24:23.742" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.777" level="DEBUG">"POST /api/v1/account/login/ HTTP/1.1" 200 58</msg>
+<msg timestamp="20171215 15:24:23.780" level="INFO">Starting new HTTPS connection (1): 192.168.20.201</msg>
+<msg timestamp="20171215 15:24:23.829" level="DEBUG">"POST /api/v1/system/servers/stop/0/ HTTP/1.1" 200 72</msg>
+<msg timestamp="20171215 15:24:23.830" level="DEBUG">start stop</msg>
+<msg timestamp="20171215 15:24:27.174" level="DEBUG">end stop</msg>
+<msg timestamp="20171215 15:24:40.191" level="DEBUG">start start</msg>
+<msg timestamp="20171215 15:24:49.799" level="DEBUG">stop start</msg>
+<status status="FAIL" endtime="20171215 15:24:51.633" starttime="20171215 15:24:18.316"></status>
+</kw>
+<doc></doc>
+<tags>
+<tag>license</tag>
+<tag>server</tag>
+</tags>
+<status status="FAIL" endtime="20171215 15:24:51.634" critical="yes" starttime="20171215 15:24:18.315">Setup failed:
+Execution terminated by signal</status>
+</test>
+<doc></doc>
+<metadata>
+</metadata>
+<status status="FAIL" endtime="20171215 15:24:51.634" starttime="20171215 15:24:18.047"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="0">Critical Tests</stat>
+<stat fail="1" pass="0">All Tests</stat>
+</total>
+<tag>
+<stat info="" links="" doc="" combined="" pass="0" fail="1">license</stat>
+<stat info="" links="" doc="" combined="" pass="0" fail="1">server</stat>
+</tag>
+<suite>
+<stat fail="1" pass="0" id="s1" name="allDebug tags">allDebug tags</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

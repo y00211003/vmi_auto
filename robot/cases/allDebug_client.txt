@@ -1,0 +1,658 @@
+*** Settings ***
+Library           vmi.robot.caseutil.Cases
+Library           vmi.robot.vmilib.VMIInstanceFactory
+Library           vmi.server.servermanager.ServerManager
+Library           vmi.unia.uniamanager.UniaManager
+
+*** Variables ***
+${full_active_code}    MW-B3VH-GU422-3HAZD-FN9FX-HJN7E-VK6TQ    # Full Active Code
+${trail_active_code}    MW-6JE7-9D8RN-AF4FN-YS62Q-WHW6S-5VJ9F
+${trail_expired_active_code}    MW-6TZR-6HAWX-SFWX9-NP99P-86WEK-RJL7P    # Expired trail license
+
+*** Test Cases ***
+unia_local_user_login
+    [Setup]    Setup    unia    unia_local_user_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_local_user_login_set_auth_none
+    [Setup]    Setup    unia    unia_local_user_login_set_auth_none
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_local_user_login_set_auth_pin
+    [Setup]    Setup    unia    unia_local_user_login_set_auth_pin
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    3
+    ...    1234
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_pin    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_local_user_login_set_auth_password
+    [Setup]    Setup    unia    unia_local_user_login_set_auth_password
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    4
+    ...    qwer
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_password    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_ldap_user_login
+    [Setup]    Setup    unia    unia_ldap_user_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001001    10001001001    person
+    ${user}    build_instance    User    vmi\\10001001001    mac8.6    10001001001@vmi.com.cn    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_ldap_user_login_set_auth_none
+    [Setup]    Setup    unia    unia_ldap_user_login_set_auth_none
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001001    10001001001    person
+    ${user}    build_instance    User    vmi\\10001001001    mac8.6    10001001001@vmi.com.cn    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_ldap_user_login_set_auth_pin
+    [Setup]    Setup    unia    unia_ldap_user_login_set_auth_pin
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001002    10001001002    person
+    ${user}    build_instance    User    10001001002    mac8.6    10001001002@vmi.com.cn    3    1234
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    log    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_pin    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_ldap_user_login_set_auth_password
+    [Setup]    Setup    unia    unia_ldap_user_login_set_auth_password
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001002    10001001002    person
+    ${user}    build_instance    User    10001001002    mac8.6    10001001002@vmi.com.cn    4    qwer
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_password    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_local_user_login_and_logout
+    [Setup]    Setup    unia    unia_local_user_login_and_logout
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_ldap_user_login_and_logout
+    [Setup]    Setup    unia    unia_ldap_user_login_and_logout
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001002    10001001002    person
+    ${user}    build_instance    User    10001001002    mac8.6    10001001002@vmi.com.cn    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+
+unia_disable_local_user_and_login
+    [Setup]    Setup    unia    unia_disable_local_user_and_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    ${user_id}    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    disable_user_by_id    ${server}    ${user_id}
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    Comment    call_method    ${droid_helper}    navigate_to_launcher
+    ${e_m}    Run Keyword And Expect Error    *    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    should_contain    ${e_m}    ValueError
+
+unia_disable_local_user_and_enable_then_login
+    [Setup]    Setup    unia    unia_disable_local_user_and_enable_then_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    ${user_id}    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    disable_user_by_id    ${server}    ${user_id}
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    Comment    call_method    ${droid_helper}    navigate_to_launcher
+    ${e_m}    Run Keyword And Expect Error    *    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    should_contain    ${e_m}    ValueError
+    enable_user_by_id    ${server}    ${user_id}
+    call_method    ${droid_helper}    reinvoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_disable_ldap_user_and_login
+    [Setup]    Setup    unia    unia_disable_ldap_user_and_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001002    10001001002    person
+    ${user_id}    get_user_id_by_name    ${server}    10001001002
+    ${user}    build_instance    User    10001001002    mac8.6    10001001002@vmi.com.cn    1
+    disable_user_by_id    ${server}    ${user_id}
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    Comment    call_method    ${droid_helper}    navigate_to_launcher
+    ${e_m}    Run Keyword And Expect Error    *    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    should_contain    ${e_m}    ValueError
+
+unia_disable_ldap_user_and_enable_then_login
+    [Setup]    Setup    unia    unia_disable_ldap_user_and_enable_then_login
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001002    10001001002    person
+    ${user_id}    get_user_id_by_name    ${server}    10001001002
+    ${user}    build_instance    User    10001001002    mac8.6    10001001002@vmi.com.cn    1
+    disable_user_by_id    ${server}    ${user_id}
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    Comment    call_method    ${droid_helper}    navigate_to_launcher
+    ${e_m}    Run Keyword And Expect Error    *    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    should_contain    ${e_m}    ValueError
+    enable_user_by_id    ${server}    ${user_id}
+    call_method    ${droid_helper}    reinvoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+unia_local_user_relogin_with_auth_none
+    [Setup]    Setup    unia    unia_local_user_relogin_with_auth_none
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    Sleep    120
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_local_user_relogin_with_auth_pin
+    [Setup]    Setup    unia    unia_local_user_relogin_with_auth_pin
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    3    1234
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_pin    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    Sleep    120
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    unlock_unia_with_pin    1234
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_local_user_relogin_with_auth_password
+    [Setup]    Setup    unia    unia_local_user_relogin_with_auth_password
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    4    qwer
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_password    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    Sleep    120
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    unlock_unia_with_password    qwer
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_ldap_user_login_with_auth_none
+    [Setup]    Setup    unia    unia_ldap_user_login_with_auth_none
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001002    10001001002    person
+    ${user}    build_instance    User    10001001002    mac8.6    10001001002@vmi.com.cn    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    Sleep    120
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_ldap_user_login_with_auth_pin
+    [Setup]    Setup    unia    unia_ldap_user_login_with_auth_pin
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001002    10001001002    person
+    ${user}    build_instance    User    10001001002    mac8.6    10001001002@vmi.com.cn    3    1234
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_pin    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    Sleep    120
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    unlock_unia_with_pin    1234
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+unia_ldap_user_login_with_auth_password
+    [Setup]    Setup    unia    unia_ldap_user_login_with_auth_password
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001002    10001001002    person
+    ${user}    build_instance    User    10001001002    mac8.6    10001001002@vmi.com.cn    4    qwer
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_password    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+    Sleep    120
+    call_method    ${droid_helper}    login_server_without_input_server_address    ${server}    ${user}
+    call_method    ${droid_helper}    unlock_unia_with_password    qwer
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    signout_from_launcher
+
+#not debuged
+unia_local_user_open_remote_view
+    [Setup]    Setup    unia    unia_local_user_open_remote_view
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    launch_app_from_unia    Settings
+
+edit_apps_of_existed_profile
+    [Setup]    Setup    management    edit_apps_of_existed_profile
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_native_application    ${server}    ${a}
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    set_user_profile    ${server}    ${u_id}    ${p_id}
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${p}    add_app    ${a_id}
+    update_profile    ${server}    ${p}
+    Sleep    30
+    call_method    ${droid_helper}    check_app_exist    Open Camera
+
+add_legal_web_clip
+    [Setup]    Setup    management    add_legal_web_clip
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${a_id}    add_webclip    ${server}    http:\/\/stackoverflow.com
+    ${p}    build_instance    Profile    test    test
+    ${p_id}    create_profile    ${server}    ${p}
+    call_method    ${p}    add_app    ${a_id}
+    update_profile    ${server}    ${p}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    set_user_profile    ${server}    ${u_id}    ${p_id}
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    call_method    ${droid_helper}    check_app_exist    Stack Overflow
+
+#add by gannicus
+auth_fail_2_time_block_60_sec
+    [Setup]    Setup    management    auth_fail_2_time_block_60_sec
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    set_ldap_lock    ${server}    2    60
+    set_active_directory    ${server}    10.206.139.99    389    vmi\\richard    1111
+    import_group_or_users    ${server}    10001001002    10001001002    person
+    ${user_id}    get_user_id_by_name    ${server}    10001001002
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_name_psw_without_remember_password    ${server}    10001001002    mac806
+    sleep    5
+    call_method    ${droid_helper}    input_password_and_login    mac806
+    sleep    5
+    call_method    ${droid_helper}    input_password_and_login    mac806
+    call_method    ${droid_helper}    check_retry_in_seconds
+
+#add by gannicus
+limitation_value_is_kept_the_same_if_all_configuration_not_changed
+    [Setup]    Setup    management    limitation_value_is_kept_the_same_if_all_configuration_not_changed
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${capacity1}    get_instance_limitation    ${server}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    test    pass    test@test.com    1
+    create_user_in_group    ${server}    ${g_id}    test    pass    1
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    ${capacity2}    get_instance_limitation    ${server}
+#    restart_vmi
+#    ${capacity3}    get_instance_limitation    ${server}
+    should be equal    ${capacity1}    ${capacity2}
+#    should be equal    ${capacity2}    ${capacity3}
+
+#
+#
+#
+#
+#
+#added by richard 2017/04/11
+Sandbox_userLogin
+    [Setup]    Setup    management    Sandbox_userLogin
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    usertest    pass    test@test.com    1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    usertest    pass    1
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    sandboxtestprofile    testTxtDemo    1,1,1,1,1    7    ${a_id}    0
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+    assign_profile_on_user    ${server}    ${u_id}    ${p_id}
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    navigate_to_Sandboxlauncher
+    call_method    ${droid_helper}    check_sandboxapp_exist    Open Camera
+
+EULA_reject
+    [Setup]    Setup    unia    EULA_reject
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    reinvoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    reject
+
+Sandbox_userLogin_change2_vmiuser
+    [Setup]    Setup    management    Sandbox_userLogin_change2_vmiuser
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    usertest    pass    test@test.com    1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    usertest    pass    1
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    sandboxtestprofile    testTxtDemo    1,1,1,1,1    7    ${a_id}    0
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+    ${p1}    build_instance    Profile    test    test
+    ${p_id1}    create_profile    ${server}    ${p1}
+    assign_profile_on_user    ${server}    ${u_id}    ${p_id}
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    navigate_to_Sandboxlauncher
+    call_method    ${droid_helper}    check_sandboxapp_exist    Open Camera
+    change_userprofile    ${server}    ${u_id}    ${p_id1}
+    Sleep    90
+    call_method    ${droid_helper}    reinvoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+
+
+Sandbox_userLogin_change2_sandboxuser
+    [Setup]    Setup    management    Sandbox_userLogin_change2_sandboxuser
+    ${server}    build_instance    Server
+    active_license    ${server}    ${full_active_code}
+    ${g_id}    get_group_id_by_name    ${server}    Default
+    ${user}    build_instance    User    usertest    pass    test@test.com    1
+    ${u_id}    create_user_in_group    ${server}    ${g_id}    usertest    pass    1
+    ${a}    build_instance    Application    Open_Camera_1.27.apk
+    ${a_id}    upload_sandbox_androidapp    ${server}    ${a}
+    ${p}    build_instance    SandboxProfile    sandboxtestprofile    testTxtDemo    1,1,1,1,1    7    ${a_id}    0
+    ${p_id}    create_sandboxprofile    ${server}    ${p}
+    ${p1}    build_instance    Profile    test    test
+    ${p_id1}    create_profile    ${server}    ${p1}
+    assign_profile_on_user    ${server}    ${u_id}    ${p_id1}
+    Sleep    10
+    ${android}    build_instance    Android
+    ${droid_helper}    build_instance    DroidAPI
+    Sleep    30
+    call_method    ${droid_helper}    invoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    set_unia_lock_screen_none    ${user}
+    call_method    ${droid_helper}    navigate_to_launcher
+    change_userprofile    ${server}    ${u_id}    ${p_id}
+    Sleep    90
+    call_method    ${droid_helper}    reinvoke_device    ${android}
+    Sleep    30
+    call_method    ${droid_helper}    eula_action    accept
+    call_method    ${droid_helper}    login_server_without_remember_password    ${server}    ${user}
+    call_method    ${droid_helper}    navigate_to_Sandboxlauncher
+    call_method    ${droid_helper}    check_sandboxapp_exist    Open Camera
